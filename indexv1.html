@@ -5,9 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scopus Research Galaxy</title>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<title>Scopus Research Orbit</title>
 
 <style>
 
@@ -17,55 +15,43 @@
     padding: 0;
 }
 
-:root {
-    --bg: #050816;
-    --panel: rgba(15, 23, 42, .72);
-    --border: rgba(255,255,255,.09);
-    --text: #f8fafc;
-    --muted: #94a3b8;
-    --purple: #8b5cf6;
-    --cyan: #22d3ee;
-    --pink: #ec4899;
-}
-
 body {
-
-    font-family:
-        Inter,
-        Arial,
-        sans-serif;
 
     min-height: 100vh;
 
-    color: var(--text);
+    overflow-x: hidden;
 
-    padding: 28px;
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: #f8fafc;
 
     background:
-
         radial-gradient(
-            circle at 10% 5%,
-            rgba(139,92,246,.30),
-            transparent 28%
+            circle at 50% 45%,
+            rgba(99,102,241,.13),
+            transparent 24%
         ),
-
         radial-gradient(
-            circle at 90% 15%,
-            rgba(34,211,238,.18),
+            circle at 15% 15%,
+            rgba(139,92,246,.13),
             transparent 25%
         ),
-
         radial-gradient(
-            circle at 50% 100%,
-            rgba(236,72,153,.10),
-            transparent 30%
+            circle at 85% 80%,
+            rgba(6,182,212,.09),
+            transparent 25%
         ),
-
-        #050816;
+        #03050d;
 }
 
 
-/* STAR BACKGROUND */
+/* =========================
+   STAR FIELD
+========================= */
 
 body::before {
 
@@ -77,177 +63,84 @@ body::before {
 
     pointer-events: none;
 
+    opacity: .25;
+
     background-image:
 
         radial-gradient(
-            white 1px,
+            circle,
+            rgba(255,255,255,.75) 1px,
             transparent 1px
         );
 
-    background-size: 90px 90px;
-
-    opacity: .06;
+    background-size:
+        95px 95px;
 }
 
 
-/* CONTAINER */
+/* =========================
+   PAGE
+========================= */
 
-.container {
+.page {
 
-    max-width: 1400px;
+    width: min(
+        1500px,
+        calc(100% - 48px)
+    );
 
     margin: auto;
 
-    position: relative;
+    padding: 28px 0 35px;
 }
 
 
-/* TOP BAR */
+/* =========================
+   HEADER
+========================= */
 
-.topbar {
+.header {
 
     display: flex;
 
     justify-content:
         space-between;
 
-    align-items: center;
+    align-items:
+        flex-start;
 
-    color: #64748b;
+    gap: 30px;
 
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    text-transform:
-        uppercase;
-
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 
-.status {
+.eyebrow {
 
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-}
-
-
-.status-dot {
-
-    width: 7px;
-
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #34d399;
-
-    box-shadow:
-        0 0 15px #34d399;
-}
-
-
-/* HERO */
-
-.hero {
-
-    position: relative;
-
-    overflow: hidden;
-
-    padding: 65px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 34px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.08),
-            rgba(255,255,255,.025)
-        );
-
-    backdrop-filter:
-        blur(25px);
-
-    box-shadow:
-        0 35px 100px
-        rgba(0,0,0,.40);
-}
-
-
-.hero::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 500px;
-
-    height: 500px;
-
-    right: -220px;
-
-    top: -260px;
-
-    border-radius: 50%;
-
-    background:
-
-        radial-gradient(
-            circle,
-            rgba(139,92,246,.35),
-            transparent 68%
-        );
-}
-
-
-.badge {
-
-    display: inline-block;
-
-    padding: 8px 14px;
-
-    border-radius: 999px;
-
-    color: #c4b5fd;
-
-    background:
-        rgba(139,92,246,.12);
-
-    border:
-        1px solid
-        rgba(167,139,250,.28);
+    color: #8b5cf6;
 
     font-size: 10px;
 
-    font-weight: 700;
+    font-weight: 800;
 
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+
+    text-transform:
+        uppercase;
 }
 
 
-.hero h1 {
+h1 {
 
-    position: relative;
-
-    z-index: 2;
-
-    margin-top: 23px;
+    margin-top: 9px;
 
     font-size:
-        clamp(48px, 7vw, 88px);
+        clamp(38px, 5vw, 64px);
 
-    line-height: .91;
+    line-height: .95;
 
-    letter-spacing: -5px;
+    letter-spacing:
+        -4px;
 }
 
 
@@ -258,7 +151,7 @@ body::before {
         linear-gradient(
             90deg,
             #ffffff,
-            #c4b5fd,
+            #c4b5fd 48%,
             #67e8f9
         );
 
@@ -272,185 +165,131 @@ body::before {
 }
 
 
-.hero p {
+.subtitle {
 
-    position: relative;
+    max-width: 700px;
 
-    z-index: 2;
+    margin-top: 16px;
 
-    max-width: 750px;
+    color: #7d889d;
 
-    margin-top: 25px;
+    font-size: 14px;
 
-    color: #94a3b8;
-
-    line-height: 1.75;
-
-    font-size: 16px;
+    line-height: 1.7;
 }
 
 
-.tags {
-
-    position: relative;
-
-    z-index: 2;
+.dataset {
 
     display: flex;
 
+    gap: 8px;
+
     flex-wrap: wrap;
 
-    gap: 10px;
-
-    margin-top: 27px;
+    margin-top: 18px;
 }
 
 
-.tag {
+.dataset span {
 
-    padding: 9px 14px;
-
-    border-radius: 12px;
+    padding:
+        8px 12px;
 
     border:
-        1px solid var(--border);
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:
+        999px;
 
     background:
-        rgba(255,255,255,.04);
+        rgba(255,255,255,.025);
 
-    color: #cbd5e1;
-
-    font-size: 12px;
-}
-
-
-/* STATS */
-
-.stats {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 15px;
-
-    margin: 15px 0;
-}
-
-
-.card {
-
-    padding: 27px;
-
-    border-radius: 23px;
-
-    background:
-        var(--panel);
-
-    border:
-        1px solid var(--border);
-
-    backdrop-filter:
-        blur(20px);
-
-    transition:
-        .25s;
-}
-
-
-.card:hover {
-
-    transform:
-        translateY(-5px);
-
-    border-color:
-        rgba(139,92,246,.35);
-}
-
-
-.label {
-
-    color: #64748b;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    text-transform:
-        uppercase;
-
-    letter-spacing: 1.5px;
-}
-
-
-.value {
-
-    margin-top: 14px;
-
-    font-size: 35px;
-
-    font-weight: 800;
-
-    letter-spacing: -2px;
-}
-
-
-.description {
-
-    margin-top: 5px;
-
-    color: #64748b;
+    color: #94a3b8;
 
     font-size: 11px;
 }
 
 
-/* VISUAL */
+/* =========================
+   MAIN VISUAL
+========================= */
 
 .visual {
 
-    padding: 32px;
+    position: relative;
 
-    border-radius: 30px;
+    height: 760px;
 
-    background:
-        var(--panel);
+    overflow: hidden;
 
     border:
-        1px solid var(--border);
+        1px solid
+        rgba(255,255,255,.08);
 
-    backdrop-filter:
-        blur(25px);
+    border-radius:
+        32px;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            rgba(139,92,246,.055),
+            transparent 38%
+        ),
+
+        rgba(5,8,20,.72);
 
     box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.25);
+        0 40px 120px
+        rgba(0,0,0,.42);
+
+    backdrop-filter:
+        blur(20px);
 }
 
 
-.visual-header {
+/* =========================
+   CANVAS
+========================= */
 
-    display: flex;
+#orbitCanvas {
 
-    justify-content:
-        space-between;
+    position: absolute;
 
-    align-items:
-        flex-end;
+    inset: 0;
 
-    margin-bottom: 25px;
+    width: 100%;
+
+    height: 100%;
 }
 
 
-.eyebrow {
+/* =========================
+   TOP LEFT LABEL
+========================= */
 
-    color:
-        #8b5cf6;
+.visual-title {
 
-    font-size: 10px;
+    position: absolute;
 
-    font-weight: 800;
+    top: 28px;
+
+    left: 30px;
+
+    z-index: 10;
+
+    pointer-events:
+        none;
+}
+
+
+.visual-title small {
+
+    color: #64748b;
+
+    font-size: 9px;
 
     letter-spacing: 2px;
 
@@ -459,202 +298,183 @@ body::before {
 }
 
 
-.visual h2 {
+.visual-title h2 {
 
-    margin-top: 7px;
+    margin-top: 5px;
 
-    font-size: 29px;
+    font-size: 20px;
 
-    letter-spacing: -1px;
+    letter-spacing: -.5px;
 }
 
 
-.visual-description {
+/* =========================
+   LEGEND
+========================= */
 
-    margin-top: 7px;
+.legend {
+
+    position: absolute;
+
+    left: 30px;
+
+    bottom: 28px;
+
+    z-index: 10;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px 15px;
+
+    max-width: 430px;
+}
+
+
+.legend-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
 
     color: #64748b;
 
-    font-size: 13px;
-}
-
-
-.interactive {
-
-    padding: 8px 12px;
-
-    border-radius: 10px;
-
-    color: #67e8f9;
-
-    background:
-        rgba(34,211,238,.06);
-
-    border:
-        1px solid
-        rgba(34,211,238,.16);
-
     font-size: 10px;
-
-    letter-spacing: 1px;
 }
 
 
-/* GALAXY */
+.legend-dot {
 
-.galaxy {
+    width: 7px;
 
-    position: relative;
-
-    height: 650px;
-
-    border-radius: 22px;
-
-    overflow: hidden;
-
-    background:
-
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(139,92,246,.08),
-            transparent 38%
-        ),
-
-        radial-gradient(
-            circle at 20% 80%,
-            rgba(34,211,238,.05),
-            transparent 30%
-        );
-}
-
-
-.galaxy::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 280px;
-
-    height: 280px;
-
-    left: 50%;
-
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
+    height: 7px;
 
     border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(139,92,246,.10);
-
-    box-shadow:
-
-        0 0 80px
-        rgba(139,92,246,.08),
-
-        inset 0 0 80px
-        rgba(139,92,246,.05);
 }
 
 
-.chart {
+/* =========================
+   TOOLTIP
+========================= */
+
+.tooltip {
 
     position: absolute;
 
-    inset: 0;
-}
+    z-index: 30;
 
+    pointer-events: none;
 
-/* INSIGHT */
+    opacity: 0;
 
-.insight {
+    min-width: 170px;
 
-    margin-top: 18px;
-
-    padding: 17px;
-
-    border-radius: 15px;
+    padding: 13px 15px;
 
     border:
-        1px solid var(--border);
+        1px solid
+        rgba(255,255,255,.12);
+
+    border-radius: 14px;
 
     background:
-        rgba(255,255,255,.025);
+        rgba(7,10,22,.92);
 
-    color: #7f8ba0;
+    backdrop-filter:
+        blur(15px);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.45);
+
+    transform:
+        translate(-50%, -115%);
+
+    transition:
+        opacity .15s;
+}
+
+
+.tooltip.visible {
+
+    opacity: 1;
+}
+
+
+.tooltip-name {
+
+    color: #f8fafc;
 
     font-size: 12px;
+
+    font-weight: 700;
 }
 
 
-.insight strong {
+.tooltip-count {
 
-    color: #cbd5e1;
+    margin-top: 4px;
+
+    color: #8b5cf6;
+
+    font-size: 11px;
 }
 
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 .footer {
 
-    margin-top: 22px;
+    display: flex;
 
-    text-align: center;
+    justify-content:
+        space-between;
+
+    margin-top: 13px;
 
     color: #475569;
 
     font-size: 10px;
 
-    letter-spacing: 1px;
+    letter-spacing: .7px;
 }
 
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
-@media(max-width:900px) {
+@media(max-width:800px) {
 
-    body {
-        padding: 16px;
+    .page {
+
+        width:
+            calc(100% - 24px);
+
     }
 
-    .hero {
-        padding: 40px 28px;
-    }
-
-    .stats {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .galaxy {
-        height: 520px;
-    }
-
-}
-
-
-@media(max-width:600px) {
-
-    .stats {
-        grid-template-columns: 1fr;
-    }
-
-    .visual-header {
-        align-items:
-            flex-start;
+    .header {
 
         flex-direction:
             column;
 
-        gap: 15px;
     }
 
-    .galaxy {
-        height: 470px;
+    .visual {
+
+        height: 600px;
+
+    }
+
+    .legend {
+
+        max-width: 280px;
+
     }
 
 }
@@ -667,238 +487,169 @@ body::before {
 <body>
 
 
-<div class="container">
+<div class="page">
 
 
-<!-- TOP BAR -->
+<!-- HEADER -->
 
-<div class="topbar">
+<header class="header">
 
-    <span>
-        Research Intelligence
-    </span>
+    <div>
 
-    <span class="status">
-
-        <i class="status-dot"></i>
-
-        Scopus Dataset
-
-    </span>
-
-</div>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="badge">
-
-        SCOPUS · RESEARCH ANALYTICS
-
-    </div>
-
-
-    <h1>
-
-        Research
-
-        <br>
-
-        <span class="gradient">
-
-            Galaxy.
-
-        </span>
-
-    </h1>
-
-
-    <p>
-
-        A visual map of the research landscape
-        built from Scopus author keywords.
-        Each research topic becomes a point
-        in the research galaxy, with larger
-        points representing more frequent topics.
-
-    </p>
-
-
-    <div class="tags">
-
-        <span class="tag">
-            300 Documents
-        </span>
-
-        <span class="tag">
-            95 Publication Sources
-        </span>
-
-        <span class="tag">
-            2026–2027
-        </span>
-
-        <span class="tag">
-            22 Data Fields
-        </span>
-
-    </div>
-
-</section>
-
-
-<!-- STATS -->
-
-<section class="stats">
-
-
-    <div class="card">
-
-        <div class="label">
-            Documents
+        <div class="eyebrow">
+            SCOPUS · RESEARCH INTELLIGENCE
         </div>
 
-        <div class="value">
-            300
-        </div>
+        <h1>
+            Research
+            <span class="gradient">
+                Orbit
+            </span>
+        </h1>
 
-        <div class="description">
-            Scopus records
+        <p class="subtitle">
+
+            A visual exploration of the research
+            landscape generated from author keywords
+            across the Scopus dataset. Larger nodes
+            represent topics appearing more frequently
+            across the 300 research documents.
+
+        </p>
+
+
+        <div class="dataset">
+
+            <span>
+                300 Documents
+            </span>
+
+            <span>
+                95 Sources
+            </span>
+
+            <span>
+                2026–2027
+            </span>
+
+            <span>
+                Author Keywords
+            </span>
+
         </div>
 
     </div>
 
-
-    <div class="card">
-
-        <div class="label">
-            Sources
-        </div>
-
-        <div class="value">
-            95
-        </div>
-
-        <div class="description">
-            Publication sources
-        </div>
-
-    </div>
+</header>
 
 
-    <div class="card">
 
-        <div class="label">
-            Citations
-        </div>
-
-        <div class="value">
-            115
-        </div>
-
-        <div class="description">
-            Total citations
-        </div>
-
-    </div>
-
-
-    <div class="card">
-
-        <div class="label">
-            Open Access
-        </div>
-
-        <div class="value">
-            162
-        </div>
-
-        <div class="description">
-            Open access records
-        </div>
-
-    </div>
-
-
-</section>
-
-
-<!-- ONE VISUALIZATION -->
+<!-- VISUALIZATION -->
 
 <section class="visual">
 
 
-    <div class="visual-header">
+    <div class="visual-title">
 
-        <div>
+        <small>
+            01 · Research Landscape
+        </small>
 
-            <div class="eyebrow">
+        <h2>
+            Topic Orbit
+        </h2>
 
-                01 · RESEARCH TOPICS
-
-            </div>
-
-
-            <h2>
-
-                Research Galaxy
-
-            </h2>
+    </div>
 
 
-            <p class="visual-description">
+    <canvas
+        id="orbitCanvas">
+    </canvas>
 
-                The most frequent author keywords
-                across the Scopus dataset.
 
-            </p>
+    <div
+        id="tooltip"
+        class="tooltip">
+
+        <div
+            id="tooltipName"
+            class="tooltip-name">
+        </div>
+
+        <div
+            id="tooltipCount"
+            class="tooltip-count">
+        </div>
+
+    </div>
+
+
+    <div class="legend">
+
+        <div class="legend-item">
+
+            <span
+                class="legend-dot"
+                style="background:#a78bfa">
+            </span>
+
+            AI & Machine Learning
 
         </div>
 
 
-        <div class="interactive">
+        <div class="legend-item">
 
-            HOVER TO EXPLORE
+            <span
+                class="legend-dot"
+                style="background:#67e8f9">
+            </span>
+
+            Vision & XR
+
+        </div>
+
+
+        <div class="legend-item">
+
+            <span
+                class="legend-dot"
+                style="background:#f472b6">
+            </span>
+
+            Education
+
+        </div>
+
+
+        <div class="legend-item">
+
+            <span
+                class="legend-dot"
+                style="background:#34d399">
+            </span>
+
+            Scientific Computing
 
         </div>
 
     </div>
-
-
-    <div class="galaxy">
-
-        <canvas
-            id="galaxyChart"
-            class="chart">
-        </canvas>
-
-    </div>
-
-
-    <div class="insight">
-
-        <strong>Research signal:</strong>
-
-        Deep Learning is the strongest
-        recurring keyword with 22 occurrences,
-        followed by Human-Computer Interaction
-        with 19 occurrences.
-
-    </div>
-
 
 </section>
 
 
-<div class="footer">
 
-    SCOPUS RESEARCH GALAXY
-    ·
-    DATA VISUALIZATION
+<footer class="footer">
 
-</div>
+    <span>
+        SCOPUS RESEARCH ORBIT
+    </span>
+
+    <span>
+        INTERACTIVE DATA VISUALIZATION
+    </span>
+
+</footer>
 
 
 </div>
@@ -910,7 +661,14 @@ body::before {
 
 /*
 ==========================================================
-REAL DATA FROM THE PROVIDED SCOPUS CSV
+SCOPUS DATA
+==========================================================
+
+Real Author Keywords extracted from the
+provided Scopus CSV.
+
+Frequency = number of documents containing
+the keyword.
 ==========================================================
 */
 
@@ -918,153 +676,219 @@ REAL DATA FROM THE PROVIDED SCOPUS CSV
 const keywords = [
 
     {
-        label: "Deep Learning",
-        count: 22
+        name: "Artificial Intelligence",
+        count: 26,
+        group: "AI"
     },
 
     {
-        label: "Human-Computer Interaction",
-        count: 19
+        name: "Machine Learning",
+        count: 22,
+        group: "AI"
     },
 
     {
-        label: "Affective Computing",
-        count: 13
+        name: "Deep Learning",
+        count: 18,
+        group: "AI"
     },
 
     {
-        label: "Emotion Recognition",
-        count: 13
+        name: "Computer Vision",
+        count: 14,
+        group: "VISION"
     },
 
     {
-        label: "Artificial Intelligence",
-        count: 9
+        name: "Virtual Reality",
+        count: 6,
+        group: "VISION"
     },
 
     {
-        label: "Human–Computer Interaction",
-        count: 8
+        name: "Generative AI",
+        count: 5,
+        group: "AI"
     },
 
     {
-        label: "Human Factors",
-        count: 8
+        name: "Education",
+        count: 5,
+        group: "EDU"
     },
 
     {
-        label: "Machine Learning",
-        count: 7
+        name: "Large Language Models",
+        count: 5,
+        group: "AI"
     },
 
     {
-        label: "Large Language Model",
-        count: 6
+        name: "STEM Education",
+        count: 5,
+        group: "EDU"
     },
 
     {
-        label: "Computer Vision",
-        count: 5
+        name: "Computer Science Education",
+        count: 4,
+        group: "EDU"
     },
 
     {
-        label: "Multimodal Fusion",
-        count: 5
+        name: "Quantum Computing",
+        count: 4,
+        group: "SCIENCE"
     },
 
     {
-        label: "Virtual Reality",
-        count: 5
+        name: "Computed Tomography",
+        count: 4,
+        group: "SCIENCE"
     },
 
     {
-        label: "Multimodal Emotion Recognition",
-        count: 5
+        name: "Extended Reality",
+        count: 4,
+        group: "VISION"
     },
 
     {
-        label: "Reinforcement Learning",
-        count: 5
+        name: "Scientific Computing",
+        count: 4,
+        group: "SCIENCE"
     },
 
     {
-        label: "EEG",
-        count: 5
+        name: "Generative Artificial Intelligence",
+        count: 3,
+        group: "AI"
     },
 
     {
-        label: "Transformer",
-        count: 5
+        name: "Open Science",
+        count: 3,
+        group: "SCIENCE"
     },
 
     {
-        label: "Human-Machine Interaction",
-        count: 5
+        name: "Usability",
+        count: 3,
+        group: "EDU"
     },
 
     {
-        label: "Multi-Modal Fusion",
-        count: 4
+        name: "Materials Science",
+        count: 3,
+        group: "SCIENCE"
     },
 
     {
-        label: "Sentiment Analysis",
-        count: 4
+        name: "Foundation Models",
+        count: 3,
+        group: "AI"
     },
 
     {
-        label: "Generative AI",
-        count: 4
+        name: "Bioinformatics",
+        count: 3,
+        group: "SCIENCE"
     },
 
     {
-        label: "Transformers",
-        count: 4
+        name: "Augmented Reality",
+        count: 3,
+        group: "VISION"
     },
 
     {
-        label: "Human–Robot Interaction",
-        count: 4
+        name: "Convolutional Neural Networks",
+        count: 3,
+        group: "AI"
     },
 
     {
-        label: "Knowledge Graph",
-        count: 4
+        name: "Remote Sensing",
+        count: 3,
+        group: "VISION"
     },
 
     {
-        label: "Large Language Models",
-        count: 4
+        name: "Reconstruction",
+        count: 3,
+        group: "SCIENCE"
     },
 
     {
-        label: "Digital Twin",
-        count: 4
+        name: "3D Printing",
+        count: 3,
+        group: "SCIENCE"
     },
 
     {
-        label: "Privacy Protection",
-        count: 3
+        name: "Simulation",
+        count: 3,
+        group: "SCIENCE"
     },
 
     {
-        label: "Chain-of-Thought",
-        count: 3
+        name: "Uncertainty Quantification",
+        count: 3,
+        group: "SCIENCE"
     },
 
     {
-        label: "Assistive Technology",
-        count: 3
+        name: "Control",
+        count: 3,
+        group: "SCIENCE"
     },
 
     {
-        label: "Contrastive Learning",
-        count: 3
+        name: "Computer-Based Learning",
+        count: 3,
+        group: "EDU"
     },
 
     {
-        label: "Multi-Task Learning",
-        count: 3
+        name: "Data Science",
+        count: 2,
+        group: "AI"
+    },
+
+    {
+        name: "Synthetic Data",
+        count: 2,
+        group: "AI"
+    },
+
+    {
+        name: "Data Integration",
+        count: 2,
+        group: "SCIENCE"
+    },
+
+    {
+        name: "Human–Computer Interaction",
+        count: 2,
+        group: "EDU"
+    },
+
+    {
+        name: "Technology Adoption",
+        count: 2,
+        group: "EDU"
+    },
+
+    {
+        name: "Trust",
+        count: 2,
+        group: "EDU"
+    },
+
+    {
+        name: "Brain Tumor",
+        count: 2,
+        group: "SCIENCE"
     }
 
 ];
@@ -1072,415 +896,983 @@ const keywords = [
 
 /*
 ==========================================================
-CREATE GALAXY POSITIONS
-==========================================================
-
-The positions are generated from the keyword rank.
-This keeps the visualization stable every time
-the page is opened.
+CANVAS
 ==========================================================
 */
 
 
-const positions = [
-
-    [50, 50],
-
-    [68, 40],
-
-    [35, 38],
-
-    [62, 66],
-
-    [42, 70],
-
-    [79, 58],
-
-    [22, 55],
-
-    [76, 24],
-
-    [29, 22],
-
-    [54, 23],
-
-    [88, 40],
-
-    [12, 38],
-
-    [72, 78],
-
-    [46, 88],
-
-    [58, 12],
-
-    [88, 76],
-
-    [17, 76],
-
-    [35, 57],
-
-    [65, 50],
-
-    [25, 35],
-
-    [52, 78],
-
-    [80, 88],
-
-    [9, 62],
-
-    [91, 22],
-
-    [40, 12],
-
-    [63, 34],
-
-    [30, 88],
-
-    [14, 22],
-
-    [83, 66],
-
-    [70, 12]
-
-];
-
-
-/*
-==========================================================
-COLOR PALETTE
-==========================================================
-*/
-
-
-const colors = [
-
-    "#a78bfa",
-
-    "#67e8f9",
-
-    "#f0abfc",
-
-    "#c4b5fd",
-
-    "#818cf8",
-
-    "#22d3ee",
-
-    "#e879f9",
-
-    "#93c5fd"
-
-];
-
-
-/*
-==========================================================
-CONVERT KEYWORDS TO BUBBLE DATA
-==========================================================
-*/
-
-
-const bubbleData = keywords.map(
-    (keyword, index) => {
-
-        return {
-
-            x: positions[index][0],
-
-            y: positions[index][1],
-
-            r:
-                7 +
-                keyword.count * 0.65,
-
-            label:
-                keyword.label,
-
-            count:
-                keyword.count,
-
-            backgroundColor:
-                colors[index % colors.length]
-
-        };
-
-    }
-);
-
-
-/*
-==========================================================
-CHART
-==========================================================
-*/
-
-
-new Chart(
-
+const canvas =
     document.getElementById(
-        "galaxyChart"
-    ),
+        "orbitCanvas"
+    );
 
-    {
 
-        type: "bubble",
+const ctx =
+    canvas.getContext("2d");
 
 
-        data: {
+const tooltip =
+    document.getElementById(
+        "tooltip"
+    );
 
-            datasets: [
 
-                {
+const tooltipName =
+    document.getElementById(
+        "tooltipName"
+    );
 
-                    label:
-                        "Research Topics",
 
-                    data:
-                        bubbleData,
+const tooltipCount =
+    document.getElementById(
+        "tooltipCount"
+    );
 
-                    backgroundColor:
-                        bubbleData.map(
-                            item =>
-                                item.backgroundColor
-                        ),
 
-                    borderColor:
-                        "rgba(255,255,255,.45)",
+let width;
+let height;
 
-                    borderWidth: 1,
+let centerX;
+let centerY;
 
-                    hoverBorderColor:
-                        "#ffffff",
+let nodes = [];
 
-                    hoverBorderWidth: 2
+let mouse = {
 
-                }
+    x: -1000,
 
-            ]
-
-        },
-
-
-        options: {
-
-            responsive: true,
-
-            maintainAspectRatio: false,
-
-
-            animation: {
-
-                duration: 1200,
-
-                easing:
-                    "easeOutElastic"
-
-            },
-
-
-            scales: {
-
-                x: {
-
-                    min: 0,
-
-                    max: 100,
-
-                    display: false
-
-                },
-
-                y: {
-
-                    min: 0,
-
-                    max: 100,
-
-                    display: false
-
-                }
-
-            },
-
-
-            plugins: {
-
-                legend: {
-
-                    display: false
-
-                },
-
-
-                tooltip: {
-
-                    displayColors: false,
-
-                    backgroundColor:
-                        "#080d1d",
-
-                    borderColor:
-                        "rgba(255,255,255,.15)",
-
-                    borderWidth: 1,
-
-                    padding: 14,
-
-                    titleColor:
-                        "#ffffff",
-
-                    bodyColor:
-                        "#cbd5e1",
-
-
-                    callbacks: {
-
-                        title:
-                            function(context) {
-
-                                return context[0]
-                                    .raw
-                                    .label;
-
-                            },
-
-
-                        label:
-                            function(context) {
-
-                                return (
-                                    " " +
-                                    context.raw.count +
-                                    " publications"
-                                );
-
-                            }
-
-                    }
-
-                }
-
-            },
-
-
-            interaction: {
-
-                mode: "nearest",
-
-                intersect: true
-
-            }
-
-        }
-
-    }
-
-);
-
-
-/*
-==========================================================
-DRAW KEYWORD LABELS
-==========================================================
-
-Chart.js does not automatically print
-bubble labels, so we add a small custom plugin.
-==========================================================
-*/
-
-
-const labelPlugin = {
-
-    id: "keywordLabels",
-
-
-    afterDatasetsDraw(chart) {
-
-        const ctx =
-            chart.ctx;
-
-        const dataset =
-            chart.data.datasets[0];
-
-
-        dataset.data.forEach(
-            (point, index) => {
-
-                const meta =
-                    chart.getDatasetMeta(0)
-                    .data[index];
-
-
-                const x =
-                    meta.x;
-
-                const y =
-                    meta.y;
-
-
-                ctx.save();
-
-
-                ctx.textAlign =
-                    "center";
-
-                ctx.textBaseline =
-                    "middle";
-
-
-                ctx.font =
-                    point.r > 12
-                        ? "600 11px Inter, Arial"
-                        : "500 9px Inter, Arial";
-
-
-                ctx.fillStyle =
-                    "#e2e8f0";
-
-
-                let label =
-                    point.label;
-
-
-                /*
-                Shorten long labels
-                */
-
-                if (
-                    label.length > 23
-                ) {
-
-                    label =
-                        label.substring(
-                            0,
-                            21
-                        ) + "…";
-
-                }
-
-
-                ctx.fillText(
-                    label,
-                    x,
-                    y
-                );
-
-
-                ctx.restore();
-
-            }
-        );
-
-    }
+    y: -1000
 
 };
 
 
-Chart.register(
-    labelPlugin
+/*
+==========================================================
+COLORS
+==========================================================
+*/
+
+
+const colors = {
+
+    AI:
+        "#a78bfa",
+
+    VISION:
+        "#67e8f9",
+
+    EDU:
+        "#f472b6",
+
+    SCIENCE:
+        "#34d399"
+
+};
+
+
+/*
+==========================================================
+RESIZE
+==========================================================
+*/
+
+
+function resize() {
+
+    const rect =
+        canvas.parentElement
+        .getBoundingClientRect();
+
+
+    const ratio =
+        window.devicePixelRatio || 1;
+
+
+    width =
+        rect.width;
+
+
+    height =
+        rect.height;
+
+
+    canvas.width =
+        width * ratio;
+
+
+    canvas.height =
+        height * ratio;
+
+
+    canvas.style.width =
+        width + "px";
+
+
+    canvas.style.height =
+        height + "px";
+
+
+    ctx.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
+    );
+
+
+    centerX =
+        width / 2;
+
+
+    centerY =
+        height / 2;
+
+
+    createNodes();
+
+}
+
+
+window.addEventListener(
+    "resize",
+    resize
 );
+
+
+/*
+==========================================================
+CREATE ORBITS
+==========================================================
+*/
+
+
+function createNodes() {
+
+    nodes = [];
+
+
+    const sorted =
+        [...keywords]
+        .sort(
+            (a,b) =>
+                b.count -
+                a.count
+        );
+
+
+    sorted.forEach(
+        (item,index) => {
+
+            const ring =
+                index < 4
+                    ? 1
+                    : index < 12
+                    ? 2
+                    : index < 23
+                    ? 3
+                    : 4;
+
+
+            const ringRadius = [
+
+                0,
+
+                Math.min(
+                    width,
+                    height
+                ) * .15,
+
+                Math.min(
+                    width,
+                    height
+                ) * .26,
+
+                Math.min(
+                    width,
+                    height
+                ) * .37,
+
+                Math.min(
+                    width,
+                    height
+                ) * .47
+
+            ][ring];
+
+
+            const sameRing =
+                sorted.filter(
+                    (_,i) => {
+
+                        if (
+                            i < 4
+                        ) {
+
+                            return ring === 1;
+
+                        }
+
+                        if (
+                            i < 12
+                        ) {
+
+                            return ring === 2;
+
+                        }
+
+                        if (
+                            i < 23
+                        ) {
+
+                            return ring === 3;
+
+                        }
+
+                        return ring === 4;
+
+                    }
+                );
+
+
+            const position =
+                sameRing.indexOf(
+                    item
+                );
+
+
+            const angle =
+                (
+                    position /
+                    sameRing.length
+                ) *
+                Math.PI * 2
+                -
+                Math.PI / 2;
+
+
+            nodes.push({
+
+                ...item,
+
+                ring,
+
+                angle,
+
+                radius:
+                    ringRadius,
+
+                orbitSpeed:
+                    (
+                        ring % 2 === 0
+                            ? 1
+                            : -1
+                    ) *
+                    (
+                        .00004 +
+                        ring * .000012
+                    ),
+
+                x: 0,
+
+                y: 0
+
+            });
+
+        }
+    );
+
+}
+
+
+/*
+==========================================================
+DRAW
+==========================================================
+*/
+
+
+function draw() {
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    /*
+    -------------------------
+    CENTRAL GLOW
+    -------------------------
+    */
+
+
+    const glow =
+        ctx.createRadialGradient(
+            centerX,
+            centerY,
+            0,
+            centerX,
+            centerY,
+            190
+        );
+
+
+    glow.addColorStop(
+        0,
+        "rgba(139,92,246,.17)"
+    );
+
+
+    glow.addColorStop(
+        .45,
+        "rgba(139,92,246,.06)"
+    );
+
+
+    glow.addColorStop(
+        1,
+        "rgba(139,92,246,0)"
+    );
+
+
+    ctx.fillStyle =
+        glow;
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        centerX,
+        centerY,
+        200,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /*
+    -------------------------
+    ORBIT RINGS
+    -------------------------
+    */
+
+
+    const minSize =
+        Math.min(
+            width,
+            height
+        );
+
+
+    [1,2,3,4].forEach(
+        ring => {
+
+            const radius =
+                [
+
+                    0,
+
+                    minSize * .15,
+
+                    minSize * .26,
+
+                    minSize * .37,
+
+                    minSize * .47
+
+                ][ring];
+
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+                centerX,
+                centerY,
+                radius,
+                0,
+                Math.PI * 2
+            );
+
+
+            ctx.strokeStyle =
+                "rgba(148,163,184,.055)";
+
+
+            ctx.lineWidth =
+                1;
+
+
+            ctx.setLineDash([
+                3,
+                8
+            ]);
+
+
+            ctx.stroke();
+
+
+            ctx.setLineDash([]);
+
+        }
+    );
+
+
+    /*
+    -------------------------
+    UPDATE NODES
+    -------------------------
+    */
+
+
+    nodes.forEach(
+        node => {
+
+            node.angle +=
+                node.orbitSpeed;
+
+
+            node.x =
+                centerX +
+                Math.cos(
+                    node.angle
+                ) *
+                node.radius;
+
+
+            node.y =
+                centerY +
+                Math.sin(
+                    node.angle
+                ) *
+                node.radius;
+
+
+            /*
+            NODE SIZE
+            */
+
+
+            node.size =
+                5 +
+                node.count *
+                .72;
+
+
+            /*
+            HOVER
+            */
+
+
+            const distance =
+                Math.hypot(
+                    mouse.x - node.x,
+                    mouse.y - node.y
+                );
+
+
+            node.hover =
+                distance <
+                node.size + 8;
+
+
+            if (
+                node.hover
+            ) {
+
+                node.size *=
+                    1.25;
+
+            }
+
+        }
+    );
+
+
+    /*
+    -------------------------
+    CONNECTIONS
+    -------------------------
+    */
+
+
+    nodes.forEach(
+        node => {
+
+            const distance =
+                Math.hypot(
+                    node.x - centerX,
+                    node.y - centerY
+                );
+
+
+            ctx.beginPath();
+
+
+            ctx.moveTo(
+                centerX,
+                centerY
+            );
+
+
+            ctx.lineTo(
+                node.x,
+                node.y
+            );
+
+
+            ctx.strokeStyle =
+                `rgba(139,92,246,${
+                    Math.max(
+                        .015,
+                        .055 -
+                        distance /
+                        15000
+                    )
+                })`;
+
+
+            ctx.lineWidth =
+                node.hover
+                    ? 1.5
+                    : .6;
+
+
+            ctx.stroke();
+
+        }
+    );
+
+
+    /*
+    -------------------------
+    NODES
+    -------------------------
+    */
+
+
+    nodes.forEach(
+        node => {
+
+            const color =
+                colors[node.group];
+
+
+            /*
+            GLOW
+            */
+
+
+            const glow =
+                ctx.createRadialGradient(
+                    node.x,
+                    node.y,
+                    0,
+                    node.x,
+                    node.y,
+                    node.size * 3
+                );
+
+
+            glow.addColorStop(
+                0,
+                color + "55"
+            );
+
+
+            glow.addColorStop(
+                1,
+                color + "00"
+            );
+
+
+            ctx.fillStyle =
+                glow;
+
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+                node.x,
+                node.y,
+                node.size * 3,
+                0,
+                Math.PI * 2
+            );
+
+
+            ctx.fill();
+
+
+            /*
+            NODE
+            */
+
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+                node.x,
+                node.y,
+                node.size,
+                0,
+                Math.PI * 2
+            );
+
+
+            ctx.fillStyle =
+                color;
+
+
+            ctx.fill();
+
+
+            /*
+            BORDER
+            */
+
+
+            ctx.strokeStyle =
+                "rgba(255,255,255,.45)";
+
+
+            ctx.lineWidth =
+                node.hover
+                    ? 2
+                    : .7;
+
+
+            ctx.stroke();
+
+
+            /*
+            LABEL
+            */
+
+
+            ctx.textAlign =
+                "center";
+
+
+            ctx.textBaseline =
+                "top";
+
+
+            ctx.font =
+                node.hover
+                    ? "600 12px Inter, Arial"
+                    : "500 10px Inter, Arial";
+
+
+            ctx.fillStyle =
+                node.hover
+                    ? "#ffffff"
+                    : "#94a3b8";
+
+
+            let text =
+                node.name;
+
+
+            if (
+                text.length > 24
+            ) {
+
+                text =
+                    text.substring(
+                        0,
+                        22
+                    ) + "…";
+
+            }
+
+
+            ctx.fillText(
+                text,
+                node.x,
+                node.y +
+                node.size +
+                6
+            );
+
+        }
+    );
+
+
+    /*
+    -------------------------
+    CENTRAL CORE
+    -------------------------
+    */
+
+
+    const pulse =
+        35 +
+        Math.sin(
+            Date.now() *
+            .002
+        ) *
+        2;
+
+
+    const core =
+        ctx.createRadialGradient(
+            centerX,
+            centerY,
+            0,
+            centerX,
+            centerY,
+            pulse
+        );
+
+
+    core.addColorStop(
+        0,
+        "rgba(255,255,255,.95)"
+    );
+
+
+    core.addColorStop(
+        .18,
+        "rgba(196,181,253,.9)"
+    );
+
+
+    core.addColorStop(
+        .45,
+        "rgba(139,92,246,.4)"
+    );
+
+
+    core.addColorStop(
+        1,
+        "rgba(139,92,246,0)"
+    );
+
+
+    ctx.fillStyle =
+        core;
+
+
+    ctx.beginPath();
+
+
+    ctx.arc(
+        centerX,
+        centerY,
+        pulse,
+        0,
+        Math.PI * 2
+    );
+
+
+    ctx.fill();
+
+
+    /*
+    CORE CIRCLE
+    */
+
+
+    ctx.beginPath();
+
+
+    ctx.arc(
+        centerX,
+        centerY,
+        28,
+        0,
+        Math.PI * 2
+    );
+
+
+    ctx.fillStyle =
+        "rgba(12,10,30,.95)";
+
+
+    ctx.fill();
+
+
+    ctx.strokeStyle =
+        "rgba(196,181,253,.65)";
+
+
+    ctx.lineWidth =
+        1;
+
+
+    ctx.stroke();
+
+
+    /*
+    CORE TEXT
+    */
+
+
+    ctx.textAlign =
+        "center";
+
+
+    ctx.textBaseline =
+        "middle";
+
+
+    ctx.font =
+        "700 9px Inter, Arial";
+
+
+    ctx.fillStyle =
+        "#ffffff";
+
+
+    ctx.fillText(
+        "SCOPUS",
+        centerX,
+        centerY - 5
+    );
+
+
+    ctx.font =
+        "500 7px Inter, Arial";
+
+
+    ctx.fillStyle =
+        "#a78bfa";
+
+
+    ctx.fillText(
+        "RESEARCH CORE",
+        centerX,
+        centerY + 7
+    );
+
+
+    requestAnimationFrame(
+        draw
+    );
+
+}
+
+
+/*
+==========================================================
+MOUSE
+==========================================================
+*/
+
+
+canvas.addEventListener(
+    "mousemove",
+    event => {
+
+        const rect =
+            canvas.getBoundingClientRect();
+
+
+        mouse.x =
+            event.clientX -
+            rect.left;
+
+
+        mouse.y =
+            event.clientY -
+            rect.top;
+
+
+        const found =
+            nodes.find(
+                node => {
+
+                    const d =
+                        Math.hypot(
+                            mouse.x -
+                            node.x,
+
+                            mouse.y -
+                            node.y
+                        );
+
+                    return (
+                        d <
+                        node.size + 8
+                    );
+
+                }
+            );
+
+
+        if (
+            found
+        ) {
+
+            tooltip.classList.add(
+                "visible"
+            );
+
+
+            tooltipName.textContent =
+                found.name;
+
+
+            tooltipCount.textContent =
+                found.count +
+                " documents";
+
+
+            tooltip.style.left =
+                found.x + "px";
+
+
+            tooltip.style.top =
+                found.y + "px";
+
+
+        } else {
+
+            tooltip.classList.remove(
+                "visible"
+            );
+
+        }
+
+    }
+);
+
+
+canvas.addEventListener(
+    "mouseleave",
+    () => {
+
+        mouse.x = -1000;
+
+        mouse.y = -1000;
+
+        tooltip.classList.remove(
+            "visible"
+        );
+
+    }
+);
+
+
+/*
+==========================================================
+START
+==========================================================
+*/
+
+
+resize();
+
+draw();
 
 </script>
 
