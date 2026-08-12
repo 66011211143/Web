@@ -3,167 +3,638 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Daily News</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Insight Daily</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
+
+        * {
             margin: 0;
-            background: #f2f2f2;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #20242a;
+        }
+
+        /* HEADER */
+
         header {
-            background: #222;
-            color: white;
-            padding: 25px;
-            text-align: center;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .logo span {
+            color: #111827;
         }
 
         nav {
-            background: #444;
-            padding: 15px;
-            text-align: center;
+            display: flex;
+            gap: 25px;
         }
 
         nav a {
-            color: white;
             text-decoration: none;
-            margin: 20px;
+            color: #555;
+            font-size: 15px;
         }
 
-        .container {
+        nav a:hover {
+            color: #2563eb;
+        }
+
+        .subscribe {
+            background: #2563eb;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        /* HERO */
+
+        .hero {
             width: 90%;
-            margin: 30px auto;
+            max-width: 1200px;
+            margin: 40px auto;
+
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
         }
 
-        .main-news {
+        .hero-main {
+            height: 430px;
+            padding: 35px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            border-radius: 18px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0,0,0,0.85),
+                    rgba(0,0,0,0.05)
+                ),
+                url("https://images.unsplash.com/photo-1518770660439-4636190af475")
+                center/cover;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #2563eb;
+            padding: 6px 12px;
+            border-radius: 20px;
+            width: fit-content;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .hero-main h1 {
+            font-size: 38px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .hero-main p {
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        /* TRENDING */
+
+        .trending {
             background: white;
+            border-radius: 18px;
             padding: 25px;
+        }
+
+        .trending h2 {
+            margin-bottom: 20px;
+        }
+
+        .trend-item {
+            padding: 18px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .trend-item:last-child {
+            border-bottom: none;
+        }
+
+        .trend-number {
+            color: #2563eb;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .trend-item h3 {
+            margin-top: 5px;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* CONTENT */
+
+        .content {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 25px;
         }
 
-        .main-news h2 {
-            font-size: 30px;
+        .section-header h2 {
+            font-size: 28px;
         }
 
-        .news-list {
-            display: flex;
-            gap: 20px;
+        .section-header a {
+            color: #2563eb;
+            text-decoration: none;
         }
 
-        .news {
+        /* NEWS CARDS */
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
             background: white;
+            border-radius: 16px;
+            overflow: hidden;
+
+            transition: 0.3s;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
             padding: 20px;
-            flex: 1;
         }
 
-        .news h3 {
-            color: #d32f2f;
+        .category {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: bold;
         }
 
-        .date {
-            color: gray;
+        .card h3 {
+            font-size: 19px;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .meta {
+            margin-top: 15px;
+            color: #999;
+            font-size: 12px;
+        }
+
+        /* NEWSLETTER */
+
+        .newsletter {
+            width: 90%;
+            max-width: 1200px;
+            margin: 60px auto;
+
+            background: #1e293b;
+            color: white;
+
+            padding: 45px;
+            border-radius: 18px;
+
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .newsletter p {
+            color: #cbd5e1;
+            margin-bottom: 25px;
+        }
+
+        .newsletter input {
+            width: 280px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .newsletter button {
+            padding: 13px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+            color: white;
+            padding: 35px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer p {
+            color: #9ca3af;
             font-size: 14px;
         }
 
-        footer {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px;
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-main h1 {
+                font-size: 28px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
+
     </style>
+
 </head>
 
 <body>
 
+
+    <!-- HEADER -->
+
     <header>
-        <h1>DAILY NEWS</h1>
-        <p>ข่าวสารและเรื่องราวที่น่าสนใจประจำวัน</p>
+
+        <div class="header-container">
+
+            <div class="logo">
+                Insight<span>Daily</span>
+            </div>
+
+            <nav>
+                <a href="#">หน้าหลัก</a>
+                <a href="#">เทคโนโลยี</a>
+                <a href="#">ธุรกิจ</a>
+                <a href="#">ไลฟ์สไตล์</a>
+                <a href="#">กีฬา</a>
+            </nav>
+
+            <a href="#" class="subscribe">
+                สมัครสมาชิก
+            </a>
+
+        </div>
+
     </header>
 
-    <nav>
-        <a href="#">หน้าแรก</a>
-        <a href="#">ข่าวล่าสุด</a>
-        <a href="#">เทคโนโลยี</a>
-        <a href="#">เศรษฐกิจ</a>
-        <a href="#">กีฬา</a>
-    </nav>
 
-    <div class="container">
+    <!-- HERO -->
 
-        <div class="main-news">
-            <p class="date">12 สิงหาคม 2569</p>
+    <section class="hero">
 
-            <h2>
-                เทคโนโลยี AI กับการเปลี่ยนแปลงของโลกในยุคดิจิทัล
-            </h2>
+        <div class="hero-main">
+
+            <span class="tag">
+                TECHNOLOGY
+            </span>
+
+            <h1>
+                AI กำลังเปลี่ยนโลกของเรา
+                อย่างไรในปี 2026
+            </h1>
 
             <p>
-                ปัจจุบันเทคโนโลยีปัญญาประดิษฐ์มีบทบาทสำคัญ
-                ในหลายด้าน ทั้งการศึกษา การทำงาน และการดำเนินธุรกิจ
-                ทำให้เกิดการเปลี่ยนแปลงอย่างรวดเร็วในสังคม
+                เจาะลึกเทคโนโลยีปัญญาประดิษฐ์
+                และการเปลี่ยนแปลงที่จะเกิดขึ้น
+                ในชีวิตประจำวันของเรา
             </p>
-        </div>
-
-        <h2>ข่าวล่าสุด</h2>
-
-        <div class="news-list">
-
-            <div class="news">
-                <p class="date">12 สิงหาคม 2569</p>
-
-                <h3>เทคโนโลยี</h3>
-
-                <h4>
-                    ระบบอัจฉริยะเข้ามามีบทบาทในชีวิตประจำวัน
-                </h4>
-
-                <p>
-                    เทคโนโลยีสมัยใหม่ช่วยเพิ่มความสะดวก
-                    และประสิทธิภาพในการทำงาน
-                </p>
-            </div>
-
-            <div class="news">
-                <p class="date">11 สิงหาคม 2569</p>
-
-                <h3>เศรษฐกิจ</h3>
-
-                <h4>
-                    ธุรกิจออนไลน์เติบโตอย่างต่อเนื่อง
-                </h4>
-
-                <p>
-                    ผู้ประกอบการหันมาใช้ช่องทางออนไลน์
-                    เพื่อเข้าถึงผู้บริโภคมากขึ้น
-                </p>
-            </div>
-
-            <div class="news">
-                <p class="date">10 สิงหาคม 2569</p>
-
-                <h3>กีฬา</h3>
-
-                <h4>
-                    การแข่งขันกีฬาระดับประเทศเริ่มต้นขึ้น
-                </h4>
-
-                <p>
-                    นักกีฬาจากหลายจังหวัดเข้าร่วมการแข่งขัน
-                    และเตรียมพร้อมสำหรับการแข่งขันครั้งสำคัญ
-                </p>
-            </div>
 
         </div>
 
-    </div>
+
+        <!-- TRENDING -->
+
+        <div class="trending">
+
+            <h2>
+                🔥 กำลังเป็นกระแส
+            </h2>
+
+            <div class="trend-item">
+
+                <span class="trend-number">
+                    01
+                </span>
+
+                <h3>
+                    เทคโนโลยี AI รุ่นใหม่กำลังได้รับความสนใจ
+                </h3>
+
+            </div>
+
+
+            <div class="trend-item">
+
+                <span class="trend-number">
+                    02
+                </span>
+
+                <h3>
+                    ตลาดดิจิทัลเติบโตอย่างต่อเนื่อง
+                </h3>
+
+            </div>
+
+
+            <div class="trend-item">
+
+                <span class="trend-number">
+                    03
+                </span>
+
+                <h3>
+                    5 เทคโนโลยีที่น่าจับตามองในปีนี้
+                </h3>
+
+            </div>
+
+
+            <div class="trend-item">
+
+                <span class="trend-number">
+                    04
+                </span>
+
+                <h3>
+                    โลกกำลังก้าวเข้าสู่ยุค Digital First
+                </h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LATEST NEWS -->
+
+    <section class="content">
+
+        <div class="section-header">
+
+            <h2>
+                ข่าวล่าสุด
+            </h2>
+
+            <a href="#">
+                ดูทั้งหมด →
+            </a>
+
+        </div>
+
+
+        <div class="news-grid">
+
+
+            <!-- CARD 1 -->
+
+            <article class="card">
+
+                <div class="card-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+                        alt="Technology"
+                    >
+
+                </div>
+
+                <div class="card-content">
+
+                    <span class="category">
+                        TECHNOLOGY
+                    </span>
+
+                    <h3>
+                        เทคโนโลยีใหม่กำลังเปลี่ยนรูปแบบการทำงาน
+                    </h3>
+
+                    <p>
+                        สำรวจแนวโน้มเทคโนโลยีที่กำลังเข้ามา
+                        มีบทบาทในโลกการทำงานยุคใหม่
+                    </p>
+
+                    <div class="meta">
+                        12 สิงหาคม 2569 · 5 นาที
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 2 -->
+
+            <article class="card">
+
+                <div class="card-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1556761175-b413da4baf72"
+                        alt="Business"
+                    >
+
+                </div>
+
+                <div class="card-content">
+
+                    <span class="category">
+                        BUSINESS
+                    </span>
+
+                    <h3>
+                        ธุรกิจยุคใหม่กับการเติบโตบนโลกออนไลน์
+                    </h3>
+
+                    <p>
+                        การเปลี่ยนแปลงของพฤติกรรมผู้บริโภค
+                        ทำให้ธุรกิจต้องปรับตัวเข้าสู่โลกดิจิทัล
+                    </p>
+
+                    <div class="meta">
+                        11 สิงหาคม 2569 · 4 นาที
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 3 -->
+
+            <article class="card">
+
+                <div class="card-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1499750310107-5fef28a66643"
+                        alt="Lifestyle"
+                    >
+
+                </div>
+
+                <div class="card-content">
+
+                    <span class="category">
+                        LIFESTYLE
+                    </span>
+
+                    <h3>
+                        Work-Life Balance ในยุคดิจิทัล
+                    </h3>
+
+                    <p>
+                        วิธีจัดสมดุลระหว่างการทำงาน
+                        และการใช้ชีวิตในยุคที่เทคโนโลยีอยู่รอบตัว
+                    </p>
+
+                    <div class="meta">
+                        10 สิงหาคม 2569 · 6 นาที
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- NEWSLETTER -->
+
+    <section class="newsletter">
+
+        <h2>
+            ไม่พลาดข่าวสำคัญ
+        </h2>
+
+        <p>
+            สมัครรับข่าวสารใหม่ ๆ ส่งตรงถึงอีเมลของคุณ
+        </p>
+
+        <input
+            type="email"
+            placeholder="อีเมลของคุณ"
+        >
+
+        <button>
+            สมัครรับข่าว
+        </button>
+
+    </section>
+
+
+    <!-- FOOTER -->
 
     <footer>
-        <p>© 2026 Daily News</p>
-        <p>เว็บไซต์ข่าวสารออนไลน์</p>
+
+        <strong>
+            InsightDaily
+        </strong>
+
+        <p>
+            © 2026 InsightDaily. All rights reserved.
+        </p>
+
     </footer>
+
 
 </body>
 
