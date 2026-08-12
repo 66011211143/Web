@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scopus Research Landscape</title>
+<title>Scopus Research Galaxy</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -16,85 +17,244 @@
     padding: 0;
 }
 
+:root {
+    --bg: #050816;
+    --panel: rgba(15, 23, 42, .72);
+    --border: rgba(255,255,255,.09);
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --purple: #8b5cf6;
+    --cyan: #22d3ee;
+    --pink: #ec4899;
+}
+
 body {
-    font-family: Inter, Arial, sans-serif;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
     min-height: 100vh;
-    color: #ffffff;
+
+    color: var(--text);
+
+    padding: 28px;
 
     background:
+
         radial-gradient(
-            circle at 10% 10%,
-            rgba(124,58,237,.45),
+            circle at 10% 5%,
+            rgba(139,92,246,.30),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(34,211,238,.18),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(236,72,153,.10),
             transparent 30%
         ),
+
+        #050816;
+}
+
+
+/* STAR BACKGROUND */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+
         radial-gradient(
-            circle at 90% 20%,
-            rgba(6,182,212,.35),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #020617,
-            #0f172a,
-            #111827
+            white 1px,
+            transparent 1px
         );
 
-    padding: 40px;
+    background-size: 90px 90px;
+
+    opacity: .06;
 }
 
+
+/* CONTAINER */
+
 .container {
+
     max-width: 1400px;
+
     margin: auto;
+
+    position: relative;
 }
+
+
+/* TOP BAR */
+
+.topbar {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    text-transform:
+        uppercase;
+
+    margin-bottom: 18px;
+}
+
+
+.status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.status-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #34d399;
+
+    box-shadow:
+        0 0 15px #34d399;
+}
+
 
 /* HERO */
 
 .hero {
-    padding: 55px;
-    border-radius: 30px;
 
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.12);
+    position: relative;
 
-    backdrop-filter: blur(25px);
+    overflow: hidden;
+
+    padding: 65px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 34px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.025)
+        );
+
+    backdrop-filter:
+        blur(25px);
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,.35);
-
-    margin-bottom: 25px;
+        0 35px 100px
+        rgba(0,0,0,.40);
 }
 
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    right: -220px;
+
+    top: -260px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(139,92,246,.35),
+            transparent 68%
+        );
+}
+
+
 .badge {
+
     display: inline-block;
 
-    padding: 8px 15px;
+    padding: 8px 14px;
 
     border-radius: 999px;
 
-    background: rgba(139,92,246,.18);
-
-    border: 1px solid
-        rgba(167,139,250,.35);
-
     color: #c4b5fd;
 
-    font-size: 12px;
+    background:
+        rgba(139,92,246,.12);
+
+    border:
+        1px solid
+        rgba(167,139,250,.28);
+
+    font-size: 10px;
+
+    font-weight: 700;
 
     letter-spacing: 2px;
-
-    margin-bottom: 20px;
 }
+
 
 .hero h1 {
 
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 23px;
+
     font-size:
-        clamp(40px, 6vw, 76px);
+        clamp(48px, 7vw, 88px);
 
-    line-height: 1;
+    line-height: .91;
 
-    letter-spacing: -4px;
+    letter-spacing: -5px;
+}
+
+
+.gradient {
 
     background:
+
         linear-gradient(
             90deg,
             #ffffff,
@@ -102,104 +262,172 @@ body {
             #67e8f9
         );
 
-    -webkit-background-clip: text;
+    -webkit-background-clip:
+        text;
 
-    -webkit-text-fill-color:
-        transparent;
+    background-clip:
+        text;
+
+    color: transparent;
 }
+
 
 .hero p {
 
-    margin-top: 20px;
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 750px;
+
+    margin-top: 25px;
 
     color: #94a3b8;
 
-    font-size: 18px;
+    line-height: 1.75;
+
+    font-size: 16px;
 }
 
 
-/* STAT CARDS */
+.tags {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 27px;
+}
+
+
+.tag {
+
+    padding: 9px 14px;
+
+    border-radius: 12px;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.04);
+
+    color: #cbd5e1;
+
+    font-size: 12px;
+}
+
+
+/* STATS */
 
 .stats {
 
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(4, 1fr);
 
-    gap: 20px;
+    gap: 15px;
 
-    margin-bottom: 25px;
+    margin: 15px 0;
 }
+
 
 .card {
 
-    padding: 30px;
+    padding: 27px;
 
-    border-radius: 24px;
+    border-radius: 23px;
 
     background:
-        rgba(255,255,255,.06);
+        var(--panel);
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid var(--border);
 
     backdrop-filter:
         blur(20px);
 
-    transition: .3s;
+    transition:
+        .25s;
 }
+
 
 .card:hover {
 
     transform:
-        translateY(-6px);
+        translateY(-5px);
 
-    background:
-        rgba(255,255,255,.1);
+    border-color:
+        rgba(139,92,246,.35);
 }
+
 
 .label {
 
     color: #64748b;
 
-    font-size: 13px;
+    font-size: 10px;
+
+    font-weight: 700;
 
     text-transform:
         uppercase;
 
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
+
 
 .value {
 
-    margin-top: 10px;
+    margin-top: 14px;
 
-    font-size: 42px;
+    font-size: 35px;
 
     font-weight: 800;
+
+    letter-spacing: -2px;
 }
 
 
-/* VISUALIZATION */
+.description {
+
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+/* VISUAL */
 
 .visual {
 
-    padding: 35px;
+    padding: 32px;
 
     border-radius: 30px;
 
     background:
-        rgba(255,255,255,.06);
+        var(--panel);
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid var(--border);
 
     backdrop-filter:
-        blur(20px);
+        blur(25px);
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.25);
 }
+
 
 .visual-header {
 
@@ -209,28 +437,163 @@ body {
         space-between;
 
     align-items:
-        center;
+        flex-end;
 
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
-.visual-header h2 {
 
-    font-size: 28px;
+.eyebrow {
+
+    color:
+        #8b5cf6;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-transform:
+        uppercase;
 }
 
-.visual-header p {
+
+.visual h2 {
+
+    margin-top: 7px;
+
+    font-size: 29px;
+
+    letter-spacing: -1px;
+}
+
+
+.visual-description {
+
+    margin-top: 7px;
 
     color: #64748b;
 
-    margin-top: 7px;
+    font-size: 13px;
 }
 
-.chart {
+
+.interactive {
+
+    padding: 8px 12px;
+
+    border-radius: 10px;
+
+    color: #67e8f9;
+
+    background:
+        rgba(34,211,238,.06);
+
+    border:
+        1px solid
+        rgba(34,211,238,.16);
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+/* GALAXY */
+
+.galaxy {
 
     position: relative;
 
-    height: 550px;
+    height: 650px;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(139,92,246,.08),
+            transparent 38%
+        ),
+
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(34,211,238,.05),
+            transparent 30%
+        );
+}
+
+
+.galaxy::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+
+    height: 280px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(139,92,246,.10);
+
+    box-shadow:
+
+        0 0 80px
+        rgba(139,92,246,.08),
+
+        inset 0 0 80px
+        rgba(139,92,246,.05);
+}
+
+
+.chart {
+
+    position: absolute;
+
+    inset: 0;
+}
+
+
+/* INSIGHT */
+
+.insight {
+
+    margin-top: 18px;
+
+    padding: 17px;
+
+    border-radius: 15px;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.025);
+
+    color: #7f8ba0;
+
+    font-size: 12px;
+}
+
+
+.insight strong {
+
+    color: #cbd5e1;
 }
 
 
@@ -238,38 +601,60 @@ body {
 
 .footer {
 
-    text-align: center;
+    margin-top: 22px;
 
-    margin-top: 25px;
+    text-align: center;
 
     color: #475569;
 
-    font-size: 12px;
+    font-size: 10px;
+
+    letter-spacing: 1px;
 }
 
 
 /* MOBILE */
 
-@media(max-width:800px) {
+@media(max-width:900px) {
 
     body {
-        padding: 20px;
+        padding: 16px;
     }
 
     .hero {
-        padding: 35px;
+        padding: 40px 28px;
     }
+
+    .stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .galaxy {
+        height: 520px;
+    }
+
+}
+
+
+@media(max-width:600px) {
 
     .stats {
         grid-template-columns: 1fr;
     }
 
-    .visual {
-        padding: 20px;
+    .visual-header {
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap: 15px;
     }
 
-    .chart {
-        height: 450px;
+    .galaxy {
+        height: 470px;
     }
 
 }
@@ -281,115 +666,243 @@ body {
 
 <body>
 
+
 <div class="container">
 
 
-<section class="hero">
+<!-- TOP BAR -->
 
-<div class="badge">
-SCOPUS DATA ANALYTICS
+<div class="topbar">
+
+    <span>
+        Research Intelligence
+    </span>
+
+    <span class="status">
+
+        <i class="status-dot"></i>
+
+        Scopus Dataset
+
+    </span>
+
 </div>
 
-<h1>
-Research<br>
-Landscape
-</h1>
 
-<p>
-Interactive visualization of Scopus publication data
-</p>
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="badge">
+
+        SCOPUS · RESEARCH ANALYTICS
+
+    </div>
+
+
+    <h1>
+
+        Research
+
+        <br>
+
+        <span class="gradient">
+
+            Galaxy.
+
+        </span>
+
+    </h1>
+
+
+    <p>
+
+        A visual map of the research landscape
+        built from Scopus author keywords.
+        Each research topic becomes a point
+        in the research galaxy, with larger
+        points representing more frequent topics.
+
+    </p>
+
+
+    <div class="tags">
+
+        <span class="tag">
+            300 Documents
+        </span>
+
+        <span class="tag">
+            95 Publication Sources
+        </span>
+
+        <span class="tag">
+            2026–2027
+        </span>
+
+        <span class="tag">
+            22 Data Fields
+        </span>
+
+    </div>
 
 </section>
 
+
+<!-- STATS -->
 
 <section class="stats">
 
 
-<div class="card">
+    <div class="card">
 
-<div class="label">
-Total Documents
-</div>
+        <div class="label">
+            Documents
+        </div>
 
-<div
-    class="value"
-    id="documents">
-—
-</div>
+        <div class="value">
+            300
+        </div>
 
-</div>
+        <div class="description">
+            Scopus records
+        </div>
 
-
-<div class="card">
-
-<div class="label">
-Publication Sources
-</div>
-
-<div
-    class="value"
-    id="sources">
-—
-</div>
-
-</div>
+    </div>
 
 
-<div class="card">
+    <div class="card">
 
-<div class="label">
-Publication Years
-</div>
+        <div class="label">
+            Sources
+        </div>
 
-<div
-    class="value"
-    id="years">
-—
-</div>
+        <div class="value">
+            95
+        </div>
 
-</div>
+        <div class="description">
+            Publication sources
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="label">
+            Citations
+        </div>
+
+        <div class="value">
+            115
+        </div>
+
+        <div class="description">
+            Total citations
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="label">
+            Open Access
+        </div>
+
+        <div class="value">
+            162
+        </div>
+
+        <div class="description">
+            Open access records
+        </div>
+
+    </div>
 
 
 </section>
 
 
+<!-- ONE VISUALIZATION -->
+
 <section class="visual">
 
-<div class="visual-header">
 
-<div>
+    <div class="visual-header">
 
-<h2>
-Top Publication Sources
-</h2>
+        <div>
 
-<p>
-Most represented publication sources
-in the Scopus dataset
-</p>
+            <div class="eyebrow">
 
-</div>
+                01 · RESEARCH TOPICS
 
-</div>
+            </div>
 
 
-<div class="chart">
+            <h2>
 
-<canvas id="chart"></canvas>
+                Research Galaxy
 
-</div>
+            </h2>
+
+
+            <p class="visual-description">
+
+                The most frequent author keywords
+                across the Scopus dataset.
+
+            </p>
+
+        </div>
+
+
+        <div class="interactive">
+
+            HOVER TO EXPLORE
+
+        </div>
+
+    </div>
+
+
+    <div class="galaxy">
+
+        <canvas
+            id="galaxyChart"
+            class="chart">
+        </canvas>
+
+    </div>
+
+
+    <div class="insight">
+
+        <strong>Research signal:</strong>
+
+        Deep Learning is the strongest
+        recurring keyword with 22 occurrences,
+        followed by Human-Computer Interaction
+        with 19 occurrences.
+
+    </div>
+
 
 </section>
 
 
 <div class="footer">
 
-Scopus Research Landscape · Interactive Data Visualization
+    SCOPUS RESEARCH GALAXY
+    ·
+    DATA VISUALIZATION
 
 </div>
 
 
 </div>
+
 
 
 <script>
@@ -397,533 +910,577 @@ Scopus Research Landscape · Interactive Data Visualization
 
 /*
 ==========================================================
-SCOPUS DATA
-==========================================================
-
-The CSV data should be embedded directly here.
-
-Replace DATA with the CSV content from your Scopus export.
-
+REAL DATA FROM THE PROVIDED SCOPUS CSV
 ==========================================================
 */
 
 
-const csvData = `
+const keywords = [
 
-PASTE_YOUR_SCOPUS_CSV_DATA_HERE
+    {
+        label: "Deep Learning",
+        count: 22
+    },
 
-`;
+    {
+        label: "Human-Computer Interaction",
+        count: 19
+    },
+
+    {
+        label: "Affective Computing",
+        count: 13
+    },
+
+    {
+        label: "Emotion Recognition",
+        count: 13
+    },
+
+    {
+        label: "Artificial Intelligence",
+        count: 9
+    },
+
+    {
+        label: "Human–Computer Interaction",
+        count: 8
+    },
+
+    {
+        label: "Human Factors",
+        count: 8
+    },
+
+    {
+        label: "Machine Learning",
+        count: 7
+    },
+
+    {
+        label: "Large Language Model",
+        count: 6
+    },
+
+    {
+        label: "Computer Vision",
+        count: 5
+    },
+
+    {
+        label: "Multimodal Fusion",
+        count: 5
+    },
+
+    {
+        label: "Virtual Reality",
+        count: 5
+    },
+
+    {
+        label: "Multimodal Emotion Recognition",
+        count: 5
+    },
+
+    {
+        label: "Reinforcement Learning",
+        count: 5
+    },
+
+    {
+        label: "EEG",
+        count: 5
+    },
+
+    {
+        label: "Transformer",
+        count: 5
+    },
+
+    {
+        label: "Human-Machine Interaction",
+        count: 5
+    },
+
+    {
+        label: "Multi-Modal Fusion",
+        count: 4
+    },
+
+    {
+        label: "Sentiment Analysis",
+        count: 4
+    },
+
+    {
+        label: "Generative AI",
+        count: 4
+    },
+
+    {
+        label: "Transformers",
+        count: 4
+    },
+
+    {
+        label: "Human–Robot Interaction",
+        count: 4
+    },
+
+    {
+        label: "Knowledge Graph",
+        count: 4
+    },
+
+    {
+        label: "Large Language Models",
+        count: 4
+    },
+
+    {
+        label: "Digital Twin",
+        count: 4
+    },
+
+    {
+        label: "Privacy Protection",
+        count: 3
+    },
+
+    {
+        label: "Chain-of-Thought",
+        count: 3
+    },
+
+    {
+        label: "Assistive Technology",
+        count: 3
+    },
+
+    {
+        label: "Contrastive Learning",
+        count: 3
+    },
+
+    {
+        label: "Multi-Task Learning",
+        count: 3
+    }
+
+];
 
 
 /*
 ==========================================================
-CSV PARSER
+CREATE GALAXY POSITIONS
+==========================================================
+
+The positions are generated from the keyword rank.
+This keeps the visualization stable every time
+the page is opened.
 ==========================================================
 */
 
 
-function parseCSV(text) {
+const positions = [
 
-    const rows = [];
+    [50, 50],
 
-    let row = [];
+    [68, 40],
 
-    let cell = "";
+    [35, 38],
 
-    let insideQuotes = false;
+    [62, 66],
 
+    [42, 70],
 
-    for (
-        let i = 0;
-        i < text.length;
-        i++
-    ) {
+    [79, 58],
 
-        const char = text[i];
+    [22, 55],
 
-        const next = text[i + 1];
+    [76, 24],
 
+    [29, 22],
 
-        if (
-            char === '"' &&
-            insideQuotes &&
-            next === '"'
-        ) {
+    [54, 23],
 
-            cell += '"';
+    [88, 40],
 
-            i++;
+    [12, 38],
 
-            continue;
-        }
+    [72, 78],
 
+    [46, 88],
 
-        if (char === '"') {
+    [58, 12],
 
-            insideQuotes =
-                !insideQuotes;
+    [88, 76],
 
-            continue;
-        }
+    [17, 76],
 
+    [35, 57],
 
-        if (
-            char === ',' &&
-            !insideQuotes
-        ) {
+    [65, 50],
 
-            row.push(cell);
+    [25, 35],
 
-            cell = "";
+    [52, 78],
 
-            continue;
-        }
+    [80, 88],
 
+    [9, 62],
 
-        if (
-            char === '\n' &&
-            !insideQuotes
-        ) {
+    [91, 22],
 
-            row.push(cell);
+    [40, 12],
 
-            rows.push(row);
+    [63, 34],
 
-            row = [];
+    [30, 88],
 
-            cell = "";
+    [14, 22],
 
-            continue;
-        }
+    [83, 66],
 
+    [70, 12]
 
-        if (
-            char !== '\r'
-        ) {
-
-            cell += char;
-        }
-
-    }
-
-
-    if (cell || row.length) {
-
-        row.push(cell);
-
-        rows.push(row);
-
-    }
-
-
-    if (!rows.length) {
-        return [];
-    }
-
-
-    const headers =
-        rows[0].map(
-            h => h.trim()
-        );
-
-
-    return rows
-        .slice(1)
-        .filter(
-            r => r.some(
-                cell =>
-                    cell.trim() !== ""
-            )
-        )
-        .map(r => {
-
-            const obj = {};
-
-            headers.forEach(
-                (header, index) => {
-
-                    obj[header] =
-                        r[index] || "";
-
-                }
-            );
-
-            return obj;
-
-        });
-
-}
+];
 
 
 /*
 ==========================================================
-FIND SCOPUS COLUMNS
+COLOR PALETTE
 ==========================================================
 */
 
 
-function findColumn(
-    data,
-    names
-) {
+const colors = [
 
-    if (!data.length) {
-        return null;
-    }
+    "#a78bfa",
 
+    "#67e8f9",
 
-    const columns =
-        Object.keys(data[0]);
+    "#f0abfc",
 
+    "#c4b5fd",
 
-    for (
-        const name of names
-    ) {
+    "#818cf8",
 
-        const found =
-            columns.find(
-                column =>
-                    column
-                    .toLowerCase()
-                    .trim()
-                    ===
-                    name
-                    .toLowerCase()
-                    .trim()
-            );
+    "#22d3ee",
 
+    "#e879f9",
 
-        if (found) {
-            return found;
-        }
+    "#93c5fd"
 
-    }
-
-
-    return null;
-
-}
+];
 
 
 /*
 ==========================================================
-CREATE DASHBOARD
+CONVERT KEYWORDS TO BUBBLE DATA
 ==========================================================
 */
 
 
-function createDashboard() {
+const bubbleData = keywords.map(
+    (keyword, index) => {
 
+        return {
 
-    const data =
-        parseCSV(csvData);
+            x: positions[index][0],
 
+            y: positions[index][1],
 
-    if (!data.length) {
+            r:
+                7 +
+                keyword.count * 0.65,
 
-        document
-            .getElementById("documents")
-            .textContent = "0";
+            label:
+                keyword.label,
 
-        return;
+            count:
+                keyword.count,
 
-    }
+            backgroundColor:
+                colors[index % colors.length]
 
-
-    /*
-    SOURCE TITLE
-    */
-
-    const sourceColumn =
-        findColumn(
-            data,
-            [
-                "Source title",
-                "Source Title",
-                "source title",
-                "Publication Name"
-            ]
-        );
-
-
-    /*
-    YEAR
-    */
-
-    const yearColumn =
-        findColumn(
-            data,
-            [
-                "Year",
-                "Publication Year",
-                "Cover Date"
-            ]
-        );
-
-
-    /*
-    TOTAL DOCUMENTS
-    */
-
-    document
-        .getElementById("documents")
-        .textContent =
-        data.length.toLocaleString();
-
-
-    /*
-    UNIQUE SOURCES
-    */
-
-    const sourceSet =
-        new Set();
-
-
-    if (sourceColumn) {
-
-        data.forEach(row => {
-
-            const source =
-                row[sourceColumn]
-                .trim();
-
-            if (source) {
-
-                sourceSet.add(source);
-
-            }
-
-        });
+        };
 
     }
+);
 
 
-    document
-        .getElementById("sources")
-        .textContent =
-        sourceSet.size.toLocaleString();
+/*
+==========================================================
+CHART
+==========================================================
+*/
 
 
-    /*
-    YEARS
-    */
+new Chart(
 
-    if (yearColumn) {
+    document.getElementById(
+        "galaxyChart"
+    ),
 
-        const years =
-            data
-            .map(row => {
+    {
 
-                const match =
-                    String(
-                        row[yearColumn]
-                    )
-                    .match(/\d{4}/);
-
-                return match
-                    ? Number(match[0])
-                    : null;
-
-            })
-            .filter(Boolean);
+        type: "bubble",
 
 
-        if (years.length) {
+        data: {
 
-            const min =
-                Math.min(...years);
+            datasets: [
 
-            const max =
-                Math.max(...years);
-
-
-            document
-                .getElementById("years")
-                .textContent =
-                `${min}–${max}`;
-
-        }
-
-    }
-
-
-    /*
-    COUNT SOURCES
-    */
-
-    const counts = {};
-
-
-    if (sourceColumn) {
-
-        data.forEach(row => {
-
-            const source =
-                row[sourceColumn]
-                .trim();
-
-
-            if (!source) {
-                return;
-            }
-
-
-            counts[source] =
-                (counts[source] || 0)
-                + 1;
-
-        });
-
-    }
-
-
-    /*
-    TOP 12
-    */
-
-    const topSources =
-        Object.entries(counts)
-        .sort(
-            (a,b) =>
-                b[1] - a[1]
-        )
-        .slice(0,12);
-
-
-    const labels =
-        topSources.map(
-            item => item[0]
-        );
-
-
-    const values =
-        topSources.map(
-            item => item[1]
-        );
-
-
-    /*
-    CHART
-    */
-
-    new Chart(
-
-        document
-        .getElementById("chart"),
-
-        {
-
-            type: "bar",
-
-            data: {
-
-                labels: labels,
-
-                datasets: [{
+                {
 
                     label:
-                        "Documents",
+                        "Research Topics",
 
-                    data: values,
+                    data:
+                        bubbleData,
 
                     backgroundColor:
-                        "rgba(139,92,246,.75)",
+                        bubbleData.map(
+                            item =>
+                                item.backgroundColor
+                        ),
 
                     borderColor:
-                        "#c4b5fd",
+                        "rgba(255,255,255,.45)",
 
                     borderWidth: 1,
 
-                    borderRadius: 12
+                    hoverBorderColor:
+                        "#ffffff",
 
-                }]
+                    hoverBorderWidth: 2
+
+                }
+
+            ]
+
+        },
+
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+
+            animation: {
+
+                duration: 1200,
+
+                easing:
+                    "easeOutElastic"
 
             },
 
 
-            options: {
+            scales: {
 
-                indexAxis: "y",
+                x: {
 
-                responsive: true,
+                    min: 0,
 
-                maintainAspectRatio:
-                    false,
+                    max: 100,
+
+                    display: false
+
+                },
+
+                y: {
+
+                    min: 0,
+
+                    max: 100,
+
+                    display: false
+
+                }
+
+            },
 
 
-                plugins: {
+            plugins: {
 
-                    legend: {
+                legend: {
 
-                        display: false
-
-                    },
-
-
-                    tooltip: {
-
-                        backgroundColor:
-                            "#0f172a",
-
-                        padding: 14
-
-                    }
+                    display: false
 
                 },
 
 
-                scales: {
+                tooltip: {
 
-                    x: {
+                    displayColors: false,
 
-                        beginAtZero: true,
+                    backgroundColor:
+                        "#080d1d",
 
-                        grid: {
+                    borderColor:
+                        "rgba(255,255,255,.15)",
 
-                            color:
-                                "rgba(255,255,255,.07)"
+                    borderWidth: 1,
 
-                        },
+                    padding: 14,
 
-                        ticks: {
+                    titleColor:
+                        "#ffffff",
 
-                            color:
-                                "#94a3b8"
-
-                        }
-
-                    },
+                    bodyColor:
+                        "#cbd5e1",
 
 
-                    y: {
+                    callbacks: {
 
-                        grid: {
+                        title:
+                            function(context) {
 
-                            display: false
+                                return context[0]
+                                    .raw
+                                    .label;
 
-                        },
+                            },
 
-                        ticks: {
 
-                            color:
-                                "#cbd5e1"
+                        label:
+                            function(context) {
 
-                        }
+                                return (
+                                    " " +
+                                    context.raw.count +
+                                    " publications"
+                                );
+
+                            }
 
                     }
 
                 }
 
+            },
+
+
+            interaction: {
+
+                mode: "nearest",
+
+                intersect: true
+
             }
 
         }
 
-    );
+    }
 
-}
+);
 
 
-createDashboard();
+/*
+==========================================================
+DRAW KEYWORD LABELS
+==========================================================
+
+Chart.js does not automatically print
+bubble labels, so we add a small custom plugin.
+==========================================================
+*/
+
+
+const labelPlugin = {
+
+    id: "keywordLabels",
+
+
+    afterDatasetsDraw(chart) {
+
+        const ctx =
+            chart.ctx;
+
+        const dataset =
+            chart.data.datasets[0];
+
+
+        dataset.data.forEach(
+            (point, index) => {
+
+                const meta =
+                    chart.getDatasetMeta(0)
+                    .data[index];
+
+
+                const x =
+                    meta.x;
+
+                const y =
+                    meta.y;
+
+
+                ctx.save();
+
+
+                ctx.textAlign =
+                    "center";
+
+                ctx.textBaseline =
+                    "middle";
+
+
+                ctx.font =
+                    point.r > 12
+                        ? "600 11px Inter, Arial"
+                        : "500 9px Inter, Arial";
+
+
+                ctx.fillStyle =
+                    "#e2e8f0";
+
+
+                let label =
+                    point.label;
+
+
+                /*
+                Shorten long labels
+                */
+
+                if (
+                    label.length > 23
+                ) {
+
+                    label =
+                        label.substring(
+                            0,
+                            21
+                        ) + "…";
+
+                }
+
+
+                ctx.fillText(
+                    label,
+                    x,
+                    y
+                );
+
+
+                ctx.restore();
+
+            }
+        );
+
+    }
+
+};
+
+
+Chart.register(
+    labelPlugin
+);
 
 </script>
 
