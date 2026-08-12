@@ -1,15 +1,170 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
+
 <head>
-    <title>ข้อมูลนิสิต</title>
+    <meta charset="UTF-8">
+    <title>Daily News</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f2f2f2;
+        }
+
+        header {
+            background: #222;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        nav {
+            background: #444;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 20px;
+        }
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        .main-news {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .main-news h2 {
+            font-size: 30px;
+        }
+
+        .news-list {
+            display: flex;
+            gap: 20px;
+        }
+
+        .news {
+            background: white;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .news h3 {
+            color: #d32f2f;
+        }
+
+        .date {
+            color: gray;
+            font-size: 14px;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>ข้อมูลนิสิต</h1>
+    <header>
+        <h1>DAILY NEWS</h1>
+        <p>ข่าวสารและเรื่องราวที่น่าสนใจประจำวัน</p>
+    </header>
 
-    <p>ชื่อคณะ: คณะวิทยาการสารสนเทศ</p>
-    <p>รหัสนิสิต: 66XXXXXXXX</p>
+    <nav>
+        <a href="#">หน้าแรก</a>
+        <a href="#">ข่าวล่าสุด</a>
+        <a href="#">เทคโนโลยี</a>
+        <a href="#">เศรษฐกิจ</a>
+        <a href="#">กีฬา</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="main-news">
+            <p class="date">12 สิงหาคม 2569</p>
+
+            <h2>
+                เทคโนโลยี AI กับการเปลี่ยนแปลงของโลกในยุคดิจิทัล
+            </h2>
+
+            <p>
+                ปัจจุบันเทคโนโลยีปัญญาประดิษฐ์มีบทบาทสำคัญ
+                ในหลายด้าน ทั้งการศึกษา การทำงาน และการดำเนินธุรกิจ
+                ทำให้เกิดการเปลี่ยนแปลงอย่างรวดเร็วในสังคม
+            </p>
+        </div>
+
+        <h2>ข่าวล่าสุด</h2>
+
+        <div class="news-list">
+
+            <div class="news">
+                <p class="date">12 สิงหาคม 2569</p>
+
+                <h3>เทคโนโลยี</h3>
+
+                <h4>
+                    ระบบอัจฉริยะเข้ามามีบทบาทในชีวิตประจำวัน
+                </h4>
+
+                <p>
+                    เทคโนโลยีสมัยใหม่ช่วยเพิ่มความสะดวก
+                    และประสิทธิภาพในการทำงาน
+                </p>
+            </div>
+
+            <div class="news">
+                <p class="date">11 สิงหาคม 2569</p>
+
+                <h3>เศรษฐกิจ</h3>
+
+                <h4>
+                    ธุรกิจออนไลน์เติบโตอย่างต่อเนื่อง
+                </h4>
+
+                <p>
+                    ผู้ประกอบการหันมาใช้ช่องทางออนไลน์
+                    เพื่อเข้าถึงผู้บริโภคมากขึ้น
+                </p>
+            </div>
+
+            <div class="news">
+                <p class="date">10 สิงหาคม 2569</p>
+
+                <h3>กีฬา</h3>
+
+                <h4>
+                    การแข่งขันกีฬาระดับประเทศเริ่มต้นขึ้น
+                </h4>
+
+                <p>
+                    นักกีฬาจากหลายจังหวัดเข้าร่วมการแข่งขัน
+                    และเตรียมพร้อมสำหรับการแข่งขันครั้งสำคัญ
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Daily News</p>
+        <p>เว็บไซต์ข่าวสารออนไลน์</p>
+    </footer>
 
 </body>
+
 </html>
