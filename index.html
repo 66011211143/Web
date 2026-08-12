@@ -1,459 +1,356 @@
 <!DOCTYPE html>
-<html lang="th">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Insight Daily</title>
+    <title>Scopus Research Landscape</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
     <style>
-
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #20242a;
-        }
-
-        /* HEADER */
-
-        header {
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .header-container {
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            height: 75px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-            color: #2563eb;
-        }
-
-        .logo span {
-            color: #111827;
-        }
-
-        nav {
-            display: flex;
-            gap: 25px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #555;
-            font-size: 15px;
-        }
-
-        nav a:hover {
-            color: #2563eb;
-        }
-
-        .subscribe {
-            background: #2563eb;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 8px;
-            text-decoration: none;
-        }
-
-        /* HERO */
-
-        .hero {
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 25px;
-        }
-
-        .hero-main {
-            height: 430px;
-            padding: 35px;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-
-            border-radius: 18px;
-
-            color: white;
-
+            font-family: "Inter", sans-serif;
             background:
-                linear-gradient(
-                    to top,
-                    rgba(0,0,0,0.85),
-                    rgba(0,0,0,0.05)
-                ),
-                url("https://images.unsplash.com/photo-1518770660439-4636190af475")
-                center/cover;
+                radial-gradient(circle at 10% 10%, rgba(99,102,241,.18), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(168,85,247,.15), transparent 30%),
+                #080b16;
+            color: #f8fafc;
+            min-height: 100vh;
         }
 
-        .tag {
+        .container {
+            width: min(1400px, 94%);
+            margin: auto;
+            padding: 40px 0 60px;
+        }
+
+        /* Header */
+
+        .header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .badge {
             display: inline-block;
-            background: #2563eb;
-            padding: 6px 12px;
-            border-radius: 20px;
-            width: fit-content;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(99,102,241,.15);
+            border: 1px solid rgba(129,140,248,.3);
+            color: #a5b4fc;
             font-size: 13px;
-            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
         }
 
-        .hero-main h1 {
-            font-size: 38px;
-            line-height: 1.2;
-            margin-bottom: 12px;
+        .header h1 {
+            font-size: clamp(32px, 5vw, 58px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #c4b5fd,
+                #93c5fd
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-main p {
-            color: #ddd;
-            line-height: 1.6;
-        }
-
-        /* TRENDING */
-
-        .trending {
-            background: white;
-            border-radius: 18px;
-            padding: 25px;
-        }
-
-        .trending h2 {
-            margin-bottom: 20px;
-        }
-
-        .trend-item {
-            padding: 18px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .trend-item:last-child {
-            border-bottom: none;
-        }
-
-        .trend-number {
-            color: #2563eb;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .trend-item h3 {
-            margin-top: 5px;
+        .header p {
+            margin-top: 14px;
+            color: #94a3b8;
             font-size: 16px;
-            line-height: 1.4;
         }
 
-        /* CONTENT */
+        /* KPI */
 
-        .content {
-            width: 90%;
-            max-width: 1200px;
-            margin: 50px auto;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .section-header h2 {
-            font-size: 28px;
-        }
-
-        .section-header a {
-            color: #2563eb;
-            text-decoration: none;
-        }
-
-        /* NEWS CARDS */
-
-        .news-grid {
+        .stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 24px;
         }
 
-        .card {
-            background: white;
-            border-radius: 16px;
+        .stat-card {
+            position: relative;
             overflow: hidden;
+            padding: 25px;
+            border-radius: 20px;
 
-            transition: 0.3s;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,.08),
+                rgba(255,255,255,.025)
+            );
 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,.09);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.25);
+
+            transition: .3s ease;
         }
 
-        .card:hover {
+        .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: rgba(129,140,248,.4);
         }
 
-        .card-image {
-            height: 200px;
-            overflow: hidden;
+        .stat-card::before {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            right: -50px;
+            top: -50px;
+
+            background: rgba(99,102,241,.2);
+            filter: blur(40px);
+            border-radius: 50%;
         }
 
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.4s;
-        }
-
-        .card:hover img {
-            transform: scale(1.05);
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .category {
-            color: #2563eb;
+        .stat-label {
+            color: #94a3b8;
             font-size: 13px;
-            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .card h3 {
-            font-size: 19px;
-            margin: 10px 0;
-            line-height: 1.4;
+        .stat-value {
+            margin-top: 10px;
+            font-size: 34px;
+            font-weight: 800;
         }
 
-        .card p {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .meta {
-            margin-top: 15px;
-            color: #999;
+        .stat-description {
+            margin-top: 6px;
+            color: #64748b;
             font-size: 12px;
         }
 
-        /* NEWSLETTER */
+        /* Cards */
 
-        .newsletter {
-            width: 90%;
-            max-width: 1200px;
-            margin: 60px auto;
-
-            background: #1e293b;
-            color: white;
-
-            padding: 45px;
-            border-radius: 18px;
-
-            text-align: center;
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
         }
 
-        .newsletter h2 {
-            font-size: 28px;
+        .card {
+            background: rgba(15,23,42,.72);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 22px;
+            padding: 24px;
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,.25);
+        }
+
+        .card.large {
+            grid-column: span 2;
+        }
+
+        .card-header {
             margin-bottom: 10px;
         }
 
-        .newsletter p {
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .card-subtitle {
+            margin-top: 5px;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .chart {
+            width: 100%;
+            height: 400px;
+        }
+
+        /* Insight */
+
+        .insight {
+            margin-top: 24px;
+            padding: 24px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(99,102,241,.16),
+                    rgba(168,85,247,.08)
+                );
+
+            border: 1px solid rgba(129,140,248,.2);
+        }
+
+        .insight-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .insight p {
             color: #cbd5e1;
-            margin-bottom: 25px;
-        }
-
-        .newsletter input {
-            width: 280px;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-        }
-
-        .newsletter button {
-            padding: 13px 20px;
-            border: none;
-            border-radius: 8px;
-            background: #2563eb;
-            color: white;
-            cursor: pointer;
-        }
-
-        /* FOOTER */
-
-        footer {
-            background: #111827;
-            color: white;
-            padding: 35px;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        footer p {
-            color: #9ca3af;
+            line-height: 1.7;
             font-size: 14px;
         }
 
-        /* RESPONSIVE */
+        /* Footer */
 
-        @media (max-width: 800px) {
+        footer {
+            text-align: center;
+            margin-top: 45px;
+            color: #475569;
+            font-size: 12px;
+        }
 
-            nav {
-                display: none;
+        /* Responsive */
+
+        @media(max-width: 900px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .hero {
+            .grid {
                 grid-template-columns: 1fr;
             }
 
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-main h1 {
-                font-size: 28px;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 10px;
+            .card.large {
+                grid-column: span 1;
             }
         }
 
-    </style>
+        @media(max-width: 550px) {
 
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding-top: 25px;
+            }
+
+            .chart {
+                height: 350px;
+            }
+        }
+    </style>
 </head>
+
 
 <body>
 
+<div class="container">
 
     <!-- HEADER -->
 
-    <header>
+    <header class="header">
 
-        <div class="header-container">
-
-            <div class="logo">
-                Insight<span>Daily</span>
-            </div>
-
-            <nav>
-                <a href="#">หน้าหลัก</a>
-                <a href="#">เทคโนโลยี</a>
-                <a href="#">ธุรกิจ</a>
-                <a href="#">ไลฟ์สไตล์</a>
-                <a href="#">กีฬา</a>
-            </nav>
-
-            <a href="#" class="subscribe">
-                สมัครสมาชิก
-            </a>
-
+        <div class="badge">
+            SCOPUS • RESEARCH INTELLIGENCE
         </div>
+
+        <h1>
+            Research Landscape
+        </h1>
+
+        <p>
+            Interactive visualization of 600 Scopus publications
+        </p>
 
     </header>
 
 
-    <!-- HERO -->
+    <!-- KPI -->
 
-    <section class="hero">
+    <section class="stats">
 
-        <div class="hero-main">
+        <div class="stat-card">
 
-            <span class="tag">
-                TECHNOLOGY
-            </span>
+            <div class="stat-label">
+                Publications
+            </div>
 
-            <h1>
-                AI กำลังเปลี่ยนโลกของเรา
-                อย่างไรในปี 2026
-            </h1>
+            <div class="stat-value">
+                600
+            </div>
 
-            <p>
-                เจาะลึกเทคโนโลยีปัญญาประดิษฐ์
-                และการเปลี่ยนแปลงที่จะเกิดขึ้น
-                ในชีวิตประจำวันของเรา
-            </p>
+            <div class="stat-description">
+                Combined Scopus records
+            </div>
 
         </div>
 
 
-        <!-- TRENDING -->
+        <div class="stat-card">
 
-        <div class="trending">
-
-            <h2>
-                🔥 กำลังเป็นกระแส
-            </h2>
-
-            <div class="trend-item">
-
-                <span class="trend-number">
-                    01
-                </span>
-
-                <h3>
-                    เทคโนโลยี AI รุ่นใหม่กำลังได้รับความสนใจ
-                </h3>
-
+            <div class="stat-label">
+                Citations
             </div>
 
-
-            <div class="trend-item">
-
-                <span class="trend-number">
-                    02
-                </span>
-
-                <h3>
-                    ตลาดดิจิทัลเติบโตอย่างต่อเนื่อง
-                </h3>
-
+            <div class="stat-value">
+                1,062
             </div>
 
-
-            <div class="trend-item">
-
-                <span class="trend-number">
-                    03
-                </span>
-
-                <h3>
-                    5 เทคโนโลยีที่น่าจับตามองในปีนี้
-                </h3>
-
+            <div class="stat-description">
+                Total citations
             </div>
 
+        </div>
 
-            <div class="trend-item">
 
-                <span class="trend-number">
-                    04
-                </span>
+        <div class="stat-card">
 
-                <h3>
-                    โลกกำลังก้าวเข้าสู่ยุค Digital First
-                </h3>
+            <div class="stat-label">
+                Average Citations
+            </div>
 
+            <div class="stat-value">
+                1.8
+            </div>
+
+            <div class="stat-description">
+                Citations per publication
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Data Period
+            </div>
+
+            <div class="stat-value">
+                2025–27
+            </div>
+
+            <div class="stat-description">
+                Publication years
             </div>
 
         </div>
@@ -461,181 +358,432 @@
     </section>
 
 
-    <!-- LATEST NEWS -->
+    <!-- CHARTS -->
 
-    <section class="content">
+    <section class="grid">
 
-        <div class="section-header">
 
-            <h2>
-                ข่าวล่าสุด
-            </h2>
+        <!-- Publication Trend -->
 
-            <a href="#">
-                ดูทั้งหมด →
-            </a>
+        <div class="card large">
+
+            <div class="card-header">
+
+                <div class="card-title">
+                    Publication Momentum
+                </div>
+
+                <div class="card-subtitle">
+                    Number of Scopus publications by year
+                </div>
+
+            </div>
+
+            <div
+                id="trendChart"
+                class="chart">
+            </div>
 
         </div>
 
 
-        <div class="news-grid">
+        <!-- Sources -->
 
+        <div class="card">
 
-            <!-- CARD 1 -->
+            <div class="card-header">
 
-            <article class="card">
-
-                <div class="card-image">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1518770660439-4636190af475"
-                        alt="Technology"
-                    >
-
+                <div class="card-title">
+                    Top Research Sources
                 </div>
 
-                <div class="card-content">
-
-                    <span class="category">
-                        TECHNOLOGY
-                    </span>
-
-                    <h3>
-                        เทคโนโลยีใหม่กำลังเปลี่ยนรูปแบบการทำงาน
-                    </h3>
-
-                    <p>
-                        สำรวจแนวโน้มเทคโนโลยีที่กำลังเข้ามา
-                        มีบทบาทในโลกการทำงานยุคใหม่
-                    </p>
-
-                    <div class="meta">
-                        12 สิงหาคม 2569 · 5 นาที
-                    </div>
-
+                <div class="card-subtitle">
+                    Journals and publication sources
                 </div>
 
-            </article>
+            </div>
+
+            <div
+                id="sourceChart"
+                class="chart">
+            </div>
+
+        </div>
 
 
-            <!-- CARD 2 -->
+        <!-- Keywords -->
 
-            <article class="card">
+        <div class="card">
 
-                <div class="card-image">
+            <div class="card-header">
 
-                    <img
-                        src="https://images.unsplash.com/photo-1556761175-b413da4baf72"
-                        alt="Business"
-                    >
-
+                <div class="card-title">
+                    Research Keywords
                 </div>
 
-                <div class="card-content">
-
-                    <span class="category">
-                        BUSINESS
-                    </span>
-
-                    <h3>
-                        ธุรกิจยุคใหม่กับการเติบโตบนโลกออนไลน์
-                    </h3>
-
-                    <p>
-                        การเปลี่ยนแปลงของพฤติกรรมผู้บริโภค
-                        ทำให้ธุรกิจต้องปรับตัวเข้าสู่โลกดิจิทัล
-                    </p>
-
-                    <div class="meta">
-                        11 สิงหาคม 2569 · 4 นาที
-                    </div>
-
+                <div class="card-subtitle">
+                    Most frequently appearing author keywords
                 </div>
 
-            </article>
+            </div>
 
-
-            <!-- CARD 3 -->
-
-            <article class="card">
-
-                <div class="card-image">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1499750310107-5fef28a66643"
-                        alt="Lifestyle"
-                    >
-
-                </div>
-
-                <div class="card-content">
-
-                    <span class="category">
-                        LIFESTYLE
-                    </span>
-
-                    <h3>
-                        Work-Life Balance ในยุคดิจิทัล
-                    </h3>
-
-                    <p>
-                        วิธีจัดสมดุลระหว่างการทำงาน
-                        และการใช้ชีวิตในยุคที่เทคโนโลยีอยู่รอบตัว
-                    </p>
-
-                    <div class="meta">
-                        10 สิงหาคม 2569 · 6 นาที
-                    </div>
-
-                </div>
-
-            </article>
-
+            <div
+                id="keywordChart"
+                class="chart">
+            </div>
 
         </div>
 
     </section>
 
 
-    <!-- NEWSLETTER -->
+    <!-- INSIGHT -->
 
-    <section class="newsletter">
+    <section class="insight">
 
-        <h2>
-            ไม่พลาดข่าวสำคัญ
-        </h2>
+        <div class="insight-title">
+            💡 Research Insight
+        </div>
 
         <p>
-            สมัครรับข่าวสารใหม่ ๆ ส่งตรงถึงอีเมลของคุณ
+            The combined Scopus dataset contains 600 publications.
+            Research output peaks in 2026, indicating a strong concentration
+            of publications during the most recent period in the dataset.
+            Citation and keyword patterns can be explored interactively
+            to identify influential publications and emerging research themes.
         </p>
-
-        <input
-            type="email"
-            placeholder="อีเมลของคุณ"
-        >
-
-        <button>
-            สมัครรับข่าว
-        </button>
 
     </section>
 
-
-    <!-- FOOTER -->
 
     <footer>
 
-        <strong>
-            InsightDaily
-        </strong>
-
-        <p>
-            © 2026 InsightDaily. All rights reserved.
-        </p>
+        SCOPUS Research Visualization Dashboard
+        • Interactive Data Exploration
 
     </footer>
 
+</div>
+
+
+<script>
+
+/* =========================================
+   GLOBAL CHART STYLE
+========================================= */
+
+const chartLayout = {
+
+    paper_bgcolor: "rgba(0,0,0,0)",
+
+    plot_bgcolor: "rgba(0,0,0,0)",
+
+    font: {
+        color: "#cbd5e1",
+        family: "Inter"
+    },
+
+    margin: {
+        l: 60,
+        r: 25,
+        t: 20,
+        b: 55
+    },
+
+    hoverlabel: {
+        bgcolor: "#111827",
+        bordercolor: "#6366f1",
+        font: {
+            color: "#ffffff"
+        }
+    },
+
+    xaxis: {
+        gridcolor: "rgba(255,255,255,.06)",
+        zerolinecolor: "rgba(255,255,255,.08)"
+    },
+
+    yaxis: {
+        gridcolor: "rgba(255,255,255,.06)",
+        zerolinecolor: "rgba(255,255,255,.08)"
+    }
+};
+
+
+/* =========================================
+   PUBLICATION TREND
+========================================= */
+
+Plotly.newPlot(
+
+    "trendChart",
+
+    [
+
+        {
+
+            x: [
+                2025,
+                2026,
+                2027
+            ],
+
+            y: [
+                140,
+                419,
+                41
+            ],
+
+            type: "scatter",
+
+            mode: "lines+markers",
+
+            line: {
+                width: 4
+            },
+
+            marker: {
+                size: 12
+            },
+
+            fill: "tozeroy",
+
+            hovertemplate:
+                "<b>%{x}</b><br>" +
+                "Publications: %{y}" +
+                "<extra></extra>"
+
+        }
+
+    ],
+
+    {
+
+        ...chartLayout,
+
+        xaxis: {
+            ...chartLayout.xaxis,
+
+            title: "Publication Year",
+
+            dtick: 1
+        },
+
+        yaxis: {
+            ...chartLayout.yaxis,
+
+            title: "Publications"
+        }
+
+    },
+
+    {
+
+        responsive: true,
+
+        displaylogo: false
+
+    }
+
+);
+
+
+/* =========================================
+   TOP SOURCES
+========================================= */
+
+const sourceNames = [
+
+    "Source A",
+    "Source B",
+    "Source C",
+    "Source D",
+    "Source E",
+    "Source F",
+    "Source G",
+    "Source H"
+
+];
+
+const sourceValues = [
+
+    20,
+    18,
+    16,
+    14,
+    12,
+    10,
+    9,
+    8
+
+];
+
+
+Plotly.newPlot(
+
+    "sourceChart",
+
+    [
+
+        {
+
+            x: sourceValues,
+
+            y: sourceNames,
+
+            type: "bar",
+
+            orientation: "h",
+
+            text: sourceValues,
+
+            textposition: "outside",
+
+            hovertemplate:
+                "<b>%{y}</b><br>" +
+                "Papers: %{x}" +
+                "<extra></extra>"
+
+        }
+
+    ],
+
+    {
+
+        ...chartLayout,
+
+        margin: {
+            l: 110,
+            r: 40,
+            t: 10,
+            b: 45
+        },
+
+        xaxis: {
+            ...chartLayout.xaxis,
+
+            title: "Papers"
+        },
+
+        yaxis: {
+            ...chartLayout.yaxis,
+
+            autorange: "reversed"
+        }
+
+    },
+
+    {
+
+        responsive: true,
+
+        displaylogo: false
+
+    }
+
+);
+
+
+/* =========================================
+   KEYWORDS
+========================================= */
+
+const keywordNames = [
+
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Deep Learning",
+    "Human-Computer Interaction",
+    "Emotion Recognition",
+    "Internet of Things",
+    "Data Mining",
+    "Neural Networks",
+    "Natural Language Processing",
+    "Cybersecurity"
+
+];
+
+const keywordValues = [
+
+    45,
+    39,
+    32,
+    28,
+    25,
+    22,
+    19,
+    17,
+    15,
+    13
+
+];
+
+
+Plotly.newPlot(
+
+    "keywordChart",
+
+    [
+
+        {
+
+            x: keywordValues,
+
+            y: keywordNames,
+
+            type: "bar",
+
+            orientation: "h",
+
+            text: keywordValues,
+
+            textposition: "outside",
+
+            hovertemplate:
+                "<b>%{y}</b><br>" +
+                "Occurrences: %{x}" +
+                "<extra></extra>"
+
+        }
+
+    ],
+
+    {
+
+        ...chartLayout,
+
+        margin: {
+            l: 170,
+            r: 40,
+            t: 10,
+            b: 45
+        },
+
+        xaxis: {
+            ...chartLayout.xaxis,
+
+            title: "Occurrences"
+        },
+
+        yaxis: {
+            ...chartLayout.yaxis,
+
+            autorange: "reversed"
+        }
+
+    },
+
+    {
+
+        responsive: true,
+
+        displaylogo: false
+
+    }
+
+);
+
+</script>
 
 </body>
-
 </html>
