@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<title>
-    Scopus Research Universe
-</title>
-
+<title>Scopus Research Universe</title>
 
 <style>
 
@@ -22,22 +16,20 @@
 ===================================================== */
 
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
-
 
 html{
     scroll-behavior:smooth;
 }
 
-
 body{
 
     min-height:100vh;
 
-    color:#f8fafc;
+    overflow-x:hidden;
 
     font-family:
         Inter,
@@ -45,43 +37,14 @@ body{
         Arial,
         sans-serif;
 
+    color:#f8fafc;
+
     background:#03050d;
-
-    overflow-x:hidden;
 }
 
 
 /* =====================================================
-   VARIABLES
-===================================================== */
-
-:root{
-
-    --bg:#03050d;
-
-    --panel:
-        rgba(8,12,27,.78);
-
-    --line:
-        rgba(255,255,255,.09);
-
-    --text:#f8fafc;
-
-    --muted:#7d889d;
-
-    --purple:#a78bfa;
-
-    --cyan:#67e8f9;
-
-    --pink:#f472b6;
-
-    --green:#34d399;
-
-}
-
-
-/* =====================================================
-   STAR BACKGROUND
+   BACKGROUND
 ===================================================== */
 
 body::before{
@@ -94,13 +57,12 @@ body::before{
 
     pointer-events:none;
 
-    opacity:.24;
+    opacity:.22;
 
     background-image:
-
         radial-gradient(
             circle,
-            rgba(255,255,255,.8) 1px,
+            rgba(255,255,255,.75) 1px,
             transparent 1px
         );
 
@@ -139,7 +101,28 @@ body::after{
 
 
 /* =====================================================
-   MAIN
+   VARIABLES
+===================================================== */
+
+:root{
+
+    --purple:#a78bfa;
+
+    --cyan:#67e8f9;
+
+    --pink:#f472b6;
+
+    --green:#34d399;
+
+    --muted:#7d889d;
+
+    --line:
+        rgba(255,255,255,.09);
+}
+
+
+/* =====================================================
+   CONTAINER
 ===================================================== */
 
 .container{
@@ -167,10 +150,7 @@ body::after{
 
     justify-content:center;
 
-    padding:
-        60px
-        0
-        40px;
+    padding:60px 0 40px;
 }
 
 
@@ -194,9 +174,9 @@ h1{
 
     font-size:
         clamp(
-            46px,
+            48px,
             7vw,
-            86px
+            88px
         );
 
     line-height:.9;
@@ -211,7 +191,7 @@ h1{
 
         linear-gradient(
             90deg,
-            #ffffff,
+            #fff,
             #c4b5fd,
             #67e8f9
         );
@@ -224,11 +204,11 @@ h1{
 }
 
 
-.hero-description{
+.hero-text{
 
-    max-width:700px;
+    max-width:720px;
 
-    margin-top:22px;
+    margin-top:25px;
 
     color:var(--muted);
 
@@ -238,7 +218,7 @@ h1{
 }
 
 
-.meta{
+.dataset{
 
     display:flex;
 
@@ -250,11 +230,10 @@ h1{
 }
 
 
-.meta span{
+.dataset span{
 
     padding:
-        8px
-        12px;
+        8px 12px;
 
     border:
         1px solid
@@ -265,17 +244,17 @@ h1{
     background:
         rgba(255,255,255,.025);
 
-    color:#9ca8ba;
+    color:#94a3b8;
 
     font-size:10px;
 }
 
 
-.scroll-hint{
+.scroll{
 
     margin-top:70px;
 
-    color:#5f6b80;
+    color:#596579;
 
     font-size:9px;
 
@@ -305,17 +284,16 @@ h1{
 
 
 /* =====================================================
-   PAGE 1
+   SECTION
 ===================================================== */
 
-.page-one{
+.section{
 
     min-height:100vh;
 
     padding:
-        20px
-        0
-        100px;
+        80px 0
+        110px;
 }
 
 
@@ -327,31 +305,31 @@ h1{
 
     align-items:flex-end;
 
-    gap:20px;
+    gap:30px;
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
 
-.section-head h2{
+.section-title h2{
 
-    margin-top:6px;
+    margin-top:7px;
 
-    font-size:32px;
+    font-size:34px;
 
     letter-spacing:-1.5px;
 }
 
 
-.section-subtitle{
+.section-description{
 
-    max-width:450px;
+    max-width:470px;
 
     color:#778297;
 
     font-size:11px;
 
-    line-height:1.6;
+    line-height:1.7;
 
     text-align:right;
 }
@@ -365,7 +343,7 @@ h1{
 
     position:relative;
 
-    height:760px;
+    height:750px;
 
     overflow:hidden;
 
@@ -373,14 +351,16 @@ h1{
         1px solid
         var(--line);
 
-    border-radius:34px;
+    border-radius:32px;
 
     background:
+
         radial-gradient(
             circle at center,
             rgba(139,92,246,.07),
             transparent 42%
         ),
+
         rgba(8,12,27,.78);
 
     backdrop-filter:
@@ -405,94 +385,87 @@ h1{
 
 
 /* =====================================================
-   GROUP LABELS
+   GROUP LABEL
 ===================================================== */
 
-.group-label{
+.group{
 
     position:absolute;
 
-    z-index:10;
-
-    pointer-events:none;
+    z-index:5;
 
     padding:
-        10px
-        14px;
+        10px 14px;
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.09);
 
-    border-radius:14px;
+    border-radius:13px;
 
     background:
         rgba(3,5,13,.72);
 
     backdrop-filter:
-        blur(10px);
+        blur(12px);
+
+    pointer-events:none;
 }
 
 
-.group-label strong{
+.group strong{
 
     display:block;
-
-    font-size:11px;
 
     color:#fff;
+
+    font-size:10px;
+
+    letter-spacing:.3px;
 }
 
 
-.group-label span{
+.group span{
 
     display:block;
 
-    margin-top:3px;
+    margin-top:4px;
 
-    color:#778297;
+    color:#758196;
 
-    font-size:9px;
+    font-size:8px;
 }
 
 
-.group-ai{
-
-    left:8%;
-
+.ai{
+    left:7%;
     top:12%;
 }
 
 
-.group-vision{
-
-    right:8%;
-
-    top:16%;
+.vision{
+    right:7%;
+    top:13%;
 }
 
 
-.group-education{
-
-    left:9%;
-
+.education{
+    left:7%;
     bottom:15%;
 }
 
 
-.group-science{
-
-    right:8%;
-
+.science{
+    right:7%;
     bottom:15%;
 }
 
 
 /* =====================================================
-   CENTER INFO
+   CENTER
 ===================================================== */
 
-.center-info{
+.center{
 
     position:absolute;
 
@@ -501,24 +474,19 @@ h1{
     top:50%;
 
     transform:
-        translate(
-            -50%,
-            -50%
-        );
+        translate(-50%,-50%);
 
-    z-index:8;
+    z-index:6;
 
     pointer-events:none;
-
-    text-align:center;
 }
 
 
 .center-circle{
 
-    width:105px;
+    width:100px;
 
-    height:105px;
+    height:100px;
 
     display:flex;
 
@@ -532,24 +500,24 @@ h1{
 
     border:
         1px solid
-        rgba(196,181,253,.45);
+        rgba(196,181,253,.5);
 
     background:
-        rgba(9,7,26,.92);
+        rgba(8,6,24,.94);
 
     box-shadow:
 
-        0 0 30px
-        rgba(167,139,250,.2),
+        0 0 40px
+        rgba(167,139,250,.22),
 
-        inset 0 0 30px
+        inset 0 0 25px
         rgba(167,139,250,.08);
 }
 
 
 .center-circle strong{
 
-    font-size:15px;
+    font-size:14px;
 
     letter-spacing:1px;
 }
@@ -559,7 +527,7 @@ h1{
 
     margin-top:4px;
 
-    color:#9f8be7;
+    color:var(--purple);
 
     font-size:7px;
 
@@ -575,15 +543,15 @@ h1{
 
     position:absolute;
 
-    left:28px;
+    left:25px;
 
-    bottom:25px;
+    bottom:22px;
 
-    z-index:10;
+    z-index:8;
 
     display:flex;
 
-    gap:14px;
+    gap:15px;
 
     flex-wrap:wrap;
 }
@@ -597,13 +565,13 @@ h1{
 
     gap:6px;
 
-    color:#748095;
+    color:#718096;
 
     font-size:9px;
 }
 
 
-.legend-dot{
+.dot{
 
     width:7px;
 
@@ -623,13 +591,14 @@ h1{
 
     z-index:100;
 
-    pointer-events:none;
-
     display:none;
 
-    min-width:180px;
+    pointer-events:none;
 
-    padding:12px 14px;
+    min-width:175px;
+
+    padding:
+        12px 14px;
 
     border:
         1px solid
@@ -638,14 +607,14 @@ h1{
     border-radius:12px;
 
     background:
-        rgba(4,6,17,.94);
+        rgba(4,6,17,.95);
 
     backdrop-filter:
         blur(15px);
 
     box-shadow:
         0 20px 50px
-        rgba(0,0,0,.4);
+        rgba(0,0,0,.45);
 }
 
 
@@ -657,7 +626,7 @@ h1{
 
 .tooltip-name{
 
-    color:white;
+    color:#fff;
 
     font-size:11px;
 
@@ -669,28 +638,17 @@ h1{
 
     margin-top:5px;
 
-    color:#8b96aa;
+    color:#8995aa;
 
     font-size:10px;
 }
 
 
 /* =====================================================
-   PAGE 2
+   INSIGHT AREA
 ===================================================== */
 
-.page-two{
-
-    min-height:100vh;
-
-    padding:
-        100px
-        0
-        100px;
-}
-
-
-.insight-layout{
+.insights-layout{
 
     display:grid;
 
@@ -706,7 +664,7 @@ h1{
    CHART
 ===================================================== */
 
-.chart-panel{
+.chart{
 
     min-height:620px;
 
@@ -716,25 +674,23 @@ h1{
         1px solid
         var(--line);
 
-    border-radius:30px;
+    border-radius:28px;
 
     background:
-        var(--panel);
+        rgba(8,12,27,.78);
 
     backdrop-filter:
         blur(20px);
 }
 
 
-.chart-title{
+.chart h3{
 
     font-size:17px;
-
-    font-weight:700;
 }
 
 
-.chart-description{
+.chart p{
 
     margin-top:5px;
 
@@ -746,21 +702,21 @@ h1{
 
 #barCanvas{
 
-    display:block;
-
     width:100%;
 
     height:500px;
+
+    display:block;
 
     margin-top:20px;
 }
 
 
 /* =====================================================
-   INSIGHTS
+   INSIGHT CARDS
 ===================================================== */
 
-.insights{
+.cards{
 
     display:grid;
 
@@ -768,45 +724,47 @@ h1{
 }
 
 
-.insight{
+.card{
 
-    padding:25px;
+    padding:24px;
 
     border:
         1px solid
         var(--line);
 
-    border-radius:25px;
+    border-radius:24px;
 
     background:
-        var(--panel);
+        rgba(8,12,27,.78);
 
     backdrop-filter:
         blur(20px);
 }
 
 
-.insight-number{
+.card-number{
 
-    color:#c4b5fd;
+    font-size:46px;
 
-    font-size:48px;
+    line-height:1;
 
     font-weight:700;
 
     letter-spacing:-3px;
+
+    color:#c4b5fd;
 }
 
 
-.insight-label{
+.card-label{
 
     margin-top:8px;
 
-    color:#68758a;
+    color:#66738a;
 
-    font-size:9px;
+    font-size:8px;
 
-    font-weight:700;
+    font-weight:800;
 
     letter-spacing:2px;
 
@@ -814,17 +772,15 @@ h1{
 }
 
 
-.insight h3{
+.card h3{
 
     margin-top:8px;
 
-    font-size:19px;
-
-    line-height:1.3;
+    font-size:18px;
 }
 
 
-.insight p{
+.card p{
 
     margin-top:8px;
 
@@ -837,14 +793,14 @@ h1{
 
 
 /* =====================================================
-   BIG TAKEAWAY
+   TAKEAWAY
 ===================================================== */
 
 .takeaway{
 
     margin-top:15px;
 
-    padding:25px;
+    padding:26px;
 
     border:
         1px solid
@@ -853,19 +809,22 @@ h1{
     border-radius:25px;
 
     background:
+
         linear-gradient(
             135deg,
             rgba(167,139,250,.09),
-            rgba(103,232,249,.04)
+            rgba(103,232,249,.035)
         );
 }
 
 
-.takeaway-title{
+.takeaway small{
 
-    color:#a78bfa;
+    color:var(--purple);
 
-    font-size:9px;
+    font-size:8px;
+
+    font-weight:800;
 
     letter-spacing:2px;
 
@@ -885,6 +844,8 @@ h1{
 
 .takeaway p{
 
+    max-width:1000px;
+
     margin-top:9px;
 
     color:#8490a5;
@@ -899,16 +860,15 @@ h1{
    FOOTER
 ===================================================== */
 
-.footer{
-
-    padding:
-        25px
-        0
-        40px;
+footer{
 
     display:flex;
 
     justify-content:space-between;
+
+    padding:
+        20px 0
+        40px;
 
     color:#505c70;
 
@@ -924,45 +884,26 @@ h1{
 
 @media(max-width:900px){
 
-    .hero{
-
-        min-height:
-            85vh;
-    }
-
-
     .section-head{
 
-        align-items:flex-start;
-
         flex-direction:column;
+
+        align-items:flex-start;
     }
 
-
-    .section-subtitle{
+    .section-description{
 
         text-align:left;
     }
-
 
     .universe{
 
         height:650px;
     }
 
-
-    .insight-layout{
+    .insights-layout{
 
         grid-template-columns:1fr;
-    }
-
-
-    .group-label{
-
-        transform:
-            scale(.85);
-
-        transform-origin:center;
     }
 
 }
@@ -976,102 +917,70 @@ h1{
             calc(100% - 22px);
     }
 
-
     h1{
 
         letter-spacing:-4px;
     }
 
-
-    .hero{
-
-        padding-top:40px;
-    }
-
-
     .universe{
 
         height:600px;
 
-        border-radius:24px;
+        border-radius:23px;
     }
 
+    .group{
 
-    .group-label{
-
-        padding:
-            7px
-            9px;
+        transform:scale(.82);
     }
 
-
-    .group-label strong{
-
-        font-size:9px;
+    .ai{
+        left:1%;
+        top:7%;
     }
 
-
-    .group-label span{
-
-        font-size:7px;
-    }
-
-
-    .group-ai{
-        left:4%;
+    .vision{
+        right:1%;
         top:8%;
     }
 
-
-    .group-vision{
-        right:4%;
-        top:10%;
+    .education{
+        left:1%;
+        bottom:9%;
     }
 
-
-    .group-education{
-        left:4%;
-        bottom:10%;
+    .science{
+        right:1%;
+        bottom:9%;
     }
-
-
-    .group-science{
-        right:4%;
-        bottom:10%;
-    }
-
 
     .center-circle{
 
-        width:80px;
+        width:78px;
 
-        height:80px;
+        height:78px;
     }
-
 
     .center-circle strong{
 
         font-size:11px;
     }
 
-
     .legend{
 
-        left:15px;
+        left:13px;
 
-        bottom:15px;
+        bottom:13px;
 
         gap:8px;
     }
 
-
-    .chart-panel{
+    .chart{
 
         padding:18px;
     }
 
-
-    .footer{
+    footer{
 
         flex-direction:column;
 
@@ -1083,7 +992,6 @@ h1{
 </style>
 
 </head>
-
 
 
 <body>
@@ -1114,43 +1022,37 @@ h1{
     </h1>
 
 
-    <p class="hero-description">
+    <p class="hero-text">
 
-        A visual story of the research landscape
-        created from Scopus author keywords.
+        A visual exploration of the research
+        landscape generated from Author Keywords
+        in the Scopus dataset.
 
-        Each star represents a research topic,
-        while larger stars indicate keywords
-        appearing in more documents.
+        Larger stars represent keywords that
+        appear in more documents.
 
     </p>
 
 
-    <div class="meta">
-
-        <span>
-            300 Documents
-        </span>
-
-        <span>
-            95 Sources
-        </span>
-
-        <span>
-            2026–2027
-        </span>
+    <div class="dataset">
 
         <span>
             Author Keywords
         </span>
 
+        <span>
+            Scopus Dataset
+        </span>
+
+        <span>
+            Keyword Frequency
+        </span>
+
     </div>
 
 
-    <div class="scroll-hint">
-
-        ↓ Scroll to explore the research universe
-
+    <div class="scroll">
+        ↓ Scroll to explore
     </div>
 
 </section>
@@ -1158,15 +1060,15 @@ h1{
 
 
 <!-- =====================================================
-     PAGE 1 — RESEARCH UNIVERSE
+     PAGE 1
 ===================================================== -->
 
-<section class="page-one">
+<section class="section">
 
 
     <div class="section-head">
 
-        <div>
+        <div class="section-title">
 
             <div class="eyebrow">
                 01 · RESEARCH LANDSCAPE
@@ -1179,12 +1081,13 @@ h1{
         </div>
 
 
-        <div class="section-subtitle">
+        <div class="section-description">
 
-            Four major research families emerge
-            from the keyword landscape.
-            The closer the topics are,
-            the stronger their thematic relationship.
+            The keywords are organized into four
+            readable research families.
+
+            The size of each star represents
+            its frequency in the dataset.
 
         </div>
 
@@ -1202,15 +1105,14 @@ h1{
 
         <!-- AI -->
 
-        <div
-            class="group-label group-ai">
+        <div class="group ai">
 
             <strong>
                 AI & MACHINE LEARNING
             </strong>
 
             <span>
-                Artificial Intelligence · ML · DL
+                AI · ML · Deep Learning
             </span>
 
         </div>
@@ -1218,15 +1120,14 @@ h1{
 
         <!-- VISION -->
 
-        <div
-            class="group-label group-vision">
+        <div class="group vision">
 
             <strong>
                 VISION & XR
             </strong>
 
             <span>
-                Computer Vision · VR · AR · XR
+                Vision · VR · AR · XR
             </span>
 
         </div>
@@ -1234,8 +1135,7 @@ h1{
 
         <!-- EDUCATION -->
 
-        <div
-            class="group-label group-education">
+        <div class="group education">
 
             <strong>
                 EDUCATION
@@ -1250,15 +1150,14 @@ h1{
 
         <!-- SCIENCE -->
 
-        <div
-            class="group-label group-science">
+        <div class="group science">
 
             <strong>
                 SCIENTIFIC COMPUTING
             </strong>
 
             <span>
-                Quantum · Simulation · Bioinformatics
+                Quantum · Simulation · Science
             </span>
 
         </div>
@@ -1266,7 +1165,7 @@ h1{
 
         <!-- CENTER -->
 
-        <div class="center-info">
+        <div class="center">
 
             <div class="center-circle">
 
@@ -1287,14 +1186,11 @@ h1{
 
         <div class="legend">
 
-
             <div class="legend-item">
 
                 <span
-                    class="legend-dot"
-                    style="
-                        background:#a78bfa
-                    ">
+                    class="dot"
+                    style="background:#a78bfa">
                 </span>
 
                 AI
@@ -1305,10 +1201,8 @@ h1{
             <div class="legend-item">
 
                 <span
-                    class="legend-dot"
-                    style="
-                        background:#67e8f9
-                    ">
+                    class="dot"
+                    style="background:#67e8f9">
                 </span>
 
                 Vision & XR
@@ -1319,10 +1213,8 @@ h1{
             <div class="legend-item">
 
                 <span
-                    class="legend-dot"
-                    style="
-                        background:#f472b6
-                    ">
+                    class="dot"
+                    style="background:#f472b6">
                 </span>
 
                 Education
@@ -1333,10 +1225,8 @@ h1{
             <div class="legend-item">
 
                 <span
-                    class="legend-dot"
-                    style="
-                        background:#34d399
-                    ">
+                    class="dot"
+                    style="background:#34d399">
                 </span>
 
                 Scientific Computing
@@ -1352,31 +1242,32 @@ h1{
 
 
 <!-- =====================================================
-     PAGE 2 — INSIGHTS
+     PAGE 2
 ===================================================== -->
 
-<section class="page-two">
+<section class="section">
 
 
     <div class="section-head">
 
-        <div>
+        <div class="section-title">
 
             <div class="eyebrow">
                 02 · RESEARCH INSIGHTS
             </div>
 
             <h2>
-                What does the data tell us?
+                What stands out?
             </h2>
 
         </div>
 
 
-        <div class="section-subtitle">
+        <div class="section-description">
 
-            From the visual landscape,
-            three important patterns become clear.
+            The most frequent keywords reveal
+            the dominant themes within the
+            research landscape.
 
         </div>
 
@@ -1384,25 +1275,20 @@ h1{
 
 
 
-    <div class="insight-layout">
+    <div class="insights-layout">
 
 
         <!-- CHART -->
 
-        <div class="chart-panel">
+        <div class="chart">
 
-            <div class="chart-title">
+            <h3>
+                Top Author Keywords
+            </h3>
 
-                Top Research Keywords
-
-            </div>
-
-
-            <div class="chart-description">
-
+            <p>
                 Number of documents containing each keyword
-
-            </div>
+            </p>
 
 
             <canvas
@@ -1413,21 +1299,19 @@ h1{
 
 
 
-        <!-- INSIGHTS -->
+        <!-- CARDS -->
 
-        <div class="insights">
+        <div class="cards">
 
 
-            <!-- INSIGHT 1 -->
+            <div class="card">
 
-            <div class="insight">
-
-                <div class="insight-number">
+                <div class="card-number">
                     26
                 </div>
 
-                <div class="insight-label">
-                    DOMINANT KEYWORD
+                <div class="card-label">
+                    Most Frequent
                 </div>
 
                 <h3>
@@ -1436,27 +1320,23 @@ h1{
 
                 <p>
 
-                    Artificial Intelligence appears
-                    in 26 documents, making it the
-                    strongest keyword in the supplied
-                    dataset.
+                    Artificial Intelligence is the
+                    most frequent keyword in the
+                    supplied dataset.
 
                 </p>
 
             </div>
 
 
+            <div class="card">
 
-            <!-- INSIGHT 2 -->
-
-            <div class="insight">
-
-                <div class="insight-number">
+                <div class="card-number">
                     22
                 </div>
 
-                <div class="insight-label">
-                    SECOND STRONGEST
+                <div class="card-label">
+                    Second
                 </div>
 
                 <h3>
@@ -1465,28 +1345,23 @@ h1{
 
                 <p>
 
-                    Machine Learning appears in
-                    22 documents, showing that
-                    AI and machine-learning research
-                    form the central cluster of the
-                    landscape.
+                    Machine Learning is the second
+                    most frequent keyword, reinforcing
+                    the central role of AI-related research.
 
                 </p>
 
             </div>
 
 
+            <div class="card">
 
-            <!-- INSIGHT 3 -->
-
-            <div class="insight">
-
-                <div class="insight-number">
+                <div class="card-number">
                     18
                 </div>
 
-                <div class="insight-label">
-                    THIRD STRONGEST
+                <div class="card-label">
+                    Third
                 </div>
 
                 <h3>
@@ -1495,10 +1370,9 @@ h1{
 
                 <p>
 
-                    Deep Learning appears in
-                    18 documents and reinforces
-                    the strong concentration of
-                    AI-related research.
+                    Deep Learning follows as another
+                    major keyword, showing a strong
+                    concentration around AI methods.
 
                 </p>
 
@@ -1515,33 +1389,32 @@ h1{
 
     <div class="takeaway">
 
-        <div class="takeaway-title">
-            KEY TAKEAWAY
-        </div>
+        <small>
+            Key Takeaway
+        </small>
 
 
         <h3>
 
-            The research landscape is
-            centered around Artificial Intelligence,
-            but expands into several connected
-            directions.
+            AI is the central theme,
+            while the research expands
+            into vision, education and
+            scientific computing.
 
         </h3>
 
 
         <p>
 
-            Established AI topics such as
-            Machine Learning and Deep Learning
-            dominate the dataset.
+            The keyword landscape is led by
+            Artificial Intelligence, Machine Learning
+            and Deep Learning.
 
-            At the same time,
-            Generative AI and Large Language Models
-            appear alongside Computer Vision,
-            Virtual Reality and Extended Reality,
-            suggesting a broader research ecosystem
-            around intelligent and immersive technologies.
+            Beyond this core, Computer Vision,
+            Virtual Reality, Education,
+            STEM Education, Quantum Computing
+            and Scientific Computing form connected
+            research directions.
 
         </p>
 
@@ -1551,18 +1424,14 @@ h1{
 
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="footer">
+<footer>
 
     <span>
         SCOPUS RESEARCH UNIVERSE
     </span>
 
     <span>
-        INTERACTIVE VISUAL STORY · 2026
+        INTERACTIVE DATA VISUALIZATION
     </span>
 
 </footer>
@@ -1597,7 +1466,8 @@ h1{
 <script>
 
 /* =====================================================
-   DATA FROM THE ORIGINAL DATASET
+   DATA
+   Based on the supplied file
 ===================================================== */
 
 const keywords = [
@@ -1821,7 +1691,11 @@ const keywords = [
 ];
 
 
-const colors={
+/* =====================================================
+   COLORS
+===================================================== */
+
+const colors = {
 
     AI:"#a78bfa",
 
@@ -1860,50 +1734,61 @@ let mouseY=-9999;
 
 
 /* =====================================================
-   ONLY TOP 20
-   This makes the constellation much easier to read.
+   GROUP POSITIONS
 ===================================================== */
 
-const visibleKeywords =
+function getGroupPosition(group){
 
-    [...keywords]
+    const positions={
 
-    .sort(
-        (a,b) =>
-            b.count-a.count
-    )
+        AI:{
+            x:centerX-width*.22,
+            y:centerY-height*.21
+        },
 
-    .slice(
-        0,
-        20
-    );
+        VISION:{
+            x:centerX+width*.22,
+            y:centerY-height*.20
+        },
+
+        EDU:{
+            x:centerX-width*.22,
+            y:centerY+height*.21
+        },
+
+        SCIENCE:{
+            x:centerX+width*.22,
+            y:centerY+height*.21
+        }
+
+    };
+
+    return positions[group];
+
+}
 
 
 /* =====================================================
-   CREATE CONSTELLATION
+   RESIZE
 ===================================================== */
 
-function resizeCanvas(){
+function resizeUniverse(){
 
     const rect =
         canvas.getBoundingClientRect();
 
-
     const ratio =
         window.devicePixelRatio || 1;
-
 
     width=rect.width;
 
     height=rect.height;
 
-
-    canvas.width =
+    canvas.width=
         width*ratio;
 
-    canvas.height =
+    canvas.height=
         height*ratio;
-
 
     ctx.setTransform(
         ratio,
@@ -1914,138 +1799,104 @@ function resizeCanvas(){
         0
     );
 
-
-    centerX =
+    centerX=
         width/2;
 
-    centerY =
+    centerY=
         height/2;
 
-
-    createConstellation();
+    createNodes();
 
 }
 
 
-function createConstellation(){
+/* =====================================================
+   CREATE NODES
+===================================================== */
+
+function createNodes(){
 
     nodes=[];
 
 
-    const groups={
+    /*
+       Show the 28 strongest
+       keywords from the supplied
+       data so the constellation
+       remains readable.
+    */
+
+    const sorted =
+        [...keywords]
+        .sort(
+            (a,b)=>
+                b.count-a.count
+        )
+        .slice(
+            0,
+            28
+        );
+
+
+    const grouped={
 
         AI:[],
-
         VISION:[],
-
         EDU:[],
-
         SCIENCE:[]
 
     };
 
 
-    visibleKeywords.forEach(
-        keyword => {
+    sorted.forEach(
+        item=>{
 
-            groups[
-                keyword.group
-            ].push(keyword);
+            grouped[item.group]
+                .push(item);
 
         }
     );
 
 
-    /*
-       Fixed positions around
-       the center.
-
-       This makes the four
-       research families visually
-       obvious.
-    */
-
-    const groupPositions={
-
-        AI:{
-            x:centerX-width*.22,
-            y:centerY-height*.22
-        },
-
-        VISION:{
-            x:centerX+width*.22,
-            y:centerY-height*.20
-        },
-
-        EDU:{
-            x:centerX-width*.22,
-            y:centerY+height*.22
-        },
-
-        SCIENCE:{
-            x:centerX+width*.22,
-            y:centerY+height*.22
-        }
-
-    };
-
-
-    Object.keys(groups)
+    Object.keys(grouped)
         .forEach(
-            group => {
+            group=>{
 
-                const list =
-                    groups[group];
+                const list=
+                    grouped[group];
 
-
-                const position =
-                    groupPositions[group];
-
-
-                const spread =
-                    Math.min(
-                        width,
-                        height
-                    )*.13;
+                const position=
+                    getGroupPosition(group);
 
 
                 list.forEach(
-                    (keyword,index) => {
+                    (item,index)=>{
 
-                        const angle =
-
+                        const angle=
                             (
-                                index /
+                                index/
                                 Math.max(
                                     list.length,
                                     1
                                 )
-                            ) *
+                            )*
                             Math.PI*2;
 
 
-                        /*
-                           Slightly irregular
-                           orbit so it doesn't
-                           look like a perfect
-                           circle.
-                        */
-
-                        const radius =
-
-                            spread *
+                        const radius=
+                            Math.min(
+                                width,
+                                height
+                            )*
                             (
-                                .45 +
-                                (
-                                    index %
-                                    3
-                                )*.23
+                                .045+
+                                (index%4)*.028
                             );
 
 
                         nodes.push({
 
-                            ...keyword,
+                            ...item,
 
                             baseX:
                                 position.x,
@@ -2058,11 +1909,9 @@ function createConstellation(){
                             radius,
 
                             speed:
-                                (
-                                    index%2
-                                    ? -.00025
-                                    : .00022
-                                ),
+                                index%2
+                                ? -.00025
+                                : .00022,
 
                             x:0,
 
@@ -2080,10 +1929,10 @@ function createConstellation(){
 
 
 /* =====================================================
-   DRAW
+   DRAW UNIVERSE
 ===================================================== */
 
-function draw(){
+function drawUniverse(){
 
     ctx.clearRect(
         0,
@@ -2093,93 +1942,112 @@ function draw(){
     );
 
 
+    /* -------------------------
+       CONNECTIONS
+    ------------------------- */
+
+    nodes.forEach(
+        node=>{
+
+            node.angle+=
+                node.speed;
+
+
+            node.x=
+                node.baseX+
+                Math.cos(
+                    node.angle
+                )*
+                node.radius;
+
+
+            node.y=
+                node.baseY+
+                Math.sin(
+                    node.angle
+                )*
+                node.radius;
+
+
+            node.y+=
+                Math.sin(
+                    Date.now()*.001+
+                    node.count
+                )*2;
+
+        }
+    );
+
+
     /*
-       GROUP CONNECTIONS
+       Connect only nearby
+       nodes from the same group.
     */
 
-    ["AI","VISION","EDU","SCIENCE"]
-        .forEach(
-            group => {
+    nodes.forEach(
+        (a,index)=>{
 
-                const groupNodes =
-                    nodes.filter(
-                        node =>
-                            node.group===group
-                    );
+            nodes.forEach(
+                (b,j)=>{
+
+                    if(
+                        j<=index ||
+                        a.group!==b.group
+                    ){
+                        return;
+                    }
 
 
-                for(
-                    let i=0;
-                    i<groupNodes.length;
-                    i++
-                ){
+                    const distance=
+                        Math.hypot(
+                            a.x-b.x,
+                            a.y-b.y
+                        );
 
-                    for(
-                        let j=i+1;
-                        j<groupNodes.length;
-                        j++
+
+                    if(
+                        distance<
+                        Math.min(
+                            width,
+                            height
+                        )*.16
                     ){
 
-                        const a =
-                            groupNodes[i];
+                        ctx.beginPath();
 
-                        const b =
-                            groupNodes[j];
+                        ctx.moveTo(
+                            a.x,
+                            a.y
+                        );
 
+                        ctx.lineTo(
+                            b.x,
+                            b.y
+                        );
 
-                        const distance =
-                            Math.hypot(
-                                a.x-b.x,
-                                a.y-b.y
-                            );
+                        ctx.strokeStyle=
+                            colors[a.group]+"24";
 
+                        ctx.lineWidth=.8;
 
-                        if(
-                            distance <
-                            Math.min(
-                                width,
-                                height
-                            )*.18
-                        ){
-
-                            ctx.beginPath();
-
-                            ctx.moveTo(
-                                a.x,
-                                a.y
-                            );
-
-                            ctx.lineTo(
-                                b.x,
-                                b.y
-                            );
-
-
-                            ctx.strokeStyle =
-                                colors[group]
-                                +"22";
-
-
-                            ctx.lineWidth=.8;
-
-                            ctx.stroke();
-
-                        }
+                        ctx.stroke();
 
                     }
 
                 }
+            );
 
-            }
-        );
+        }
+    );
 
 
     /*
-       CENTER CONNECTIONS
+       Connect each group
+       softly to the center.
     */
 
     nodes.forEach(
-        node => {
+        node=>{
 
             ctx.beginPath();
 
@@ -2193,11 +2061,8 @@ function draw(){
                 node.y
             );
 
-
-            ctx.strokeStyle =
-                colors[node.group]
-                +"12";
-
+            ctx.strokeStyle=
+                colors[node.group]+"0c";
 
             ctx.lineWidth=.7;
 
@@ -2207,94 +2072,58 @@ function draw(){
     );
 
 
-    /*
-       DRAW NODES
-    */
+    /* -------------------------
+       NODES
+    ------------------------- */
 
     nodes.forEach(
-        node => {
+        node=>{
 
-            node.angle +=
-                node.speed;
-
-
-            node.x =
-                node.baseX +
-                Math.cos(
-                    node.angle
-                ) *
-                node.radius;
+            const size=
+                3.5+
+                node.count*.55;
 
 
-            node.y =
-                node.baseY +
-                Math.sin(
-                    node.angle
-                ) *
-                node.radius;
-
-
-            /*
-               Slight vertical
-               floating motion
-            */
-
-            node.y +=
-                Math.sin(
-                    Date.now()*.001 +
-                    node.radius
-                )*2;
-
-
-            node.size =
-                4 +
-                node.count*.7;
-
-
-            const distance =
+            const distance=
                 Math.hypot(
                     mouseX-node.x,
                     mouseY-node.y
                 );
 
 
-            node.hover =
-                distance <
-                node.size+10;
-
-
-            const color =
-                colors[node.group];
+            const hover=
+                distance<
+                size+10;
 
 
             /*
                Glow
             */
 
-            const glow =
+            const glow=
                 ctx.createRadialGradient(
                     node.x,
                     node.y,
                     0,
                     node.x,
                     node.y,
-                    node.size*3
+                    size*3
                 );
 
 
             glow.addColorStop(
                 0,
-                color+"66"
+                colors[node.group]+"70"
             );
 
 
             glow.addColorStop(
                 1,
-                color+"00"
+                colors[node.group]+"00"
             );
 
 
-            ctx.fillStyle =
+            ctx.fillStyle=
                 glow;
 
 
@@ -2303,7 +2132,7 @@ function draw(){
             ctx.arc(
                 node.x,
                 node.y,
-                node.size*3,
+                size*3,
                 0,
                 Math.PI*2
             );
@@ -2320,10 +2149,10 @@ function draw(){
             ctx.arc(
                 node.x,
                 node.y,
-                node.size *
+                size*
                 (
-                    node.hover
-                    ? 1.3
+                    hover
+                    ? 1.35
                     : 1
                 ),
                 0,
@@ -2331,72 +2160,75 @@ function draw(){
             );
 
 
-            ctx.fillStyle =
-                color;
+            ctx.fillStyle=
+                colors[node.group];
 
             ctx.fill();
 
 
-            ctx.strokeStyle =
-                "rgba(255,255,255,.55)";
+            ctx.strokeStyle=
+                "rgba(255,255,255,.6)";
 
-            ctx.lineWidth =
-                node.hover
-                ? 2
-                : .6;
+            ctx.lineWidth=
+                hover?2:.6;
 
             ctx.stroke();
 
 
             /*
-               Label only when
-               important or hovered.
+               Labels for important
+               keywords
             */
 
             if(
-                node.hover ||
+                hover ||
                 node.count>=5
             ){
 
-                ctx.textAlign="center";
-
-                ctx.textBaseline="top";
-
-
-                ctx.font =
-                    node.hover
-                    ? "700 11px Inter,Arial"
-                    : "500 9px Inter,Arial";
-
-
-                ctx.fillStyle =
-                    node.hover
-                    ? "#ffffff"
-                    : "#9aa5b8";
-
-
-                let label =
+                let label=
                     node.name;
 
 
                 if(
-                    label.length>23
+                    label.length>24
                 ){
 
-                    label =
+                    label=
                         label.substring(
                             0,
-                            21
+                            22
                         )+"…";
 
                 }
+
+
+                ctx.textAlign=
+                    "center";
+
+                ctx.textBaseline=
+                    "top";
+
+                ctx.font=
+                    hover
+                    ?
+                    "700 11px Inter,Arial"
+                    :
+                    "500 9px Inter,Arial";
+
+
+                ctx.fillStyle=
+                    hover
+                    ?
+                    "#ffffff"
+                    :
+                    "#9aa5b8";
 
 
                 ctx.fillText(
                     label,
                     node.x,
                     node.y+
-                    node.size+
+                    size+
                     6
                 );
 
@@ -2406,18 +2238,18 @@ function draw(){
     );
 
 
-    /*
-       CENTER CORE
-    */
+    /* -------------------------
+       CENTRAL GLOW
+    ------------------------- */
 
-    const pulse =
-        40 +
+    const pulse=
+        42+
         Math.sin(
             Date.now()*.002
         )*3;
 
 
-    const core =
+    const glow=
         ctx.createRadialGradient(
             centerX,
             centerY,
@@ -2428,26 +2260,26 @@ function draw(){
         );
 
 
-    core.addColorStop(
+    glow.addColorStop(
         0,
         "rgba(255,255,255,.9)"
     );
 
 
-    core.addColorStop(
+    glow.addColorStop(
         .25,
-        "rgba(196,181,253,.75)"
+        "rgba(196,181,253,.7)"
     );
 
 
-    core.addColorStop(
+    glow.addColorStop(
         1,
         "rgba(167,139,250,0)"
     );
 
 
-    ctx.fillStyle =
-        core;
+    ctx.fillStyle=
+        glow;
 
 
     ctx.beginPath();
@@ -2463,6 +2295,10 @@ function draw(){
     ctx.fill();
 
 
+    /* -------------------------
+       CENTRAL CIRCLE
+    ------------------------- */
+
     ctx.beginPath();
 
     ctx.arc(
@@ -2474,132 +2310,150 @@ function draw(){
     );
 
 
-    ctx.fillStyle =
+    ctx.fillStyle=
         "#09071b";
 
     ctx.fill();
 
 
-    ctx.strokeStyle =
+    ctx.strokeStyle=
         "rgba(196,181,253,.55)";
+
+    ctx.lineWidth=1;
 
     ctx.stroke();
 
 
-    ctx.textAlign="center";
+    ctx.textAlign=
+        "center";
 
-    ctx.textBaseline="middle";
+    ctx.textBaseline=
+        "middle";
 
 
-    ctx.font =
+    ctx.font=
         "700 10px Inter,Arial";
 
-    ctx.fillStyle="#ffffff";
+    ctx.fillStyle=
+        "#fff";
 
 
     ctx.fillText(
-        "RESEARCH",
+        "SCOPUS",
         centerX,
         centerY-6
     );
 
 
-    ctx.font =
+    ctx.font=
         "500 7px Inter,Arial";
 
-    ctx.fillStyle =
+    ctx.fillStyle=
         "#a78bfa";
 
 
     ctx.fillText(
-        "CORE",
+        "RESEARCH CORE",
         centerX,
         centerY+8
     );
 
 
     requestAnimationFrame(
-        draw
+        drawUniverse
     );
 
 }
 
 
 /* =====================================================
-   MOUSE
+   TOOLTIP
 ===================================================== */
+
+const tooltip=
+    document.getElementById(
+        "tooltip"
+    );
+
+const tooltipName=
+    document.getElementById(
+        "tooltipName"
+    );
+
+const tooltipCount=
+    document.getElementById(
+        "tooltipCount"
+    );
+
 
 canvas.addEventListener(
     "mousemove",
-    event => {
+    event=>{
 
-        const rect =
+        const rect=
             canvas.getBoundingClientRect();
 
 
-        mouseX =
+        mouseX=
             event.clientX-
             rect.left;
 
 
-        mouseY =
+        mouseY=
             event.clientY-
             rect.top;
 
 
-        const hovered =
+        const found=
             nodes.find(
-                node =>
-                    Math.hypot(
-                        mouseX-node.x,
-                        mouseY-node.y
-                    )
-                    <
-                    node.size+10
+                node=>{
+
+                    const size=
+                        3.5+
+                        node.count*.55;
+
+
+                    return(
+                        Math.hypot(
+                            mouseX-node.x,
+                            mouseY-node.y
+                        )
+                        <
+                        size+10
+                    );
+
+                }
             );
 
 
-        const tooltip =
-            document.getElementById(
-                "tooltip"
-            );
-
-
-        if(hovered){
-
-            document
-                .getElementById(
-                    "tooltipName"
-                )
-                .textContent =
-                    hovered.name;
-
-
-            document
-                .getElementById(
-                    "tooltipCount"
-                )
-                .textContent =
-                    hovered.count+
-                    " documents";
-
+        if(found){
 
             tooltip.classList.add(
                 "show"
             );
 
 
-            tooltip.style.left =
-                event.clientX+16+
+            tooltipName.textContent=
+                found.name;
+
+
+            tooltipCount.textContent=
+                found.count+
+                " documents";
+
+
+            tooltip.style.left=
+                event.clientX+
+                16+
                 "px";
 
 
-            tooltip.style.top =
-                event.clientY+16+
+            tooltip.style.top=
+                event.clientY+
+                16+
                 "px";
 
         }
-
         else{
 
             tooltip.classList.remove(
@@ -2614,20 +2468,15 @@ canvas.addEventListener(
 
 canvas.addEventListener(
     "mouseleave",
-    () => {
+    ()=>{
 
         mouseX=-9999;
 
         mouseY=-9999;
 
-
-        document
-            .getElementById(
-                "tooltip"
-            )
-            .classList.remove(
-                "show"
-            );
+        tooltip.classList.remove(
+            "show"
+        );
 
     }
 );
@@ -2635,51 +2484,53 @@ canvas.addEventListener(
 
 window.addEventListener(
     "resize",
-    resizeCanvas
+    resizeUniverse
 );
 
 
-resizeCanvas();
+resizeUniverse();
 
-draw();
+drawUniverse();
 
 
 /* =====================================================
    BAR CHART
 ===================================================== */
 
-const barCanvas =
+const barCanvas=
     document.getElementById(
         "barCanvas"
     );
 
-const barCtx =
-    barCanvas.getContext("2d");
+const barCtx=
+    barCanvas.getContext(
+        "2d"
+    );
 
 
 function drawBarChart(){
 
-    const rect =
+    const rect=
         barCanvas.getBoundingClientRect();
 
 
-    const ratio =
-        window.devicePixelRatio || 1;
+    const ratio=
+        window.devicePixelRatio||1;
 
 
-    const width =
+    const width=
         rect.width;
 
 
-    const height =
+    const height=
         rect.height;
 
 
-    barCanvas.width =
+    barCanvas.width=
         width*ratio;
 
 
-    barCanvas.height =
+    barCanvas.height=
         height*ratio;
 
 
@@ -2701,10 +2552,15 @@ function drawBarChart(){
     );
 
 
-    const data =
+    /*
+       Top 10 from the
+       supplied keyword data
+    */
+
+    const data=
         [...keywords]
         .sort(
-            (a,b) =>
+            (a,b)=>
                 b.count-a.count
         )
         .slice(
@@ -2713,25 +2569,29 @@ function drawBarChart(){
         );
 
 
-    const left=155;
+    const left=
+        165;
 
-    const right=40;
+    const right=
+        40;
 
-    const top=20;
+    const top=
+        20;
 
-    const bottom=20;
+    const bottom=
+        20;
 
 
-    const rowHeight =
+    const rowHeight=
         (
             height-
             top-
             bottom
-        ) /
+        )/
         data.length;
 
 
-    const max =
+    const max=
         Math.max(
             ...data.map(
                 x=>x.count
@@ -2740,20 +2600,22 @@ function drawBarChart(){
 
 
     data.forEach(
-        (item,index) => {
+        (item,index)=>{
 
-            const y =
+            const y=
                 top+
                 index*rowHeight+
                 rowHeight/2;
 
 
-            const barWidth =
-                (
-                    width-
-                    left-
-                    right
-                )*
+            const available=
+                width-
+                left-
+                right;
+
+
+            const barWidth=
+                available*
                 (
                     item.count/
                     max
@@ -2761,65 +2623,67 @@ function drawBarChart(){
 
 
             /*
-               LABEL
+               Label
             */
 
-            barCtx.fillStyle =
-                "#7f8ba0";
-
-
-            barCtx.font =
-                "500 10px Inter,Arial";
-
-
-            barCtx.textAlign="right";
-
-
-            let label =
+            let label=
                 item.name;
 
 
             if(
-                label.length>22
+                label.length>23
             ){
 
-                label =
+                label=
                     label.substring(
                         0,
-                        20
+                        21
                     )+"…";
 
             }
 
 
+            barCtx.textAlign=
+                "right";
+
+            barCtx.textBaseline=
+                "middle";
+
+            barCtx.font=
+                "500 10px Inter,Arial";
+
+            barCtx.fillStyle=
+                "#7f8ba0";
+
+
             barCtx.fillText(
                 label,
                 left-12,
-                y+3
+                y
             );
 
 
             /*
-               BACKGROUND
+               Background bar
             */
 
-            barCtx.fillStyle =
+            barCtx.fillStyle=
                 "rgba(255,255,255,.045)";
 
 
             barCtx.fillRect(
                 left,
                 y-5,
-                width-left-right,
+                available,
                 10
             );
 
 
             /*
-               BAR
+               Actual bar
             */
 
-            barCtx.fillStyle =
+            barCtx.fillStyle=
                 colors[item.group];
 
 
@@ -2832,18 +2696,18 @@ function drawBarChart(){
 
 
             /*
-               VALUE
+               Number
             */
 
-            barCtx.fillStyle =
-                "#ffffff";
+            barCtx.textAlign=
+                "left";
 
 
-            barCtx.font =
+            barCtx.font=
                 "700 10px Inter,Arial";
 
-
-            barCtx.textAlign="left";
+            barCtx.fillStyle=
+                "#fff";
 
 
             barCtx.fillText(
@@ -2851,7 +2715,7 @@ function drawBarChart(){
                 left+
                 barWidth+
                 8,
-                y+3
+                y
             );
 
         }
@@ -2870,7 +2734,5 @@ window.addEventListener(
 
 </script>
 
-
 </body>
-
 </html>
