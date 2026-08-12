@@ -1,496 +1,789 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Scopus Research Orbit</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
+:root{
+    --bg:#03050d;
+    --panel:rgba(8,12,27,.82);
+    --line:rgba(255,255,255,.09);
+    --text:#f8fafc;
+    --muted:#7d889d;
 
-    min-height: 100vh;
+    --purple:#a78bfa;
+    --cyan:#67e8f9;
+    --pink:#f472b6;
+    --green:#34d399;
+}
 
-    overflow-x: hidden;
-
+body{
+    min-height:100vh;
+    color:var(--text);
     font-family:
         Inter,
         "Segoe UI",
         Arial,
         sans-serif;
 
-    color: #f8fafc;
-
     background:
         radial-gradient(
-            circle at 50% 45%,
-            rgba(99,102,241,.13),
-            transparent 24%
-        ),
-        radial-gradient(
             circle at 15% 15%,
-            rgba(139,92,246,.13),
-            transparent 25%
+            rgba(139,92,246,.16),
+            transparent 28%
         ),
         radial-gradient(
-            circle at 85% 80%,
-            rgba(6,182,212,.09),
-            transparent 25%
+            circle at 85% 75%,
+            rgba(6,182,212,.10),
+            transparent 30%
         ),
         #03050d;
+
+    overflow-x:hidden;
 }
 
-
-/* =========================
-   STAR FIELD
-========================= */
-
-body::before {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    opacity: .25;
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.25;
 
     background-image:
-
         radial-gradient(
             circle,
             rgba(255,255,255,.75) 1px,
             transparent 1px
         );
 
-    background-size:
-        95px 95px;
+    background-size:95px 95px;
 }
 
-
-/* =========================
-   PAGE
-========================= */
-
-.page {
-
-    width: min(
-        1500px,
+.container{
+    width:min(
+        1450px,
         calc(100% - 48px)
     );
 
-    margin: auto;
-
-    padding: 28px 0 35px;
+    margin:auto;
+    padding:28px 0 45px;
 }
 
 
-/* =========================
+/* ================================
    HEADER
-========================= */
+================================ */
 
-.header {
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        flex-start;
-
-    gap: 30px;
-
-    margin-bottom: 20px;
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:30px;
+    margin-bottom:18px;
 }
 
-
-.eyebrow {
-
-    color: #8b5cf6;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: 3px;
-
-    text-transform:
-        uppercase;
+.eyebrow{
+    color:var(--purple);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:3px;
+    text-transform:uppercase;
 }
 
-
-h1 {
-
-    margin-top: 9px;
-
-    font-size:
-        clamp(38px, 5vw, 64px);
-
-    line-height: .95;
-
-    letter-spacing:
-        -4px;
+h1{
+    margin-top:8px;
+    font-size:clamp(42px,6vw,72px);
+    line-height:.92;
+    letter-spacing:-5px;
 }
 
-
-.gradient {
-
+.gradient{
     background:
-
         linear-gradient(
             90deg,
             #ffffff,
-            #c4b5fd 48%,
+            #c4b5fd,
             #67e8f9
         );
 
-    -webkit-background-clip:
-        text;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
 
-    background-clip:
-        text;
+.subtitle{
+    max-width:760px;
+    margin-top:16px;
 
-    color: transparent;
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.7;
+}
+
+.tags{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:17px;
+}
+
+.tag{
+    padding:7px 11px;
+
+    border:1px solid var(--line);
+    border-radius:999px;
+
+    background:rgba(255,255,255,.025);
+    color:#aab3c3;
+
+    font-size:10px;
 }
 
 
-.subtitle {
+/* ================================
+   NAVIGATION
+================================ */
 
-    max-width: 700px;
+.nav{
+    display:flex;
+    gap:5px;
 
-    margin-top: 16px;
+    padding:5px;
 
-    color: #7d889d;
+    border:1px solid var(--line);
+    border-radius:16px;
 
-    font-size: 14px;
+    background:rgba(255,255,255,.025);
 
-    line-height: 1.7;
+    backdrop-filter:blur(20px);
+
+    position:sticky;
+    top:12px;
+
+    z-index:100;
+}
+
+.nav button{
+    border:0;
+    border-radius:11px;
+
+    background:transparent;
+
+    color:#68758a;
+
+    padding:10px 13px;
+
+    font-size:11px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.nav button:hover{
+    color:white;
+    background:rgba(167,139,250,.10);
+}
+
+.nav button.active{
+    color:white;
+    background:rgba(167,139,250,.16);
 }
 
 
-.dataset {
+/* ================================
+   PAGES
+================================ */
 
-    display: flex;
+.page{
+    display:none;
 
-    gap: 8px;
+    animation:
+        pageIn
+        .45s
+        ease;
+}
 
-    flex-wrap: wrap;
+.page.active{
+    display:block;
+}
 
-    margin-top: 18px;
+@keyframes pageIn{
+
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 
-.dataset span {
+/* ================================
+   PANEL
+================================ */
 
-    padding:
-        8px 12px;
+.panel{
+    border:1px solid var(--line);
+    border-radius:30px;
+
+    background:var(--panel);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 40px 110px rgba(0,0,0,.4);
+}
+
+
+/* ================================
+   PAGE 1
+================================ */
+
+.page1-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.45fr
+        .55fr;
+
+    gap:14px;
+}
+
+.orbit-panel{
+    height:710px;
+    position:relative;
+    overflow:hidden;
+}
+
+#orbitCanvas{
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+}
+
+.visual-title{
+    position:absolute;
+
+    top:27px;
+    left:29px;
+
+    z-index:5;
+}
+
+.visual-title small{
+    color:#64748b;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+.visual-title h2{
+    margin-top:5px;
+
+    font-size:21px;
+}
+
+.visual-hint{
+    position:absolute;
+
+    right:28px;
+    top:28px;
+
+    color:#68758a;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+}
+
+.legend{
+    position:absolute;
+
+    left:28px;
+    bottom:26px;
+
+    display:flex;
+    gap:14px;
+
+    flex-wrap:wrap;
+}
+
+.legend-item{
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    color:#718096;
+
+    font-size:10px;
+}
+
+.legend-dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+}
+
+
+/* ================================
+   PAGE 1 SIDE
+================================ */
+
+.side-panel{
+    padding:25px;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:space-between;
+}
+
+.side-title{
+    color:#69758a;
+
+    font-size:11px;
+    font-weight:700;
+
+    letter-spacing:1.5px;
+
+    text-transform:uppercase;
+}
+
+.stat{
+    padding:19px 0;
+
+    border-bottom:
+        1px solid
+        var(--line);
+}
+
+.stat:last-child{
+    border-bottom:0;
+}
+
+.stat-number{
+    font-size:34px;
+
+    letter-spacing:-2px;
+
+    font-weight:700;
+}
+
+.stat-label{
+    display:block;
+
+    margin-top:4px;
+
+    color:#7c879a;
+
+    font-size:10px;
+    line-height:1.5;
+}
+
+.story{
+    padding:18px;
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        var(--line);
 
-    border-radius:
-        999px;
+    border-radius:20px;
 
     background:
         rgba(255,255,255,.025);
+}
 
-    color: #94a3b8;
+.story-title{
+    font-size:12px;
+    font-weight:700;
+}
 
-    font-size: 11px;
+.story-text{
+    margin-top:7px;
+
+    color:#8490a5;
+
+    font-size:11px;
+    line-height:1.7;
 }
 
 
-/* =========================
-   MAIN VISUAL
-========================= */
+/* ================================
+   PAGE 2
+================================ */
 
-.visual {
+.section-heading{
+    display:flex;
 
-    position: relative;
+    justify-content:space-between;
+    align-items:flex-end;
 
-    height: 760px;
+    margin-bottom:14px;
+}
 
-    overflow: hidden;
+.section-heading h2{
+    margin-top:5px;
+
+    font-size:30px;
+
+    letter-spacing:-1px;
+}
+
+.section-description{
+    color:#778297;
+
+    font-size:11px;
+}
+
+.explore-grid{
+    display:grid;
+
+    grid-template-columns:
+        .65fr
+        1.35fr;
+
+    gap:14px;
+}
+
+.filter-panel{
+    padding:25px;
+}
+
+.filter-title{
+    color:#8b96aa;
+
+    font-size:11px;
+    font-weight:700;
+
+    letter-spacing:1.5px;
+
+    text-transform:uppercase;
+
+    margin-bottom:14px;
+}
+
+.filter{
+    display:block;
+
+    width:100%;
+
+    margin:6px 0;
+
+    padding:13px 14px;
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        var(--line);
 
-    border-radius:
-        32px;
+    border-radius:13px;
 
     background:
+        rgba(255,255,255,.02);
 
-        radial-gradient(
-            circle at center,
-            rgba(139,92,246,.055),
-            transparent 38%
-        ),
+    color:#9ca8ba;
 
-        rgba(5,8,20,.72);
+    text-align:left;
 
-    box-shadow:
-        0 40px 120px
-        rgba(0,0,0,.42);
+    font-size:11px;
 
-    backdrop-filter:
-        blur(20px);
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.filter:hover{
+    background:
+        rgba(167,139,250,.08);
+
+    color:white;
+}
+
+.filter.active{
+    color:white;
+
+    border-color:
+        rgba(167,139,250,.45);
+
+    background:
+        rgba(167,139,250,.12);
+}
+
+.chart-panel{
+    height:590px;
+
+    padding:20px;
+
+    position:relative;
+}
+
+#barCanvas{
+    width:100%;
+    height:100%;
 }
 
 
-/* =========================
-   CANVAS
-========================= */
+/* ================================
+   PAGE 3
+================================ */
 
-#orbitCanvas {
+.insight-grid{
+    display:grid;
 
-    position: absolute;
+    grid-template-columns:
+        1.05fr
+        .95fr;
 
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
+    gap:14px;
 }
 
+.main-insight{
+    min-height:580px;
 
-/* =========================
-   TOP LEFT LABEL
-========================= */
+    padding:32px;
 
-.visual-title {
+    position:relative;
 
-    position: absolute;
-
-    top: 28px;
-
-    left: 30px;
-
-    z-index: 10;
-
-    pointer-events:
-        none;
+    overflow:hidden;
 }
 
+.main-number{
+    font-size:115px;
 
-.visual-title small {
+    line-height:.8;
 
-    color: #64748b;
+    letter-spacing:-9px;
 
-    font-size: 9px;
-
-    letter-spacing: 2px;
-
-    text-transform:
-        uppercase;
+    color:#c4b5fd;
 }
 
+.main-insight h2{
+    max-width:700px;
 
-.visual-title h2 {
+    margin-top:25px;
 
-    margin-top: 5px;
+    font-size:32px;
 
-    font-size: 20px;
-
-    letter-spacing: -.5px;
+    letter-spacing:-1px;
 }
 
+.main-insight p{
+    max-width:650px;
 
-/* =========================
-   LEGEND
-========================= */
+    margin-top:14px;
 
-.legend {
+    color:#8490a5;
 
-    position: absolute;
+    font-size:13px;
 
-    left: 30px;
-
-    bottom: 28px;
-
-    z-index: 10;
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 8px 15px;
-
-    max-width: 430px;
+    line-height:1.8;
 }
 
+.insight-box{
+    margin-top:25px;
 
-.legend-item {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    color: #64748b;
-
-    font-size: 10px;
-}
-
-
-.legend-dot {
-
-    width: 7px;
-
-    height: 7px;
-
-    border-radius: 50%;
-}
-
-
-/* =========================
-   TOOLTIP
-========================= */
-
-.tooltip {
-
-    position: absolute;
-
-    z-index: 30;
-
-    pointer-events: none;
-
-    opacity: 0;
-
-    min-width: 170px;
-
-    padding: 13px 15px;
+    padding:20px;
 
     border:
         1px solid
-        rgba(255,255,255,.12);
+        var(--line);
 
-    border-radius: 14px;
+    border-radius:20px;
 
     background:
-        rgba(7,10,22,.92);
+        rgba(255,255,255,.025);
+}
 
-    backdrop-filter:
-        blur(15px);
+.insight-box strong{
+    font-size:12px;
+}
 
-    box-shadow:
-        0 15px 50px
-        rgba(0,0,0,.45);
+.insight-box p{
+    margin-top:8px;
 
-    transform:
-        translate(-50%, -115%);
+    font-size:11px;
+}
 
-    transition:
-        opacity .15s;
+.insight-cards{
+    display:grid;
+
+    gap:14px;
+}
+
+.insight-card{
+    min-height:183px;
+
+    padding:25px;
+}
+
+.card-label{
+    color:#68758a;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+.insight-card h3{
+    margin-top:9px;
+
+    font-size:19px;
+}
+
+.insight-card p{
+    margin-top:8px;
+
+    color:#818da2;
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+.progress{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:15px;
+
+    color:#b5c0d0;
+
+    font-size:10px;
+}
+
+.progress-bar{
+    height:5px;
+
+    flex:1;
+
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            var(--cyan)
+        );
 }
 
 
-.tooltip.visible {
-
-    opacity: 1;
-}
-
-
-.tooltip-name {
-
-    color: #f8fafc;
-
-    font-size: 12px;
-
-    font-weight: 700;
-}
-
-
-.tooltip-count {
-
-    margin-top: 4px;
-
-    color: #8b5cf6;
-
-    font-size: 11px;
-}
-
-
-/* =========================
+/* ================================
    FOOTER
-========================= */
+================================ */
 
-.footer {
+.footer{
+    display:flex;
 
-    display: flex;
+    justify-content:space-between;
 
-    justify-content:
-        space-between;
+    margin-top:12px;
 
-    margin-top: 13px;
+    color:#566176;
 
-    color: #475569;
+    font-size:9px;
 
-    font-size: 10px;
-
-    letter-spacing: .7px;
+    letter-spacing:1px;
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* ================================
+   RESPONSIVE
+================================ */
 
-@media(max-width:800px) {
+@media(max-width:900px){
 
-    .page {
-
-        width:
-            calc(100% - 24px);
-
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    .header {
-
-        flex-direction:
-            column;
-
+    .page1-grid,
+    .explore-grid,
+    .insight-grid{
+        grid-template-columns:1fr;
     }
 
-    .visual {
-
-        height: 600px;
-
+    .orbit-panel{
+        height:620px;
     }
 
-    .legend {
+    .side-panel{
+        display:grid;
 
-        max-width: 280px;
+        grid-template-columns:
+            1fr 1fr;
 
+        gap:12px;
     }
 
+    .story{
+        grid-column:1/-1;
+    }
 }
 
+@media(max-width:600px){
+
+    .container{
+        width:calc(100% - 22px);
+    }
+
+    .nav{
+        width:100%;
+        justify-content:space-between;
+    }
+
+    .nav button{
+        padding:9px 7px;
+    }
+
+    .orbit-panel{
+        height:560px;
+    }
+
+    .side-panel{
+        grid-template-columns:1fr;
+    }
+
+    .main-number{
+        font-size:80px;
+    }
+}
 </style>
-
 </head>
 
 
 <body>
 
+<div class="container">
 
-<div class="page">
 
-
-<!-- HEADER -->
+<!-- =================================
+     HEADER
+================================= -->
 
 <header class="header">
 
@@ -511,28 +804,29 @@ h1 {
 
             A visual exploration of the research
             landscape generated from author keywords
-            across the Scopus dataset. Larger nodes
-            represent topics appearing more frequently
-            across the 300 research documents.
+            across the Scopus dataset.
+
+            Explore the research field,
+            compare topic frequency,
+            and discover the strongest patterns.
 
         </p>
 
+        <div class="tags">
 
-        <div class="dataset">
-
-            <span>
+            <span class="tag">
                 300 Documents
             </span>
 
-            <span>
+            <span class="tag">
                 95 Sources
             </span>
 
-            <span>
+            <span class="tag">
                 2026–2027
             </span>
 
-            <span>
+            <span class="tag">
                 Author Keywords
             </span>
 
@@ -540,96 +834,551 @@ h1 {
 
     </div>
 
+
+    <!-- NAVIGATION -->
+
+    <nav class="nav">
+
+        <button
+            class="active"
+            data-page="page1">
+
+            01 · Landscape
+
+        </button>
+
+        <button
+            data-page="page2">
+
+            02 · Explore
+
+        </button>
+
+        <button
+            data-page="page3">
+
+            03 · Insights
+
+        </button>
+
+    </nav>
+
 </header>
 
 
 
-<!-- VISUALIZATION -->
+<!-- =================================
+     PAGE 1
+================================= -->
 
-<section class="visual">
+<section
+    id="page1"
+    class="page active">
+
+    <div class="page1-grid">
 
 
-    <div class="visual-title">
+        <!-- ORBIT -->
 
-        <small>
-            01 · Research Landscape
-        </small>
+        <div class="panel orbit-panel">
 
-        <h2>
-            Topic Orbit
-        </h2>
+            <div class="visual-title">
+
+                <small>
+                    01 · Research Landscape
+                </small>
+
+                <h2>
+                    Topic Orbit
+                </h2>
+
+            </div>
+
+            <div class="visual-hint">
+                HOVER A NODE TO EXPLORE
+            </div>
+
+
+            <canvas
+                id="orbitCanvas">
+            </canvas>
+
+
+            <div class="legend">
+
+                <div class="legend-item">
+
+                    <span
+                        class="legend-dot"
+                        style="background:#a78bfa">
+                    </span>
+
+                    AI & Machine Learning
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span
+                        class="legend-dot"
+                        style="background:#67e8f9">
+                    </span>
+
+                    Vision & XR
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span
+                        class="legend-dot"
+                        style="background:#f472b6">
+                    </span>
+
+                    Education
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span
+                        class="legend-dot"
+                        style="background:#34d399">
+                    </span>
+
+                    Scientific Computing
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SIDE INFORMATION -->
+
+        <aside class="panel side-panel">
+
+            <div>
+
+                <div class="side-title">
+                    Research leaders
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-number">
+                        26
+                    </div>
+
+                    <span class="stat-label">
+                        documents · Artificial Intelligence
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-number">
+                        22
+                    </div>
+
+                    <span class="stat-label">
+                        documents · Machine Learning
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-number">
+                        18
+                    </div>
+
+                    <span class="stat-label">
+                        documents · Deep Learning
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-number">
+                        14
+                    </div>
+
+                    <span class="stat-label">
+                        documents · Computer Vision
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="story">
+
+                <div class="story-title">
+                    How to read this map
+                </div>
+
+                <div class="story-text">
+
+                    The center represents the
+                    research core.
+
+                    Larger nodes indicate keywords
+                    appearing in more documents.
+
+                    Colors represent broad research
+                    themes.
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================
+     PAGE 2
+================================= -->
+
+<section
+    id="page2"
+    class="page">
+
+    <div class="section-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                02 · EXPLORE THE PATTERN
+            </div>
+
+            <h2>
+                Which topics dominate?
+            </h2>
+
+        </div>
+
+        <div class="section-description">
+
+            Select a research family
+            to compare its keywords.
+
+        </div>
 
     </div>
 
 
-    <canvas
-        id="orbitCanvas">
-    </canvas>
+    <div class="explore-grid">
 
 
-    <div
-        id="tooltip"
-        class="tooltip">
+        <!-- FILTER -->
 
-        <div
-            id="tooltipName"
-            class="tooltip-name">
+        <div class="panel filter-panel">
+
+            <div class="filter-title">
+                Research family
+            </div>
+
+
+            <button
+                class="filter active"
+                data-group="ALL">
+
+                All topics
+
+            </button>
+
+
+            <button
+                class="filter"
+                data-group="AI">
+
+                AI & Machine Learning
+
+            </button>
+
+
+            <button
+                class="filter"
+                data-group="VISION">
+
+                Vision & XR
+
+            </button>
+
+
+            <button
+                class="filter"
+                data-group="EDU">
+
+                Education
+
+            </button>
+
+
+            <button
+                class="filter"
+                data-group="SCIENCE">
+
+                Scientific Computing
+
+            </button>
+
+
+            <div
+                class="story"
+                style="margin-top:25px">
+
+                <div class="story-title">
+                    How to read
+                </div>
+
+                <div class="story-text">
+
+                    Bar length represents the
+                    number of documents containing
+                    that keyword.
+
+                    Start with the longest bars
+                    to identify the dominant topics.
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div
-            id="tooltipCount"
-            class="tooltip-count">
+
+        <!-- BAR CHART -->
+
+        <div class="panel chart-panel">
+
+            <canvas
+                id="barCanvas">
+            </canvas>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================
+     PAGE 3
+================================= -->
+
+<section
+    id="page3"
+    class="page">
+
+    <div class="section-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                03 · KEY INSIGHTS
+            </div>
+
+            <h2>
+                From topics to a research story
+            </h2>
+
+        </div>
+
+        <div class="section-description">
+
+            The strongest signals in the
+            supplied keyword dataset.
+
         </div>
 
     </div>
 
 
-    <div class="legend">
+    <div class="insight-grid">
 
-        <div class="legend-item">
 
-            <span
-                class="legend-dot"
-                style="background:#a78bfa">
-            </span>
+        <!-- MAIN INSIGHT -->
 
-            AI & Machine Learning
+        <div class="panel main-insight">
+
+            <div class="main-number">
+                26
+            </div>
+
+            <h2>
+                Artificial Intelligence
+                is the strongest keyword.
+            </h2>
+
+            <p>
+
+                Artificial Intelligence appears
+                in 26 documents, followed by
+                Machine Learning at 22 and
+                Deep Learning at 18.
+
+                This places AI-related research
+                at the center of the landscape.
+
+            </p>
+
+
+            <div class="insight-box">
+
+                <strong>
+                    The bigger pattern
+                </strong>
+
+                <p>
+
+                    AI does not appear as a single
+                    isolated topic.
+
+                    It connects with newer directions
+                    such as Generative AI,
+                    Large Language Models and
+                    Foundation Models, while also
+                    intersecting with Computer Vision.
+
+                </p>
+
+            </div>
 
         </div>
 
 
-        <div class="legend-item">
 
-            <span
-                class="legend-dot"
-                style="background:#67e8f9">
-            </span>
+        <!-- INSIGHT CARDS -->
 
-            Vision & XR
-
-        </div>
+        <div class="insight-cards">
 
 
-        <div class="legend-item">
+            <div class="panel insight-card">
 
-            <span
-                class="legend-dot"
-                style="background:#f472b6">
-            </span>
+                <div class="card-label">
+                    01 · DOMINANT THEME
+                </div>
 
-            Education
+                <h3>
+                    AI leads the landscape
+                </h3>
 
-        </div>
+                <p>
+
+                    Artificial Intelligence,
+                    Machine Learning and Deep Learning
+                    occupy the three highest-frequency
+                    keyword positions.
+
+                </p>
+
+                <div class="progress">
+
+                    <span>
+                        26
+                    </span>
+
+                    <div
+                        class="progress-bar"
+                        style="max-width:100%">
+                    </div>
+
+                </div>
+
+            </div>
 
 
-        <div class="legend-item">
 
-            <span
-                class="legend-dot"
-                style="background:#34d399">
-            </span>
+            <div class="panel insight-card">
 
-            Scientific Computing
+                <div class="card-label">
+                    02 · ADJACENT FIELD
+                </div>
+
+                <h3>
+                    Vision connects technology
+                    and experience
+                </h3>
+
+                <p>
+
+                    Computer Vision appears strongly,
+                    while Virtual Reality,
+                    Extended Reality and Augmented
+                    Reality add an immersive direction.
+
+                </p>
+
+                <div class="progress">
+
+                    <span>
+                        14
+                    </span>
+
+                    <div
+                        class="progress-bar"
+                        style="max-width:54%">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="panel insight-card">
+
+                <div class="card-label">
+                    03 · EMERGING DIRECTIONS
+                </div>
+
+                <h3>
+                    Generative AI & LLMs appear
+                </h3>
+
+                <p>
+
+                    Generative AI and Large Language
+                    Models each appear in 5 documents,
+                    showing newer AI directions
+                    alongside established topics.
+
+                </p>
+
+                <div class="progress">
+
+                    <span>
+                        5
+                    </span>
+
+                    <div
+                        class="progress-bar"
+                        style="max-width:20%">
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -646,7 +1395,7 @@ h1 {
     </span>
 
     <span>
-        INTERACTIVE DATA VISUALIZATION
+        INTERACTIVE DATA VISUALIZATION · 3 PAGE STORY
     </span>
 
 </footer>
@@ -658,275 +1407,313 @@ h1 {
 
 <script>
 
-
-/*
-==========================================================
-SCOPUS DATA
-==========================================================
-
-Real Author Keywords extracted from the
-provided Scopus CSV.
-
-Frequency = number of documents containing
-the keyword.
-==========================================================
-*/
-
+/* =====================================================
+   DATA
+===================================================== */
 
 const keywords = [
 
     {
-        name: "Artificial Intelligence",
-        count: 26,
-        group: "AI"
+        name:"Artificial Intelligence",
+        count:26,
+        group:"AI"
     },
 
     {
-        name: "Machine Learning",
-        count: 22,
-        group: "AI"
+        name:"Machine Learning",
+        count:22,
+        group:"AI"
     },
 
     {
-        name: "Deep Learning",
-        count: 18,
-        group: "AI"
+        name:"Deep Learning",
+        count:18,
+        group:"AI"
     },
 
     {
-        name: "Computer Vision",
-        count: 14,
-        group: "VISION"
+        name:"Computer Vision",
+        count:14,
+        group:"VISION"
     },
 
     {
-        name: "Virtual Reality",
-        count: 6,
-        group: "VISION"
+        name:"Virtual Reality",
+        count:6,
+        group:"VISION"
     },
 
     {
-        name: "Generative AI",
-        count: 5,
-        group: "AI"
+        name:"Generative AI",
+        count:5,
+        group:"AI"
     },
 
     {
-        name: "Education",
-        count: 5,
-        group: "EDU"
+        name:"Education",
+        count:5,
+        group:"EDU"
     },
 
     {
-        name: "Large Language Models",
-        count: 5,
-        group: "AI"
+        name:"Large Language Models",
+        count:5,
+        group:"AI"
     },
 
     {
-        name: "STEM Education",
-        count: 5,
-        group: "EDU"
+        name:"STEM Education",
+        count:5,
+        group:"EDU"
     },
 
     {
-        name: "Computer Science Education",
-        count: 4,
-        group: "EDU"
+        name:"Computer Science Education",
+        count:4,
+        group:"EDU"
     },
 
     {
-        name: "Quantum Computing",
-        count: 4,
-        group: "SCIENCE"
+        name:"Quantum Computing",
+        count:4,
+        group:"SCIENCE"
     },
 
     {
-        name: "Computed Tomography",
-        count: 4,
-        group: "SCIENCE"
+        name:"Computed Tomography",
+        count:4,
+        group:"SCIENCE"
     },
 
     {
-        name: "Extended Reality",
-        count: 4,
-        group: "VISION"
+        name:"Extended Reality",
+        count:4,
+        group:"VISION"
     },
 
     {
-        name: "Scientific Computing",
-        count: 4,
-        group: "SCIENCE"
+        name:"Scientific Computing",
+        count:4,
+        group:"SCIENCE"
     },
 
     {
-        name: "Generative Artificial Intelligence",
-        count: 3,
-        group: "AI"
+        name:"Generative Artificial Intelligence",
+        count:3,
+        group:"AI"
     },
 
     {
-        name: "Open Science",
-        count: 3,
-        group: "SCIENCE"
+        name:"Open Science",
+        count:3,
+        group:"SCIENCE"
     },
 
     {
-        name: "Usability",
-        count: 3,
-        group: "EDU"
+        name:"Usability",
+        count:3,
+        group:"EDU"
     },
 
     {
-        name: "Materials Science",
-        count: 3,
-        group: "SCIENCE"
+        name:"Materials Science",
+        count:3,
+        group:"SCIENCE"
     },
 
     {
-        name: "Foundation Models",
-        count: 3,
-        group: "AI"
+        name:"Foundation Models",
+        count:3,
+        group:"AI"
     },
 
     {
-        name: "Bioinformatics",
-        count: 3,
-        group: "SCIENCE"
+        name:"Bioinformatics",
+        count:3,
+        group:"SCIENCE"
     },
 
     {
-        name: "Augmented Reality",
-        count: 3,
-        group: "VISION"
+        name:"Augmented Reality",
+        count:3,
+        group:"VISION"
     },
 
     {
-        name: "Convolutional Neural Networks",
-        count: 3,
-        group: "AI"
+        name:"Convolutional Neural Networks",
+        count:3,
+        group:"AI"
     },
 
     {
-        name: "Remote Sensing",
-        count: 3,
-        group: "VISION"
+        name:"Remote Sensing",
+        count:3,
+        group:"VISION"
     },
 
     {
-        name: "Reconstruction",
-        count: 3,
-        group: "SCIENCE"
+        name:"Reconstruction",
+        count:3,
+        group:"SCIENCE"
     },
 
     {
-        name: "3D Printing",
-        count: 3,
-        group: "SCIENCE"
+        name:"3D Printing",
+        count:3,
+        group:"SCIENCE"
     },
 
     {
-        name: "Simulation",
-        count: 3,
-        group: "SCIENCE"
+        name:"Simulation",
+        count:3,
+        group:"SCIENCE"
     },
 
     {
-        name: "Uncertainty Quantification",
-        count: 3,
-        group: "SCIENCE"
+        name:"Uncertainty Quantification",
+        count:3,
+        group:"SCIENCE"
     },
 
     {
-        name: "Control",
-        count: 3,
-        group: "SCIENCE"
+        name:"Control",
+        count:3,
+        group:"SCIENCE"
     },
 
     {
-        name: "Computer-Based Learning",
-        count: 3,
-        group: "EDU"
+        name:"Computer-Based Learning",
+        count:3,
+        group:"EDU"
     },
 
     {
-        name: "Data Science",
-        count: 2,
-        group: "AI"
+        name:"Data Science",
+        count:2,
+        group:"AI"
     },
 
     {
-        name: "Synthetic Data",
-        count: 2,
-        group: "AI"
+        name:"Synthetic Data",
+        count:2,
+        group:"AI"
     },
 
     {
-        name: "Data Integration",
-        count: 2,
-        group: "SCIENCE"
+        name:"Data Integration",
+        count:2,
+        group:"SCIENCE"
     },
 
     {
-        name: "Human–Computer Interaction",
-        count: 2,
-        group: "EDU"
+        name:"Human–Computer Interaction",
+        count:2,
+        group:"EDU"
     },
 
     {
-        name: "Technology Adoption",
-        count: 2,
-        group: "EDU"
+        name:"Technology Adoption",
+        count:2,
+        group:"EDU"
     },
 
     {
-        name: "Trust",
-        count: 2,
-        group: "EDU"
+        name:"Trust",
+        count:2,
+        group:"EDU"
     },
 
     {
-        name: "Brain Tumor",
-        count: 2,
-        group: "SCIENCE"
+        name:"Brain Tumor",
+        count:2,
+        group:"SCIENCE"
     }
 
 ];
 
 
-/*
-==========================================================
-CANVAS
-==========================================================
-*/
+const colors = {
+
+    AI:"#a78bfa",
+
+    VISION:"#67e8f9",
+
+    EDU:"#f472b6",
+
+    SCIENCE:"#34d399"
+
+};
 
 
-const canvas =
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+const pages =
+    document.querySelectorAll(".page");
+
+const navButtons =
+    document.querySelectorAll(".nav button");
+
+
+navButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            navButtons.forEach(
+                b =>
+                b.classList.remove(
+                    "active"
+                )
+            );
+
+            button.classList.add(
+                "active"
+            );
+
+
+            pages.forEach(page => {
+
+                page.classList.toggle(
+                    "active",
+
+                    page.id ===
+                    button.dataset.page
+                );
+
+            });
+
+
+            if(
+                button.dataset.page ===
+                "page2"
+            ){
+
+                drawBars(
+                    currentGroup
+                );
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   ORBIT
+===================================================== */
+
+const orbitCanvas =
     document.getElementById(
         "orbitCanvas"
     );
 
-
-const ctx =
-    canvas.getContext("2d");
-
-
-const tooltip =
-    document.getElementById(
-        "tooltip"
-    );
-
-
-const tooltipName =
-    document.getElementById(
-        "tooltipName"
-    );
-
-
-const tooltipCount =
-    document.getElementById(
-        "tooltipCount"
-    );
+const orbitCtx =
+    orbitCanvas.getContext("2d");
 
 
 let width;
@@ -935,84 +1722,33 @@ let height;
 let centerX;
 let centerY;
 
-let nodes = [];
+let nodes=[];
 
-let mouse = {
-
-    x: -1000,
-
-    y: -1000
-
-};
+let mouseX=-9999;
+let mouseY=-9999;
 
 
-/*
-==========================================================
-COLORS
-==========================================================
-*/
-
-
-const colors = {
-
-    AI:
-        "#a78bfa",
-
-    VISION:
-        "#67e8f9",
-
-    EDU:
-        "#f472b6",
-
-    SCIENCE:
-        "#34d399"
-
-};
-
-
-/*
-==========================================================
-RESIZE
-==========================================================
-*/
-
-
-function resize() {
+function resizeOrbit(){
 
     const rect =
-        canvas.parentElement
-        .getBoundingClientRect();
-
+        orbitCanvas.getBoundingClientRect();
 
     const ratio =
         window.devicePixelRatio || 1;
 
 
-    width =
-        rect.width;
+    width=rect.width;
+    height=rect.height;
 
 
-    height =
-        rect.height;
-
-
-    canvas.width =
+    orbitCanvas.width =
         width * ratio;
 
-
-    canvas.height =
+    orbitCanvas.height =
         height * ratio;
 
 
-    canvas.style.width =
-        width + "px";
-
-
-    canvas.style.height =
-        height + "px";
-
-
-    ctx.setTransform(
+    orbitCtx.setTransform(
         ratio,
         0,
         0,
@@ -1023,11 +1759,10 @@ function resize() {
 
 
     centerX =
-        width / 2;
-
+        width/2;
 
     centerY =
-        height / 2;
+        height/2;
 
 
     createNodes();
@@ -1035,30 +1770,16 @@ function resize() {
 }
 
 
-window.addEventListener(
-    "resize",
-    resize
-);
+function createNodes(){
 
-
-/*
-==========================================================
-CREATE ORBITS
-==========================================================
-*/
-
-
-function createNodes() {
-
-    nodes = [];
+    nodes=[];
 
 
     const sorted =
         [...keywords]
         .sort(
             (a,b) =>
-                b.count -
-                a.count
+            b.count-a.count
         );
 
 
@@ -1067,37 +1788,37 @@ function createNodes() {
 
             const ring =
                 index < 4
-                    ? 1
-                    : index < 12
-                    ? 2
-                    : index < 23
-                    ? 3
-                    : 4;
+                ? 1
+                : index < 12
+                ? 2
+                : index < 23
+                ? 3
+                : 4;
 
 
-            const ringRadius = [
+            const radius = [
 
                 0,
 
                 Math.min(
                     width,
                     height
-                ) * .15,
+                )*.15,
 
                 Math.min(
                     width,
                     height
-                ) * .26,
+                )*.26,
 
                 Math.min(
                     width,
                     height
-                ) * .37,
+                )*.37,
 
                 Math.min(
                     width,
                     height
-                ) * .47
+                )*.47
 
             ][ring];
 
@@ -1106,31 +1827,16 @@ function createNodes() {
                 sorted.filter(
                     (_,i) => {
 
-                        if (
-                            i < 4
-                        ) {
+                        if(i<4)
+                            return ring===1;
 
-                            return ring === 1;
+                        if(i<12)
+                            return ring===2;
 
-                        }
+                        if(i<23)
+                            return ring===3;
 
-                        if (
-                            i < 12
-                        ) {
-
-                            return ring === 2;
-
-                        }
-
-                        if (
-                            i < 23
-                        ) {
-
-                            return ring === 3;
-
-                        }
-
-                        return ring === 4;
+                        return ring===4;
 
                     }
                 );
@@ -1147,9 +1853,10 @@ function createNodes() {
                     position /
                     sameRing.length
                 ) *
-                Math.PI * 2
+                Math.PI *
+                2
                 -
-                Math.PI / 2;
+                Math.PI/2;
 
 
             nodes.push({
@@ -1158,25 +1865,24 @@ function createNodes() {
 
                 ring,
 
-                angle,
+                radius,
 
-                radius:
-                    ringRadius,
+                angle,
 
                 orbitSpeed:
                     (
-                        ring % 2 === 0
-                            ? 1
-                            : -1
+                        ring%2
+                        ? -1
+                        : 1
                     ) *
                     (
-                        .00004 +
-                        ring * .000012
+                        .00005 +
+                        ring*.000012
                     ),
 
-                x: 0,
+                x:0,
 
-                y: 0
+                y:0
 
             });
 
@@ -1186,81 +1892,14 @@ function createNodes() {
 }
 
 
-/*
-==========================================================
-DRAW
-==========================================================
-*/
+function drawOrbit(){
 
-
-function draw() {
-
-    ctx.clearRect(
+    orbitCtx.clearRect(
         0,
         0,
         width,
         height
     );
-
-
-    /*
-    -------------------------
-    CENTRAL GLOW
-    -------------------------
-    */
-
-
-    const glow =
-        ctx.createRadialGradient(
-            centerX,
-            centerY,
-            0,
-            centerX,
-            centerY,
-            190
-        );
-
-
-    glow.addColorStop(
-        0,
-        "rgba(139,92,246,.17)"
-    );
-
-
-    glow.addColorStop(
-        .45,
-        "rgba(139,92,246,.06)"
-    );
-
-
-    glow.addColorStop(
-        1,
-        "rgba(139,92,246,0)"
-    );
-
-
-    ctx.fillStyle =
-        glow;
-
-
-    ctx.beginPath();
-
-    ctx.arc(
-        centerX,
-        centerY,
-        200,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-
-    /*
-    -------------------------
-    ORBIT RINGS
-    -------------------------
-    */
 
 
     const minSize =
@@ -1270,361 +1909,264 @@ function draw() {
         );
 
 
+    /* ORBIT RINGS */
+
     [1,2,3,4].forEach(
         ring => {
 
-            const radius =
-                [
+            const radius = [
 
-                    0,
+                0,
 
-                    minSize * .15,
+                minSize*.15,
 
-                    minSize * .26,
+                minSize*.26,
 
-                    minSize * .37,
+                minSize*.37,
 
-                    minSize * .47
+                minSize*.47
 
-                ][ring];
-
-
-            ctx.beginPath();
+            ][ring];
 
 
-            ctx.arc(
+            orbitCtx.beginPath();
+
+            orbitCtx.arc(
                 centerX,
                 centerY,
                 radius,
                 0,
-                Math.PI * 2
+                Math.PI*2
             );
 
-
-            ctx.strokeStyle =
+            orbitCtx.strokeStyle =
                 "rgba(148,163,184,.055)";
 
+            orbitCtx.lineWidth=1;
 
-            ctx.lineWidth =
-                1;
+            orbitCtx.setLineDash(
+                [3,8]
+            );
 
+            orbitCtx.stroke();
 
-            ctx.setLineDash([
-                3,
-                8
-            ]);
-
-
-            ctx.stroke();
-
-
-            ctx.setLineDash([]);
+            orbitCtx.setLineDash([]);
 
         }
     );
 
 
-    /*
-    -------------------------
-    UPDATE NODES
-    -------------------------
-    */
+    /* UPDATE */
+
+    nodes.forEach(node => {
+
+        node.angle +=
+            node.orbitSpeed;
 
 
-    nodes.forEach(
-        node => {
-
-            node.angle +=
-                node.orbitSpeed;
-
-
-            node.x =
-                centerX +
-                Math.cos(
-                    node.angle
-                ) *
-                node.radius;
+        node.x =
+            centerX +
+            Math.cos(
+                node.angle
+            ) *
+            node.radius;
 
 
-            node.y =
-                centerY +
-                Math.sin(
-                    node.angle
-                ) *
-                node.radius;
+        node.y =
+            centerY +
+            Math.sin(
+                node.angle
+            ) *
+            node.radius;
 
 
-            /*
-            NODE SIZE
-            */
+        node.size =
+            5 +
+            node.count*.55;
 
 
-            node.size =
-                5 +
-                node.count *
-                .72;
-
-
-            /*
-            HOVER
-            */
-
-
-            const distance =
-                Math.hypot(
-                    mouse.x - node.x,
-                    mouse.y - node.y
-                );
-
-
-            node.hover =
-                distance <
-                node.size + 8;
-
-
-            if (
-                node.hover
-            ) {
-
-                node.size *=
-                    1.25;
-
-            }
-
-        }
-    );
-
-
-    /*
-    -------------------------
-    CONNECTIONS
-    -------------------------
-    */
-
-
-    nodes.forEach(
-        node => {
-
-            const distance =
-                Math.hypot(
-                    node.x - centerX,
-                    node.y - centerY
-                );
-
-
-            ctx.beginPath();
-
-
-            ctx.moveTo(
-                centerX,
-                centerY
+        const distance =
+            Math.hypot(
+                mouseX-node.x,
+                mouseY-node.y
             );
 
 
-            ctx.lineTo(
+        node.hover =
+            distance <
+            node.size+9;
+
+    });
+
+
+    /* CONNECTIONS */
+
+    nodes.forEach(node => {
+
+        orbitCtx.beginPath();
+
+        orbitCtx.moveTo(
+            centerX,
+            centerY
+        );
+
+        orbitCtx.lineTo(
+            node.x,
+            node.y
+        );
+
+        orbitCtx.strokeStyle =
+            "rgba(139,92,246,.035)";
+
+        orbitCtx.lineWidth=.7;
+
+        orbitCtx.stroke();
+
+    });
+
+
+    /* NODES */
+
+    nodes.forEach(node => {
+
+        const color =
+            colors[node.group];
+
+
+        /* GLOW */
+
+        const glow =
+            orbitCtx.createRadialGradient(
                 node.x,
-                node.y
+                node.y,
+                0,
+                node.x,
+                node.y,
+                node.size*3
             );
 
 
-            ctx.strokeStyle =
-                `rgba(139,92,246,${
-                    Math.max(
-                        .015,
-                        .055 -
-                        distance /
-                        15000
-                    )
-                })`;
+        glow.addColorStop(
+            0,
+            color+"66"
+        );
+
+        glow.addColorStop(
+            1,
+            color+"00"
+        );
 
 
-            ctx.lineWidth =
+        orbitCtx.fillStyle =
+            glow;
+
+
+        orbitCtx.beginPath();
+
+        orbitCtx.arc(
+            node.x,
+            node.y,
+            node.size*3,
+            0,
+            Math.PI*2
+        );
+
+        orbitCtx.fill();
+
+
+        /* NODE */
+
+        orbitCtx.beginPath();
+
+        orbitCtx.arc(
+            node.x,
+            node.y,
+            node.size *
+            (
                 node.hover
-                    ? 1.5
-                    : .6;
+                ? 1.25
+                : 1
+            ),
+            0,
+            Math.PI*2
+        );
 
 
-            ctx.stroke();
+        orbitCtx.fillStyle =
+            color;
 
-        }
-    );
-
-
-    /*
-    -------------------------
-    NODES
-    -------------------------
-    */
+        orbitCtx.fill();
 
 
-    nodes.forEach(
-        node => {
+        orbitCtx.strokeStyle =
+            "rgba(255,255,255,.45)";
 
-            const color =
-                colors[node.group];
+        orbitCtx.lineWidth =
+            node.hover
+            ? 2
+            : .7;
+
+        orbitCtx.stroke();
 
 
-            /*
-            GLOW
-            */
+        /* LABEL */
+
+        orbitCtx.textAlign =
+            "center";
+
+        orbitCtx.textBaseline =
+            "top";
 
 
-            const glow =
-                ctx.createRadialGradient(
-                    node.x,
-                    node.y,
+        orbitCtx.font =
+            node.hover
+            ? "600 12px Inter, Arial"
+            : "500 9px Inter, Arial";
+
+
+        orbitCtx.fillStyle =
+            node.hover
+            ? "#ffffff"
+            : "#8995a9";
+
+
+        let text =
+            node.name;
+
+
+        if(text.length>24){
+
+            text =
+                text.substring(
                     0,
-                    node.x,
-                    node.y,
-                    node.size * 3
-                );
-
-
-            glow.addColorStop(
-                0,
-                color + "55"
-            );
-
-
-            glow.addColorStop(
-                1,
-                color + "00"
-            );
-
-
-            ctx.fillStyle =
-                glow;
-
-
-            ctx.beginPath();
-
-
-            ctx.arc(
-                node.x,
-                node.y,
-                node.size * 3,
-                0,
-                Math.PI * 2
-            );
-
-
-            ctx.fill();
-
-
-            /*
-            NODE
-            */
-
-
-            ctx.beginPath();
-
-
-            ctx.arc(
-                node.x,
-                node.y,
-                node.size,
-                0,
-                Math.PI * 2
-            );
-
-
-            ctx.fillStyle =
-                color;
-
-
-            ctx.fill();
-
-
-            /*
-            BORDER
-            */
-
-
-            ctx.strokeStyle =
-                "rgba(255,255,255,.45)";
-
-
-            ctx.lineWidth =
-                node.hover
-                    ? 2
-                    : .7;
-
-
-            ctx.stroke();
-
-
-            /*
-            LABEL
-            */
-
-
-            ctx.textAlign =
-                "center";
-
-
-            ctx.textBaseline =
-                "top";
-
-
-            ctx.font =
-                node.hover
-                    ? "600 12px Inter, Arial"
-                    : "500 10px Inter, Arial";
-
-
-            ctx.fillStyle =
-                node.hover
-                    ? "#ffffff"
-                    : "#94a3b8";
-
-
-            let text =
-                node.name;
-
-
-            if (
-                text.length > 24
-            ) {
-
-                text =
-                    text.substring(
-                        0,
-                        22
-                    ) + "…";
-
-            }
-
-
-            ctx.fillText(
-                text,
-                node.x,
-                node.y +
-                node.size +
-                6
-            );
+                    22
+                )+"…";
 
         }
-    );
 
 
-    /*
-    -------------------------
-    CENTRAL CORE
-    -------------------------
-    */
+        orbitCtx.fillText(
+            text,
+            node.x,
+            node.y +
+            node.size +
+            6
+        );
 
+    });
+
+
+    /* CENTRAL CORE */
 
     const pulse =
         35 +
         Math.sin(
-            Date.now() *
-            .002
-        ) *
-        2;
+            Date.now()*.002
+        )*2;
 
 
     const core =
-        ctx.createRadialGradient(
+        orbitCtx.createRadialGradient(
             centerX,
             centerY,
             0,
@@ -1639,18 +2181,15 @@ function draw() {
         "rgba(255,255,255,.95)"
     );
 
-
     core.addColorStop(
-        .18,
+        .2,
         "rgba(196,181,253,.9)"
     );
-
 
     core.addColorStop(
         .45,
         "rgba(139,92,246,.4)"
     );
-
 
     core.addColorStop(
         1,
@@ -1658,221 +2197,380 @@ function draw() {
     );
 
 
-    ctx.fillStyle =
+    orbitCtx.fillStyle =
         core;
 
 
-    ctx.beginPath();
+    orbitCtx.beginPath();
 
-
-    ctx.arc(
+    orbitCtx.arc(
         centerX,
         centerY,
         pulse,
         0,
-        Math.PI * 2
+        Math.PI*2
     );
 
-
-    ctx.fill();
-
-
-    /*
-    CORE CIRCLE
-    */
+    orbitCtx.fill();
 
 
-    ctx.beginPath();
+    orbitCtx.beginPath();
 
-
-    ctx.arc(
+    orbitCtx.arc(
         centerX,
         centerY,
-        28,
+        27,
         0,
-        Math.PI * 2
+        Math.PI*2
     );
 
 
-    ctx.fillStyle =
+    orbitCtx.fillStyle =
         "rgba(12,10,30,.95)";
 
+    orbitCtx.fill();
 
-    ctx.fill();
 
-
-    ctx.strokeStyle =
+    orbitCtx.strokeStyle =
         "rgba(196,181,253,.65)";
 
-
-    ctx.lineWidth =
-        1;
+    orbitCtx.stroke();
 
 
-    ctx.stroke();
+    orbitCtx.textAlign="center";
+    orbitCtx.textBaseline="middle";
 
 
-    /*
-    CORE TEXT
-    */
-
-
-    ctx.textAlign =
-        "center";
-
-
-    ctx.textBaseline =
-        "middle";
-
-
-    ctx.font =
+    orbitCtx.font =
         "700 9px Inter, Arial";
 
-
-    ctx.fillStyle =
-        "#ffffff";
+    orbitCtx.fillStyle="#ffffff";
 
 
-    ctx.fillText(
+    orbitCtx.fillText(
         "SCOPUS",
         centerX,
-        centerY - 5
+        centerY-5
     );
 
 
-    ctx.font =
+    orbitCtx.font =
         "500 7px Inter, Arial";
 
-
-    ctx.fillStyle =
+    orbitCtx.fillStyle =
         "#a78bfa";
 
 
-    ctx.fillText(
+    orbitCtx.fillText(
         "RESEARCH CORE",
         centerX,
-        centerY + 7
+        centerY+8
     );
 
 
     requestAnimationFrame(
-        draw
+        drawOrbit
     );
 
 }
 
 
-/*
-==========================================================
-MOUSE
-==========================================================
-*/
-
-
-canvas.addEventListener(
+orbitCanvas.addEventListener(
     "mousemove",
     event => {
 
         const rect =
-            canvas.getBoundingClientRect();
+            orbitCanvas.getBoundingClientRect();
 
 
-        mouse.x =
+        mouseX =
             event.clientX -
             rect.left;
 
 
-        mouse.y =
+        mouseY =
             event.clientY -
             rect.top;
 
+    }
+);
 
-        const found =
-            nodes.find(
-                node => {
 
-                    const d =
-                        Math.hypot(
-                            mouse.x -
-                            node.x,
+orbitCanvas.addEventListener(
+    "mouseleave",
+    () => {
 
-                            mouse.y -
-                            node.y
-                        );
+        mouseX=-9999;
+        mouseY=-9999;
 
-                    return (
-                        d <
-                        node.size + 8
+    }
+);
+
+
+window.addEventListener(
+    "resize",
+    resizeOrbit
+);
+
+
+resizeOrbit();
+
+drawOrbit();
+
+
+/* =====================================================
+   BAR CHART
+===================================================== */
+
+const barCanvas =
+    document.getElementById(
+        "barCanvas"
+    );
+
+const barCtx =
+    barCanvas.getContext("2d");
+
+
+let currentGroup="ALL";
+
+
+document
+    .querySelectorAll(".filter")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .querySelectorAll(
+                        ".filter"
+                    )
+                    .forEach(
+                        b =>
+                        b.classList.remove(
+                            "active"
+                        )
                     );
 
-                }
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                currentGroup =
+                    button.dataset.group;
+
+
+                drawBars(
+                    currentGroup
+                );
+
+            }
+        );
+
+    });
+
+
+function drawBars(group){
+
+    const rect =
+        barCanvas.getBoundingClientRect();
+
+
+    const ratio =
+        window.devicePixelRatio || 1;
+
+
+    const w=rect.width;
+    const h=rect.height;
+
+
+    barCanvas.width =
+        w*ratio;
+
+    barCanvas.height =
+        h*ratio;
+
+
+    barCtx.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
+    );
+
+
+    barCtx.clearRect(
+        0,
+        0,
+        w,
+        h
+    );
+
+
+    let data =
+        keywords
+        .filter(
+            keyword =>
+                group==="ALL" ||
+                keyword.group===group
+        )
+        .sort(
+            (a,b) =>
+                b.count-a.count
+        )
+        .slice(
+            0,
+            12
+        );
+
+
+    const left=175;
+    const right=45;
+    const top=28;
+    const bottom=25;
+
+
+    const rowHeight =
+        (
+            h-top-bottom
+        ) /
+        data.length;
+
+
+    const max =
+        Math.max(
+            ...data.map(
+                x=>x.count
+            )
+        );
+
+
+    data.forEach(
+        (item,index) => {
+
+            const y =
+                top +
+                index*rowHeight +
+                rowHeight/2;
+
+
+            const barWidth =
+                (
+                    w-left-right
+                ) *
+                (
+                    item.count/max
+                );
+
+
+            /* LABEL */
+
+            barCtx.fillStyle =
+                "#718096";
+
+            barCtx.font =
+                "500 10px Inter, Arial";
+
+            barCtx.textAlign="right";
+
+            let label =
+                item.name;
+
+
+            if(label.length>25){
+
+                label =
+                    label.substring(
+                        0,
+                        23
+                    )+"…";
+
+            }
+
+
+            barCtx.fillText(
+                label,
+                left-12,
+                y+3
             );
 
 
-        if (
-            found
-        ) {
+            /* BACKGROUND */
 
-            tooltip.classList.add(
-                "visible"
+            barCtx.fillStyle =
+                "rgba(255,255,255,.045)";
+
+
+            barCtx.fillRect(
+                left,
+                y-5,
+                w-left-right,
+                10
             );
 
 
-            tooltipName.textContent =
-                found.name;
+            /* BAR */
+
+            barCtx.fillStyle =
+                colors[item.group];
 
 
-            tooltipCount.textContent =
-                found.count +
-                " documents";
+            barCtx.fillRect(
+                left,
+                y-5,
+                barWidth,
+                10
+            );
 
 
-            tooltip.style.left =
-                found.x + "px";
+            /* VALUE */
+
+            barCtx.fillStyle="#ffffff";
+
+            barCtx.font =
+                "700 10px Inter, Arial";
+
+            barCtx.textAlign="left";
 
 
-            tooltip.style.top =
-                found.y + "px";
+            barCtx.fillText(
+                item.count,
+                left +
+                barWidth +
+                9,
+                y+3
+            );
+
+        }
+    );
+
+}
 
 
-        } else {
+window.addEventListener(
+    "resize",
+    () => {
 
-            tooltip.classList.remove(
-                "visible"
+        if(
+            document
+            .getElementById("page2")
+            .classList
+            .contains("active")
+        ){
+
+            drawBars(
+                currentGroup
             );
 
         }
 
     }
 );
-
-
-canvas.addEventListener(
-    "mouseleave",
-    () => {
-
-        mouse.x = -1000;
-
-        mouse.y = -1000;
-
-        tooltip.classList.remove(
-            "visible"
-        );
-
-    }
-);
-
-
-/*
-==========================================================
-START
-==========================================================
-*/
-
-
-resize();
-
-draw();
 
 </script>
 
